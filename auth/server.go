@@ -1,8 +1,8 @@
 package main
 
-// bongo - auth-server for athentication and user-registration.
+// # auth - server for athentication and user-registration.
 //
-// The server uses environment variables. If they are not set the server won't start. It expects the following environment variables:
+// ## The server uses environment variables. If they are not set the server won't start. It expects the following environment variables:
 //   * SERVER_PORT       - the server is listening on this portnumber
 //   * DB_HOST           - database host for connecting the auth database
 //   * DB_NAME           - database name for connecting the auth database
@@ -12,9 +12,10 @@ package main
 //   * P_FACEBOOK_SECRET - Facebook-secret for login-provider (goth)
 //   * P_GPLUS_KEY    	 - Google+-key for login-provider (goth)
 //   * P_GPLUS_SECRET    - Google+-secret for login-provider (goth)
-//   * ACTIVATION_URL    - The url that holds the link to the activaton route. <- depends on dns and albert config for bongo
+//   * ACTIVATION_URL    - The url that holds the link to the activaton route. <- depends on dns and albert config for auth
 //   * ACTIVATION_SUCCESS_URL - Thes urls that is called when activation has happened. Its a static page that is reached through redirect
-
+//   * BASE_URL          - Defines the base monkeycash-URL for contructing i.e. callback-URLs. Should be the name of the server the app is running on.
+//   * SESSION_SECRET - Defines the secret that is uses to encrypt the sessions.
 import (
 	"context"
 	"fmt"
@@ -43,20 +44,15 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-// BASEURL defines the base monkeycash-URL for contructing i.e. callback-URLs
-// TODO extract into ENV (startup.sh)
-const BASEURL = "https://checkin.chckr.de"
-
-// TODO - save it central
-const sessionSecret = "ThatsASessionStoreSecret"
-
 type (
-	// ServerConfigStruct holds the server-config for bongo
+	// ServerConfigStruct holds the server-config for auth
 	ServerConfigStruct struct {
-		Port       string                `env:"SERVER_PORT"`
-		Providers  ProvidersStruct       `json:"providers"`
-		Database   database.ConfigStruct `json:"database"`
-		Activation ActivationStruct      `json:"activation"`
+		Port          string                `env:"SERVER_PORT"`
+		Baseurl       string                `env:"BASE_URL"`
+		SessionSecret string                `env:"SESSION_SECRET`
+		Providers     ProvidersStruct       `json:"providers"`
+		Database      database.ConfigStruct `json:"database"`
+		Activation    ActivationStruct      `json:"activation"`
 	}
 
 	// ProvidersStruct defines all configured OAuth-providers
@@ -188,17 +184,17 @@ func (userInfo *UserInfo) createAndStoreActivationTokenForUser(c echo.Context) e
 
 }
 
-// ServerConfig defines the configuration for bongo
+// ServerConfig defines the configuration for auth
 var serverConfig ServerConfigStruct
 
 func main() {
 	// tracer init
-	closer, span, ctx := tracing.InitJaeger("bongo-auth")
+	closer, span, ctx := tracing.InitJaeger("auth")
 	defer closer.Close()
 
 	// Init echo
 	e := echo.New()
-	l.ConfigureLogger(ctx, "bongo-auth", e)
+	l.ConfigureLogger(ctx, "auth", e)
 	readEnvironmentConfig(ctx, e.Logger)
 	tracing.LogStruct(span, "serverConfig", serverConfig)
 
@@ -219,10 +215,10 @@ func main() {
 	defer database.DB.Close()
 
 	// creeate session store for echo and gorilla (used by goth!)
-	sessionStore := sessions.NewCookieStore([]byte(sessionSecret))
+	sessionStore := sessions.NewCookieStore([]byte(serverConfig.SessionSecret))
 	gothic.Store = sessionStore
 	e.Use(session.Middleware(sessionStore))
-	e.Use(tracing.Middleware("bongo-auth"))
+	e.Use(tracing.Middleware("auth"))
 	e.Use(middleware.Recover())
 
 	// Routes
@@ -552,13 +548,14 @@ func getCallbackURL(c echo.Context, urlPart string) string {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
+	baseURL := serverConfig.Baseurl
 	if urlPart == "" {
-		return BASEURL
+		return baseURL
 	}
 	if urlPart[0] != '/' {
-		return BASEURL + "/" + urlPart
+		return baseURL + "/" + urlPart
 	}
-	return BASEURL + urlPart
+	return baseURL + urlPart
 }
 
 // getCallbackURLFromSession returns URL-Part from cookie and deletes it after reading. Returning full callback-URL.
