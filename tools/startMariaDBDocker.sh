@@ -1,4 +1,3 @@
 #!/bin/bash
 
-
-docker container start bongodb
+docker container start ch3ck1n
