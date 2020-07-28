@@ -78,32 +78,34 @@ func TestGetUsernameValidSession(t *testing.T) {
 
 func TestGetCallbackURL(t *testing.T) {
 	initTest()
+	baseURL := serverConfig.Baseurl
 	resultURL := getCallbackURL(C, "")
-	if resultURL != BASEURL {
-		t.Errorf("callback-URL is %s not %s", resultURL, BASEURL)
+	if resultURL != baseURL {
+		t.Errorf("callback-URL is %s not %s", resultURL, baseURL)
 	}
 
 	resultURL = getCallbackURL(C, "/use")
-	if resultURL != BASEURL+"/use" {
-		t.Errorf("callback-URL is %s not %s", resultURL, BASEURL+"/use")
+	if resultURL != baseURL {
+		t.Errorf("callback-URL is %s not %s", resultURL, baseURL+"/use")
 	}
 
 	resultURL = getCallbackURL(C, "pay")
-	if resultURL != BASEURL+"/pay" {
-		t.Errorf("callback-URL is %s not %s", resultURL, BASEURL+"/pay")
+	if resultURL != baseURL+"/pay" {
+		t.Errorf("callback-URL is %s not %s", resultURL, baseURL+"/pay")
 	}
 }
 
 func TestGetCallbackURLFromSession(t *testing.T) {
 	c, _ := setupTest()
 	callbackURL := getCallbackURLFromSession(c)
+	baseURL := serverConfig.Baseurl
 	// test without cookie set
-	if callbackURL != BASEURL {
-		t.Errorf("callback-URL is %s not %s", callbackURL, BASEURL)
+	if callbackURL != baseURL {
+		t.Errorf("callback-URL is %s not %s", callbackURL, baseURL)
 	}
 
 	// set cookie and test
-	sess, _ := session.Get("_monkeycash_callback", c)
+	sess, _ := session.Get(sessionName, c)
 	sess.Options = &sessions.Options{
 		Path:     "/auth",
 		MaxAge:   30,
@@ -113,8 +115,8 @@ func TestGetCallbackURLFromSession(t *testing.T) {
 	sess.Values["callbackURL"] = "/use"
 	sess.Save(c.Request(), c.Response())
 	callbackURL = getCallbackURLFromSession(c)
-	if callbackURL != BASEURL+"/use" {
-		t.Errorf("callback-URL is %s not %s", callbackURL, BASEURL)
+	if callbackURL != baseURL+"/use" {
+		t.Errorf("callback-URL is %s not %s", callbackURL, baseURL)
 	}
 }
 
@@ -128,6 +130,10 @@ func initTest() {
 	os.Setenv("P_FACEBOOK_SECRET", "aaabbbccc1234567890123")
 	os.Setenv("P_GPLUS_KEY", "123456789012-1234567890abcdef1234567890.apps.googleusercontent.com")
 	os.Setenv("P_GPLUS_SECRET", "secretsecretsecretsecretsecretsecret")
+	os.Setenv("BASE_URL", "https://example.com")
+	os.Setenv("SESSION_SECRET", "secretsecretsecretsecretsecretsecret")
+	os.Setenv("ACTIVATION_URL", "https://example.com")
+	os.Setenv("ACTIVATION_STATE_URL", "https://example.com")
 
 	// tracer init
 	_, _, Ctx = tracing.InitMockJaeger("bongo-auth-test")

@@ -14,8 +14,8 @@ package main
 //   * P_GPLUS_SECRET    - Google+-secret for login-provider (goth)
 //   * ACTIVATION_URL    - The url that holds the link to the activaton route. <- depends on dns and albert config for auth
 //   * ACTIVATION_SUCCESS_URL - Thes urls that is called when activation has happened. Its a static page that is reached through redirect
-//   * BASE_URL          - Defines the base monkeycash-URL for contructing i.e. callback-URLs. Should be the name of the server the app is running on.
-//   * SESSION_SECRET - Defines the secret that is uses to encrypt the sessions.
+//   * BASE_URL          - Defines the base URL for contructing i.e. callback-URLs. Should be the name of the server the app is running on.
+//   * SESSION_SECRET    - Defines the secret that is uses to encrypt the sessions.
 import (
 	"context"
 	"fmt"
@@ -113,10 +113,6 @@ type (
 	MerchantModeResponse struct {
 		Successful bool `json:"successful"`
 	}
-	// ActivationInformationResponse returns boolean information if a user has been succesfully activated via autenticationtoken
-	// ActivationInformationResponse struct {
-	// 	Activated bool `json:"activated"`
-	// }
 
 	// AccountActivation carries the token and provides functions to activate a user/ trigger follow up actions
 	AccountActivation struct {
@@ -184,6 +180,8 @@ func (userInfo *UserInfo) createAndStoreActivationTokenForUser(c echo.Context) e
 
 }
 
+const sessionName = "_ch3ck1n_callback"
+
 // ServerConfig defines the configuration for auth
 var serverConfig ServerConfigStruct
 
@@ -202,8 +200,8 @@ func main() {
 	e.Logger.Debug("Initialise Goth with Facebook and Google+ providers")
 	tracing.LogString(span, "goth", "Initialise Goth with Facebook and Google+ providers")
 	goth.UseProviders(
-		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://checkin.chckr.de/auth/callback?provider=facebook"),
-		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://checkin.chckr.de/auth/callback?provider=gplus"),
+		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=facebook"),
+		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=gplus"),
 	)
 
 	if err := database.InitDatabase(serverConfig.Database); err != nil {
@@ -257,7 +255,7 @@ func login(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	sess, _ := session.Get("_monkeycash_callback", c)
+	sess, _ := session.Get(sessionName, c)
 	sess.Options = &sessions.Options{
 		Path:     "/auth",
 		MaxAge:   30,
@@ -284,10 +282,10 @@ func login(c echo.Context) error {
 	}
 	// user have to login
 	gothic.BeginAuthHandler(c.Response(), c.Request())
-	return nil //c.Redirect(http.StatusTemporaryRedirect, "https://checkin.chckr.de")
+	return nil //c.Redirect(http.StatusTemporaryRedirect, "https://dev.checkin.chckr.de")
 }
 
-// logout remove monkeycash session cookie and sign out the user
+// logout remove session cookie and sign out the user
 func logout(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
@@ -563,7 +561,7 @@ func getCallbackURLFromSession(c echo.Context) string {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	sess, _ := session.Get("_monkeycash_callback", c)
+	sess, _ := session.Get(sessionName, c)
 	urlPart := ""
 	if sess.Values["callbackURL"] != nil {
 		urlPart = sess.Values["callbackURL"].(string)

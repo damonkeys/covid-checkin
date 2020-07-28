@@ -186,7 +186,7 @@ func setupTest() (echo.Context, *httptest.ResponseRecorder) {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Logger.SetLevel(log.OFF)
-	sessionStore := sessions.NewCookieStore([]byte(sessionSecret))
+	sessionStore := sessions.NewCookieStore([]byte("secret"))
 	gothic.Store = sessionStore
 	e.Use(session.Middleware(sessionStore))
 	rec := httptest.NewRecorder()
