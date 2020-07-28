@@ -1,4 +1,4 @@
-create database if not exists monkey_auth;
-create user if not exists 'auth_user'@'%' identified by '';
-grant ALL PRIVILEGES on monkey_auth.* to 'auth_user'@'%';
+create database if not exists ch3ck1n;
+create user if not exists 'ch3ck1n_user'@'%' identified by '==>';
+grant ALL PRIVILEGES on ch3ck1n.* to 'ch3ck1n_user'@'%';
 FLUSH PRIVILEGES;
