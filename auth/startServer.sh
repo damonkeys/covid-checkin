@@ -16,7 +16,7 @@ export P_GPLUS_SECRET=""
 export P_APPLE_KEY=""
 export P_APPLE_SECRET=""
 
-# static part plus dynamic replacement for the activaation token
+# static part plus dynamic replacement for the activation token
 export ACTIVATION_URL="https://dev.checkin.chckr.de/auth/activation/%s"
 export ACTIVATION_STATE_URL="https://dev.checkin.chckr.de/activation/%s"
 
