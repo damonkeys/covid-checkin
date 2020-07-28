@@ -1,0 +1,26 @@
+{
+  "cwd": "/Users/ch3ck1n/projects/github/ch3ck1n/client-app",
+  "type": [
+    "pwa"
+  ],
+  "name": "ch3ck1n",
+  "framework": "react",
+  "template": "blank",
+  "bundler": "webpack",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkTheme": false,
+    "iconFonts": true,
+    "fillBars": false
+  },
+  "customBuild": false,
+  "webpack": {
+    "developmentSourceMap": true,
+    "productionSourceMap": true,
+    "hashAssets": false,
+    "preserveAssetsPaths": false,
+    "inlineAssets": true
+  }
+}
