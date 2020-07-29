@@ -7,10 +7,11 @@ import (
 	"testing"
 
 	"github.com/gorilla/sessions"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 
-	"../monkeys/tracing"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 )
 
 var (

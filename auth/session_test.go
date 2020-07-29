@@ -7,14 +7,18 @@ import (
 	"testing"
 	"time"
 
-	"../monkeys/database"
-	"../monkeys/tracing"
-	"./models"
+	"github.com/damonkeys/ch3ck1n/auth/models"
+	"github.com/damonkeys/ch3ck1n/monkeys/database"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+
 	"github.com/gorilla/sessions"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
+
 	log "github.com/labstack/gommon/log"
+
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 )
