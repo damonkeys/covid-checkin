@@ -16,3 +16,4 @@
 
 # log file should be ignored
 logs
+auth/auth

@@ -7,7 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	"../monkeys/tracing"
+	"github.com/damonkeys/ch3ck1n/auth/models"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+
 	"github.com/eefret/gravatar/default_img"
 
 	"github.com/eefret/gravatar"
@@ -18,7 +20,6 @@ import (
 	"github.com/labstack/echo-contrib/session"
 	"github.com/markbates/goth"
 
-	"./models"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
