@@ -1,7 +1,7 @@
 package session
 
 import (
-	"../tracing"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 )

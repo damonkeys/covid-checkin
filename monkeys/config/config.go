@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"strings"
 
-	"../tracing"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 )
 
 // ReadEnvVars checks setting of all environment variable names of the given struct. If they aren't existing an error will returned.
