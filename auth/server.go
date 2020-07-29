@@ -49,7 +49,7 @@ type (
 	ServerConfigStruct struct {
 		Port          string                `env:"SERVER_PORT"`
 		Baseurl       string                `env:"BASE_URL"`
-		SessionSecret string                `env:"SESSION_SECRET`
+		SessionSecret string                `env:"SESSION_SECRET"`
 		Providers     ProvidersStruct       `json:"providers"`
 		Database      database.ConfigStruct `json:"database"`
 		Activation    ActivationStruct      `json:"activation"`
