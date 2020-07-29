@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"../../monkeys/database"
-	"../../monkeys/tracing"
+	"github.com/damonkeys/ch3ck1n/monkeys/database"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 	"github.com/jinzhu/gorm"
 )
 

@@ -1,12 +1,13 @@
 package main
 
 import (
-	"../monkeys/tracing"
 	"context"
 	"fmt"
-	"github.com/mailgun/mailgun-go"
 	"log"
 	"time"
+
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/mailgun/mailgun-go"
 )
 
 // Your available domain names can be found here:
