@@ -34,12 +34,14 @@ import (
 	"github.com/markbates/goth/providers/facebook"
 	"github.com/markbates/goth/providers/gplus"
 
-	bubblesclient "../monkeys/bubbles"
-	"../monkeys/config"
-	"../monkeys/database"
-	l "../monkeys/logger"
-	"../monkeys/tracing"
-	"./models"
+	"github.com/damonkeys/ch3ck1n/auth/models"
+
+	bubblesclient "github.com/damonkeys/ch3ck1n/monkeys/bubbles"
+	"github.com/damonkeys/ch3ck1n/monkeys/config"
+	"github.com/damonkeys/ch3ck1n/monkeys/database"
+	l "github.com/damonkeys/ch3ck1n/monkeys/logger"
+	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+
 	"github.com/google/uuid"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
