@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import {
   App,
   View,
 } from 'framework7-react';
-
 import routes from '../js/routes';
+import { I18nextProvider, Translation } from 'react-i18next';
+import i18n from './i18n'; // the initialized i18next instance
+import {
+  Preloader, Block
+} from 'framework7-react';
 
 export default class extends React.Component {
   constructor() {
@@ -32,10 +36,17 @@ export default class extends React.Component {
   render() {
     return (
       <App params={ this.state.f7params } >
-
         {/* Your main view, should have "view-main" class */}
-        <View main className="safe-areas" url="/" />
-
+        <Suspense fallback={<Block className="text-align-center"><Preloader color="pink"></Preloader></Block>}>
+          <I18nextProvider i18n={i18n}>
+            <Translation>
+              {
+                t =>
+                  <View main className="safe-areas"/>
+              }
+            </Translation>
+          </I18nextProvider>
+        </Suspense>
       </App>
     );
   }

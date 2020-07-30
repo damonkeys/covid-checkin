@@ -1,0 +1,17 @@
+{
+    "basic": {
+        "appname": "monkeycash.io",
+        "back": "Zurück",
+        "logout": "Abmelden",
+        "edit": "Bearbeiten",
+        "more": "Mehr",
+        "start": "Starten",
+        "close": "Schließen",
+        "cancel": "Abbrechen"
+    },
+    "explanation": {
+        "bummer": "Tut uns leid!",
+        "usesmartphone": "Bitte benutze monkeycash mit Deinem Smartphone!",
+        "contentnotfound": "Angefragter Inhalt nicht gefunden"
+    }
+}

@@ -8,9 +8,10 @@ import {
   Toolbar,
   Block,
 } from 'framework7-react';
-
+import Navigation from '../components/Navigation'
 export default () => (
   <Page name="home">
+    <Navigation></Navigation>
     {/* Top Navbar */}
     <Navbar large>
       <NavTitle>ch3ck1n</NavTitle>
@@ -18,7 +19,7 @@ export default () => (
     </Navbar>
     {/* Toolbar */}
     <Toolbar bottom>
-      <Link>Left Link</Link>
+      <Link href="/Privacy/">Privacy</Link>
       <Link>Right Link</Link>
     </Toolbar>
     {/* Page content */}
