@@ -16,8 +16,8 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/gorilla/sessions"
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 	"github.com/markbates/goth"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"

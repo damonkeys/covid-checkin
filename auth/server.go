@@ -25,9 +25,9 @@ import (
 
 	"github.com/gorilla/sessions"
 
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
@@ -51,7 +51,7 @@ type (
 	ServerConfigStruct struct {
 		Port          string                `env:"SERVER_PORT"`
 		Baseurl       string                `env:"BASE_URL"`
-		SessionSecret string                `env:"SESSION_SECRET`
+		SessionSecret string                `env:"SESSION_SECRET"`
 		Providers     ProvidersStruct       `json:"providers"`
 		Database      database.ConfigStruct `json:"database"`
 		Activation    ActivationStruct      `json:"activation"`
