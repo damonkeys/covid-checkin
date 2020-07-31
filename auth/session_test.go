@@ -12,10 +12,9 @@ import (
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 
 	"github.com/gorilla/sessions"
-
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 
 	log "github.com/labstack/gommon/log"
 

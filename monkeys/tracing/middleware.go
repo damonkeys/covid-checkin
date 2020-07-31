@@ -1,8 +1,8 @@
 package tracing
 
 import (
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 )
 
 // Middleware defines the tracing middleware. Use it with echo as first middleware for tracing the whole request time!

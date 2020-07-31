@@ -2,8 +2,8 @@ package session
 
 import (
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 )
 
 func UserUUIDFromSession(e echo.Context) string {

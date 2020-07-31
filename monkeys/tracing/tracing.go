@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"runtime"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	opentracing "github.com/opentracing/opentracing-go"
 	jaeger "github.com/uber/jaeger-client-go"
 	config "github.com/uber/jaeger-client-go/config"

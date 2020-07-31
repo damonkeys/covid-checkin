@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
-	"github.com/mailgun/mailgun-go"
+	"github.com/mailgun/mailgun-go/v4"
 )
 
 // Your available domain names can be found here:

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 type (

@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/sessions"
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 )
 
 // CheckLoggedInUserAccess checks wether a user is logged in. If not the request ist not further processed and 403 is returned.
