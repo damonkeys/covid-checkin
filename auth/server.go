@@ -12,6 +12,8 @@ package main
 //   * P_FACEBOOK_SECRET - Facebook-secret for login-provider (goth)
 //   * P_GPLUS_KEY    	 - Google+-key for login-provider (goth)
 //   * P_GPLUS_SECRET    - Google+-secret for login-provider (goth)
+//   * P_APPLE_KEY    	 - Apple-key for login-provider (goth)
+//   * P_APPLE_SECRET    - Apple-secret for login-provider (goth)
 //   * ACTIVATION_URL    - The url that holds the link to the activaton route. <- depends on dns and albert config for auth
 //   * ACTIVATION_SUCCESS_URL - Thes urls that is called when activation has happened. Its a static page that is reached through redirect
 //   * BASE_URL          - Defines the base URL for contructing i.e. callback-URLs. Should be the name of the server the app is running on.
@@ -31,6 +33,7 @@ import (
 
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
+	"github.com/markbates/goth/providers/apple"
 	"github.com/markbates/goth/providers/facebook"
 	"github.com/markbates/goth/providers/gplus"
 
@@ -61,6 +64,7 @@ type (
 	ProvidersStruct struct {
 		Facebook FacebookSecretsStruct `json:"facebook"`
 		Gplus    GplusSecretsStruct    `json:"gplus"`
+		Apple    AppleSecretsStruct    `json:"apple"`
 	}
 	// FacebookSecretsStruct defines one key-secret-pair for facebooks oauth-provider
 	FacebookSecretsStruct struct {
@@ -71,6 +75,11 @@ type (
 	GplusSecretsStruct struct {
 		Key    string `env:"P_GPLUS_KEY" json:"key"`
 		Secret string `env:"P_GPLUS_SECRET" json:"secret"`
+	}
+	// AppleSecretsStruct defines one key-secret-pair for Apple oauth-provider
+	AppleSecretsStruct struct {
+		Key    string `env:"P_APPLE_KEY" json:"key"`
+		Secret string `env:"P_APPLE_SECRET" json:"secret"`
 	}
 
 	// LogoutUserResponse returns successfully logouts
@@ -199,11 +208,12 @@ func main() {
 	tracing.LogStruct(span, "serverConfig", serverConfig)
 
 	// Init goth-providers that we use
-	e.Logger.Debug("Initialise Goth with Facebook and Google+ providers")
-	tracing.LogString(span, "goth", "Initialise Goth with Facebook and Google+ providers")
+	e.Logger.Debug("Initialise Goth with Facebook, Google+ and Apple providers")
+	tracing.LogString(span, "goth", "Initialise Goth with Facebook, Google+ and Apple providers")
 	goth.UseProviders(
 		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=facebook"),
 		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=gplus"),
+		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=apple", nil, apple.ScopeName, apple.ScopeEmail),
 	)
 
 	if err := database.InitDatabase(serverConfig.Database); err != nil {
