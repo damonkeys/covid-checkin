@@ -1,6 +1,7 @@
+-- migrate:up
 -- MySQL dump 10.13  Distrib 8.0.21, for osx10.15 (x86_64)
 --
--- Host: 127.0.0.1    Database: monkey_auth
+-- Host: 127.0.0.1    Database: ch3ck1n
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.4.10-MariaDB-1:10.4.10+maria~bionic
 
@@ -16,10 +17,10 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `monkey_auth`
+-- Current Database: `ch3ck1n`
 --
 
-USE `monkey_auth`;
+USE `ch3ck1n`;
 
 --
 -- Table structure for table `providers`
@@ -48,40 +49,6 @@ CREATE TABLE `providers` (
   PRIMARY KEY (`id`),
   KEY `idx_providers_deleted_at` (`deleted_at`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `qor_admin_settings`
---
-
-DROP TABLE IF EXISTS `qor_admin_settings`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `qor_admin_settings` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `key` varchar(255) DEFAULT NULL,
-  `resource` varchar(255) DEFAULT NULL,
-  `user_id` varchar(255) DEFAULT NULL,
-  `value` longtext DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idx_qor_admin_settings_deleted_at` (`deleted_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `schema_migrations`
---
-
-DROP TABLE IF EXISTS `schema_migrations`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `schema_migrations` (
-  `version` varchar(255) NOT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,3 +85,9 @@ CREATE TABLE `users` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2020-07-28 22:59:18
+
+
+
+-- migrate:down
+DROP TABLE IF EXISTS `providers`;
+DROP TABLE IF EXISTS `users`;
