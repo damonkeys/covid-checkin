@@ -9,6 +9,7 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/sessions v1.2.0
 	github.com/jinzhu/gorm v1.9.15
+	github.com/kr/pretty v0.2.0
 	github.com/labstack/echo-contrib v0.9.0
 	github.com/labstack/echo/v4 v4.1.16
 	github.com/labstack/gommon v0.3.0
@@ -17,4 +18,5 @@ require (
 	github.com/markbates/goth v1.64.2
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
+	googlemaps.github.io/maps v1.2.1
 )
