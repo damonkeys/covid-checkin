@@ -6,7 +6,7 @@
 #  
 if [ -z "$1" ]
 then
-    echo -e "\nERROR: Missing Applicationname for starting... eg. './startServer.sh auth-server'\n\n"
+    echo -e "\nERROR: Missing Applicationname for starting... eg. './startServer.sh auth'\n\n"
     exit
 fi
 
@@ -18,12 +18,12 @@ if [ -n $param2 ] && [[ $param2 = "local" ]]
         # local environment - development
         echo -e "\nStarting service... $1 LOCAL!"
         echo -e "==========================================================================\n"
-        screen -S $app_name -dmS bash -c "cd ../go/$app_name/; go build; ./startServer.sh; exec bash"
+        screen -S $app_name -dmS bash -c "cd ../$app_name/; go build; ./startServer.sh; exec bash"
     else
         # Variables
-        server="checkin.chckr.de"
-        server_path="/opt/monkeycash/"
-        server_user="pmd"
+        server="dev.checkin.chckr.de"
+        server_path="/opt/ch3ck1n/"
+        server_user="user"
         server_ssh=$server_user@$server
 
         # Starting server..."

@@ -19,13 +19,13 @@ fi
 sudo_user=$1 #bbu or sho
 
 server="dev.checkin.chckr.de"
-server_path="/opt/checkin/"
-server_user="pmd"
+server_path="/opt/ch3ck1n/"
+server_user="user"
 server_ssh=$server_user@$server
 server_sudossh=$sudo_user@$server
 dist_directory="dist"
 current_path=$(pwd)
-tools_path="../../tools"
+tools_path="../tools"
 
 # Microserver-variables
 app_name="proxy"
@@ -37,8 +37,8 @@ echo -e "\nStarting goreleaser for building binary"
 echo -e "==========================================================================\n"
 #cd ../go/$1
 goreleaser --snapshot --skip-validate --rm-dist
-mv $dist_directory/monkeycash_SNAPSHOT_linux_amd64.tar.gz $dist_directory/$app_archive
-mv $dist_directory/monkeycash_SNAPSHOT_checksums.txt $dist_directory/$app_checksum
+mv $dist_directory/ch3ck1n_SNAPSHOT_linux_amd64.tar.gz $dist_directory/$app_archive
+mv $dist_directory/ch3ck1n_SNAPSHOT_checksums.txt $dist_directory/$app_checksum
 
 echo -e "\nDeploy $app_directory to Server..."
 echo -e "==========================================================================\n"

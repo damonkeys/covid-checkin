@@ -4,7 +4,7 @@ ETC_HOSTS=/etc/hosts
 # DEFAULT IP FOR HOSTNAME
 IP="127.0.0.1"
 # Hostname to add/remove.
-HOSTNAME=checkin.chckr.de
+HOSTNAME=dev.checkin.chckr.de
 
 function removehost() {
     if [ -n "$(grep $HOSTNAME /etc/hosts)" ]

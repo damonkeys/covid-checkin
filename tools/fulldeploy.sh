@@ -6,35 +6,23 @@ then
     exit
 fi
 
-echo -e "\nDeploying all monkeycash.io services"
+echo -e "\nDeploying all ch3ck1n services"
 echo -e "==========================================================================\n"
 
 echo -e "\nSimple-Web-Server"
 echo -e "==========================================================================\n"
-cd ../react
+cd ../client-app
 yarn build
 cd ../tools
-./deploy.sh monkeywebserver
+./deploy.sh simplewebserver
 
-echo -e "\nbongo - auth-server"
+echo -e "\nauth-server"
 echo -e "==========================================================================\n"
-./deploy.sh bongo-auth
-
-echo -e "\nkoko - qr-server"
-echo -e "==========================================================================\n"
-./deploy.sh koko-qr
-
-echo -e "\nkingkong - pos-server"
-echo -e "==========================================================================\n"
-./deploy.sh kingkong
-
-echo -e "\nbubbles - messaging server"
-echo -e "==========================================================================\n"
-./deploy.sh bubbles
+./deploy.sh auth
 
 ### ALBERT is the last service to deploy. It has its own deploy-script!
-echo -e "\nalbert - Proxy-Server"
+echo -e "\Proxy-Server"
 echo -e "==========================================================================\n"
-cd ../go/albert-proxy
-tools/deployAlbert.sh $@
+cd ../proxy
+tools/deployProxy.sh $@
 ### ALBERT is the last service to deploy. It has its own deploy-script!

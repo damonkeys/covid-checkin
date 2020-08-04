@@ -3,9 +3,5 @@
 
 ./hosts.sh remove
 
-./stopServer.sh albert-proxy local
-./stopServer.sh bongo-auth local
-./stopServer.sh koko-qr local
-./stopServer.sh react local
-./stopServer.sh kingkong local
-./stopServer.sh bubbles local
+./stopServer.sh proxy local
+./stopServer.sh auth local

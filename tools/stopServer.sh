@@ -10,9 +10,9 @@ then
     exit
 fi
 # Variables
-server="checkin.chckr.de"
-server_path="/opt/monkeycash/"
-server_user="pmd"
+server="dev.checkin.chckr.de"
+server_path="/opt/ch3ck1n/"
+server_user="user"
 server_ssh=$server_user@$server
 
 # Microserver-variables

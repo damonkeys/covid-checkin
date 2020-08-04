@@ -6,13 +6,13 @@
 #  
 if [ -z "$1" ]
 then
-    echo -e "\nERROR: Missing Applicationname for deploying... eg. './deploy.sh auth-server'\n\n"
+    echo -e "\nERROR: Missing Applicationname for deploying... eg. './deploy.sh auth'\n\n"
     exit
 fi
 # Variables
-server="checkin.chckr.de"
-server_path="/opt/monkeycash/"
-server_user="pmd"
+server="dev.checkin.chckr.de"
+server_path="/opt/ch3ck1n/"
+server_user="user"
 server_ssh=$server_user@$server
 dist_directory="dist"
 current_path=$(pwd)
@@ -25,10 +25,10 @@ app_checksum="$1_SNAPSHOT_checksum.txt"
 
 echo -e "\nStarting goreleaser for building binary"
 echo -e "==========================================================================\n"
-cd ../go/$1
+cd ../$1
 goreleaser --snapshot --skip-validate --rm-dist
-mv $dist_directory/monkeycash_SNAPSHOT_linux_amd64.tar.gz $dist_directory/$app_archive
-mv $dist_directory/monkeycash_SNAPSHOT_checksums.txt $dist_directory/$app_checksum
+mv $dist_directory/ch3ck1n_SNAPSHOT_linux_amd64.tar.gz $dist_directory/$app_archive
+mv $dist_directory/ch3ck1n_SNAPSHOT_checksums.txt $dist_directory/$app_checksum
 
 echo -e "\nDeploy $app_directory to Server..."
 echo -e "==========================================================================\n"

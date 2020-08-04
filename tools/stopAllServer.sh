@@ -1,24 +1,16 @@
 #!/bin/bash         
 
-echo -e "\nStopping all monkeycash services"
+echo -e "\nStopping all ch3ck1n services"
 echo -e "==========================================================================\n"
 
-echo -e "\nMonkeyWebServer"
+echo -e "\SimpleWebServer"
 echo -e "==========================================================================\n"
-./stopServer.sh monkeywebserver
+./stopServer.sh simplewebserver
 
-echo -e "\nbongo - auth-server"
+echo -e "\nauth-server"
 echo -e "==========================================================================\n"
-./stopServer.sh bongo-auth
+./stopServer.sh auth
 
-echo -e "\nkoko - qr-server"
+echo -e "\nproxy server"
 echo -e "==========================================================================\n"
-./stopServer.sh koko-qr
-
-echo -e "\nbubbles - messagig-server"
-echo -e "==========================================================================\n"
-./stopServer.sh bubbles
-
-echo -e "\nalbert - proxy server"
-echo -e "==========================================================================\n"
-./stopServer.sh albert-proxy
+./stopServer.sh proxy

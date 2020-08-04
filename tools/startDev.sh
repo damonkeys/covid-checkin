@@ -3,10 +3,7 @@
 
 ./hosts.sh add
 
-./startServer.sh albert-proxy local
-./startServer.sh bongo-auth local
-./startServer.sh koko-qr local
-./startServer.sh kingkong local
-./startServer.sh bubbles local
+./startServer.sh proxy local
+./startServer.sh auth local
 
-screen -S react -dmS bash -c "cd ../react/; yarn start; exec bash"
+screen -S react -dmS bash -c "cd ../client-app/; yarn start; exec bash"
