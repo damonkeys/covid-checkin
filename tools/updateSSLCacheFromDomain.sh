@@ -1,3 +1,3 @@
 #!/bin/bash
 
-scp -r pmd@checkin.chckr.de:/opt/monkeycash/albert-proxy/.cache ../go/albert-proxy/
+scp -r user@dev.checkin.chckr.de:/opt/ch3ck1n/proxy/.cache ../proxy/

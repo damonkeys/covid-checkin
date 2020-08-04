@@ -1,20 +1,16 @@
 #!/bin/bash         
 
-echo -e "\nStarting all monkeycash.io services"
+echo -e "\nStarting all ch3ck1n services"
 echo -e "==========================================================================\n"
 
-echo -e "\nalbert - proxy-server"
+echo -e "\nproxy-server"
 echo -e "==========================================================================\n"
-../go/albert-proxy/tools/startServer.sh albert-proxy
+../proxy/tools/startServer.sh proxy
 
-echo -e "\nmonkeycashweberver"
+echo -e "\nsimplewebserver"
 echo -e "==========================================================================\n"
-./startServer.sh monkeywebserver 
+./startServer.sh simplewebserver 
 
-echo -e "\nbongo - auth-server"
+echo -e "\nauth-server"
 echo -e "==========================================================================\n"
-./startServer.sh bongo-auth
-
-echo -e "\nkoko - qr-server"
-echo -e "==========================================================================\n"
-./startServer.sh koko-qr
+./startServer.sh auth
