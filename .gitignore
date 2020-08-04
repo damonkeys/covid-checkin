@@ -23,4 +23,5 @@ logs
 
 # binaries
 auth/auth
+sales/locacq/locacq
 proxy/proxy
