@@ -1,0 +1,22 @@
+{
+    "routes": [{
+        "name": "Client-App",
+        "path": "/*",
+        "description": "The route to the (react based) webserver for monkeycash",
+        "urls": [
+            "http://dev.checkin.chckr.de:3000"
+        ],
+        "balancer": "random",
+        "rewrite": true
+    }, {
+        "name": "Auth",
+        "path": "/auth",
+        "description":"The route to the auth server",
+        "urls": [
+            "http://dev.checkin.chckr.de:2000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+
+    }]
+}
