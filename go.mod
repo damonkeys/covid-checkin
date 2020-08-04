@@ -18,5 +18,6 @@ require (
 	github.com/markbates/goth v1.64.2
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
+	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
 	googlemaps.github.io/maps v1.2.1
 )

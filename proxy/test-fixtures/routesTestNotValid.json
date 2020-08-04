@@ -1,0 +1,16 @@
+{
+    "routes": [{
+        "time": "2018-09-21T19:04:35.366887121+02:00",
+        "id": "",
+        "remote_ip": "77.22.158.100",
+        "host": "checkin.chckr.de",
+        "method": "GET",
+        "uri": "/auth/checksession",
+        "status": 200,
+        "error": "",
+        "latency": 331598,
+        "latency_human": "331.598µs",
+        "bytes_in": 0,
+        "bytes_out": 956
+    }]
+}

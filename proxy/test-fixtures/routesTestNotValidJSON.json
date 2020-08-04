@@ -1,0 +1,25 @@
+{
+    "routes": [{
+        "name": "React-App",
+        "path": "/",
+        "urls": [
+            "http://checkin.chckr.de:8080"
+        ],
+        "balancer": "random"
+    }, {
+        "name": "Bongo-Auth",
+        "path": "/auth",
+        "urls": [
+            "http://checkin.chckr.de:3000"
+        ],
+        "balancer": "roundrobin"
+    }, {
+        "name": "Admin-Tests",
+        "path": "/admin",
+        "urls": [
+            "http://checkin.chckr.de:9000/admin/behaviour/device_infos",
+            "http://checkin.chckr.de:9000/admin/gaming/gameturns",
+            "http://checkin.chckr.de:9000/admin/auth/users"
+        ],
+
+}
