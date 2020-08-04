@@ -25,3 +25,4 @@ logs
 auth/auth
 sales/locacq/locacq
 proxy/proxy
+simplewebserver/simplewebserver
