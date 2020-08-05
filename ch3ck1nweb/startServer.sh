@@ -2,4 +2,4 @@
 
 export SERVER_PORT=3000
 
-./simplewebserver
+./ch3ck1nweb
