@@ -25,4 +25,5 @@ logs
 auth/auth
 sales/locacq/locacq
 service-gateway/service-gateway
+service-gateway/.cache/
 ch3ck1nweb/ch3ck1nweb
