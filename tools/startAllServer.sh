@@ -7,9 +7,9 @@ echo -e "\nproxy-server"
 echo -e "==========================================================================\n"
 ../proxy/tools/startServer.sh proxy
 
-echo -e "\nsimplewebserver"
+echo -e "\nch3ck1nweb"
 echo -e "==========================================================================\n"
-./startServer.sh simplewebserver 
+./startServer.sh ch3ck1nweb 
 
 echo -e "\nauth-server"
 echo -e "==========================================================================\n"

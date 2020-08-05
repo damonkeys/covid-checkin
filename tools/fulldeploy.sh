@@ -9,12 +9,12 @@ fi
 echo -e "\nDeploying all ch3ck1n services"
 echo -e "==========================================================================\n"
 
-echo -e "\nSimple-Web-Server"
+echo -e "\ch3ck1nweb-Web-Server"
 echo -e "==========================================================================\n"
 cd ../client-app
 yarn build
 cd ../tools
-./deploy.sh simplewebserver
+./deploy.sh ch3ck1nweb
 
 echo -e "\nauth-server"
 echo -e "==========================================================================\n"
