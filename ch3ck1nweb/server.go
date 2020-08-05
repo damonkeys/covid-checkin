@@ -1,6 +1,6 @@
 package main
 
-// Simple webserver for static websites. To serve your static site put all files in folder static.
+// ch3ck1nweb webserver for static websites. To serve your static site put all files in folder static.
 //
 // The server uses environment variables. If they are not set the server won't start. It expects the following environment variables:
 //   * SERVER_PORT - the server is listening on this portnumber
