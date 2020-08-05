@@ -74,4 +74,5 @@ archives:
     files:
       - README.md
       - startServer.sh
-      
+      - dbmate/*
+      - dbmate/**/*
