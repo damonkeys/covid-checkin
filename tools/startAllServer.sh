@@ -3,9 +3,9 @@
 echo -e "\nStarting all ch3ck1n services"
 echo -e "==========================================================================\n"
 
-echo -e "\nproxy-server"
+echo -e "\nservice-gateway"
 echo -e "==========================================================================\n"
-../proxy/tools/startServer.sh proxy
+../service-gateway/tools/startServer.sh service-gateway
 
 echo -e "\nch3ck1nweb"
 echo -e "==========================================================================\n"

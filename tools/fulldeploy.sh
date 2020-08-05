@@ -21,8 +21,8 @@ echo -e "=======================================================================
 ./deploy.sh auth
 
 ### ALBERT is the last service to deploy. It has its own deploy-script!
-echo -e "\Proxy-Server"
+echo -e "\Service-Gateway"
 echo -e "==========================================================================\n"
-cd ../proxy
-tools/deployProxy.sh $@
+cd ../service-gateway
+tools/deployServiceGateway.sh $@
 ### ALBERT is the last service to deploy. It has its own deploy-script!

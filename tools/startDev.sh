@@ -3,7 +3,7 @@
 
 ./hosts.sh add
 
-./startServer.sh proxy local
+./startServer.sh service-gateway local
 ./startServer.sh auth local
 
 screen -S react -dmS bash -c "cd ../client-app/; yarn start; exec bash"

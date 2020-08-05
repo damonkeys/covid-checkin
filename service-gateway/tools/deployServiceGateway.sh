@@ -1,7 +1,7 @@
 #!/bin/bash         
 #
-# !!!!!!!!!!!!!!!!!!!!! RUN FROM PROJECT-DIRECTORE (proxy) !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# >> tools/deployProxy.sh
+# !!!!!!!!!!!!!!!!!!!!! RUN FROM PROJECT-DIRECTORE (service-gateway) !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# >> tools/deployServiceGateway.sh
 #
 #
 # Commandline arguments
@@ -12,7 +12,7 @@
 # Variables
 if [ -z "$1" ]
 then
-    echo -e "\nERROR: Missing User for starting... eg. 'tools/deployProxy.sh sho'\n\n"
+    echo -e "\nERROR: Missing User for starting... eg. 'tools/deployServiceGateway.sh sho'\n\n"
     exit
 fi
 
@@ -28,7 +28,7 @@ current_path=$(pwd)
 tools_path="../tools"
 
 # Microserver-variables
-app_name="proxy"
+app_name="service-gateway"
 app_archive=$app_name"_SNAPSHOT_linux_amd64.tar.gz"
 app_checksum=$app_name"_SNAPSHOT_checksum.txt"
 

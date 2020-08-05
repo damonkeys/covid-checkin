@@ -84,7 +84,7 @@ var proxyConfig ProxyConfigStruct
 
 func main() {
 	// tracer init
-	closer, span, ctx := tracing.InitJaeger("proxy")
+	closer, span, ctx := tracing.InitJaeger("service-gateway")
 	defer closer.Close()
 
 	setProxyConfig(ctx)
@@ -93,14 +93,14 @@ func main() {
 
 	// init echo
 	e := echo.New()
-	e.Use(tracing.MiddlewareWithoutCurrentUser("proxy"))
+	e.Use(tracing.MiddlewareWithoutCurrentUser("service-gateway"))
 	e.Pre(middleware.HTTPSRedirect()) // Add https-redirect
 
 	// needed for AutoTLS
 	e.Use(middleware.Recover())
 
 	// Logger config
-	l.ConfigureLogger(ctx, "proxy", e)
+	l.ConfigureLogger(ctx, "service-gateway", e)
 
 	e.AutoTLSManager.Cache = autocert.DirCache("./.cache")
 
