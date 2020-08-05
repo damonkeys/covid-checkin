@@ -8,7 +8,7 @@ builds:
 
     # Name of the binary.
     # Default is the name of the project directory.
-    binary: proxy
+    binary: service-gateway
 
     # Set flags for custom build tags.
     # Default is empty.
@@ -76,4 +76,3 @@ archives:
       - startServer.sh
       - routes.json
       - .cache/*
-      

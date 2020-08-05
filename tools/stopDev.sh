@@ -3,5 +3,5 @@
 
 ./hosts.sh remove
 
-./stopServer.sh proxy local
+./stopServer.sh service-gateway local
 ./stopServer.sh auth local

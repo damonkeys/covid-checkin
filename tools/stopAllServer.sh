@@ -11,6 +11,6 @@ echo -e "\nauth-server"
 echo -e "==========================================================================\n"
 ./stopServer.sh auth
 
-echo -e "\nproxy server"
+echo -e "\nservice-gateway"
 echo -e "==========================================================================\n"
-./stopServer.sh proxy
+./stopServer.sh service-gateway
