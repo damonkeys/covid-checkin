@@ -21,7 +21,7 @@
             "step1": "Geht zu Deinem benutzen Login Provider (Facebook, Google oder Apple).",
             "step2": "Geh zu den Einstellungen Deiner oauth apps.",
             "step3": "Entferne die ch3ck1n app.",
-            "step4": "Gehe zu https://dev.checkin.chckr.de und logge Dich erneut über eine der Möglichkeiten ein ein und erlaube ch3ck1n, Deine Email Adresse zu bekommen."
+            "step4": "Gehe zu https://dev.checkin.chckr.de, logge Dich erneut über eine der Möglichkeiten ein ein und erlaube ch3ck1n, Deine Email Adresse zu bekommen."
         }
     }
 }
