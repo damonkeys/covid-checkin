@@ -1,6 +1,6 @@
 {
     "basic": {
-        "appname": "monkeycash.io",
+        "appname": "ch3ck1n",
         "back": "Zurück",
         "logout": "Abmelden",
         "edit": "Bearbeiten",
@@ -11,7 +11,17 @@
     },
     "explanation": {
         "bummer": "Tut uns leid!",
-        "usesmartphone": "Bitte benutze monkeycash mit Deinem Smartphone!",
-        "contentnotfound": "Angefragter Inhalt nicht gefunden"
+        "usesmartphone": "Bitte benutze ch3ck1n mit Deinem Smartphone!",
+        "contentnotfound": "Angefragter Inhalt nicht gefunden",
+        "butcannotusemc": "aber Du kannst ch3ck1n gerade nicht nutzen.",
+        "apologizeemailrequired": "Wir entschuldigen uns, aber wir haben Deine Email Adresse, die notwendig für die Kommunikation mit Dir ist, nicht bekommen",
+        "mailrecievingprohibited": "Anscheinend hast du uns den Zugriff auf die Email während des Login Prozess verweigert.",
+        "changemind": "Falls Du Dich je dazu entschließt, uns doch Deine Email zu überlassen:",
+        "repair": {
+            "step1": "Geht zu Deinem benutzen Login Provider (facebook oder google).",
+            "step2": "Geh zu den Einstellungen Deiner oauth apps.",
+            "step3": "Entferne die ch3ck1n app.",
+            "step4": "Gehe zu https://dev.checkin.chckr.de und logge Dich mit dem Provider (aktuell google oder facebook) Deiner Wahl ein und erlaube monkeycash, Deine Email Adresse zu bekommen."
+        }
     }
 }
