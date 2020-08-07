@@ -21,7 +21,7 @@
             "step1": "Go to the used login provider (Facebook, Google or Aplle).",
             "step2": "Go to the settings for your oauth apps.",
             "step3": "Remove the ch3ck1n app.",
-            "step4": "Go to https://ch3ck1n.monkeycash.io and login with your favourite provider (currently Google, Facebook or Apple) and allow monkeycash to recieve your email address."
+            "step4": "Go to https://ch3ck1n.monkeycash.io login again and allow ch3ck1n to recieve your email address."
         }
 
     }
