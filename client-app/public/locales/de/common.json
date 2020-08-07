@@ -18,10 +18,10 @@
         "mailrecievingprohibited": "Anscheinend hast du uns den Zugriff auf die Email während des Login Prozess verweigert.",
         "changemind": "Falls Du Dich je dazu entschließt, uns doch Deine Email zu überlassen:",
         "repair": {
-            "step1": "Geht zu Deinem benutzen Login Provider (facebook oder google).",
+            "step1": "Geht zu Deinem benutzen Login Provider (Facebook, Google oder Apple).",
             "step2": "Geh zu den Einstellungen Deiner oauth apps.",
             "step3": "Entferne die ch3ck1n app.",
-            "step4": "Gehe zu https://dev.checkin.chckr.de und logge Dich mit dem Provider (aktuell Google, Facebook oder Apple) Deiner Wahl ein und erlaube monkeycash, Deine Email Adresse zu bekommen."
+            "step4": "Gehe zu https://dev.checkin.chckr.de und logge Dich erneut über eine der Möglichkeiten ein ein und erlaube ch3ck1n, Deine Email Adresse zu bekommen."
         }
     }
 }
