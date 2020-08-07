@@ -26,6 +26,13 @@ export default class extends React.Component {
         // App routes
         routes: routes,
         // Register service worker
+        //
+        // IMPORTANT COMMENT:
+        // service-worker.js uses precacheAndRoute. We have to configure it with URL outside of the app.
+        // With service-worker.js included we now have the problem to a not working app. External ch3ck1n-calls
+        // like connecting the auth-server doesn't work.
+        // For more informations: https://developers.google.com/web/tools/workbox/modules/workbox-precaching#clean_urls 
+        //
         // serviceWorker: {
         //   path: '/service-worker.js',
         // },
