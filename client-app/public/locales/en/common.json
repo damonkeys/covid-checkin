@@ -18,10 +18,10 @@
         "mailrecievingprohibited": "Seemingly you didn't allow us to get the email address during the login process.",
         "changemind": "If you should ever decide to allow us to use your email address:",
         "repair": {
-            "step1": "Go to the used login provider (facebook or google).",
+            "step1": "Go to the used login provider (Facebook, Google or Aplle).",
             "step2": "Go to the settings for your oauth apps.",
             "step3": "Remove the ch3ck1n app.",
-            "step4": "Go to https://ch3ck1n.monkeycash.io and login with your favourite provider (currently google or facebook) and allow monkeycash to recieve your email address."
+            "step4": "Go to https://ch3ck1n.monkeycash.io and login with your favourite provider (currently Google, Facebook or Apple) and allow monkeycash to recieve your email address."
         }
 
     }
