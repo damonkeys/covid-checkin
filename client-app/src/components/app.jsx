@@ -26,9 +26,9 @@ export default class extends React.Component {
         // App routes
         routes: routes,
         // Register service worker
-        serviceWorker: {
-          path: '/service-worker.js',
-        },
+        // serviceWorker: {
+        //   path: '/service-worker.js',
+        // },
       },
 
     }
