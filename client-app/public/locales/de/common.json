@@ -21,7 +21,7 @@
             "step1": "Geht zu Deinem benutzen Login Provider (facebook oder google).",
             "step2": "Geh zu den Einstellungen Deiner oauth apps.",
             "step3": "Entferne die ch3ck1n app.",
-            "step4": "Gehe zu https://dev.checkin.chckr.de und logge Dich mit dem Provider (aktuell google oder facebook) Deiner Wahl ein und erlaube monkeycash, Deine Email Adresse zu bekommen."
+            "step4": "Gehe zu https://dev.checkin.chckr.de und logge Dich mit dem Provider (aktuell google, facebook oder apple) Deiner Wahl ein und erlaube monkeycash, Deine Email Adresse zu bekommen."
         }
     }
 }
