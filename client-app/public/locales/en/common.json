@@ -24,5 +24,25 @@
             "step4": "Go to https://ch3ck1n.monkeycash.io login again and allow ch3ck1n to recieve your email address."
         }
 
+    },
+    "activation": {
+        "toStartPage": "Go to ch3ck1n dashboard",
+        "resendActivation": {
+            "title": "Resend activation",
+            "intro": "To send you a fresh activation link we need the email adress you used during signup for ch3ck1n."
+        },
+        "ongoing": {
+            "head": "Activation",
+            "title": "Activation neccessary",
+            "text": "We sent you an ch3ck1n activation email.  Please have a look into your emails and activate your account.",
+            "action": "Resend activation mail."
+        },
+        "success": {
+            "head": "Activation done",
+            "title": "Your activation was successful.",
+            "text": "ch3ck1n has been activated for you.",
+            "action": "Go to the dashboard."
+        }
     }
+
 }

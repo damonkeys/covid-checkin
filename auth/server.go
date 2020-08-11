@@ -105,12 +105,13 @@ type (
 
 	// UserInfo returns all userdata for profile
 	UserInfo struct {
-		UserOnline      bool   `json:"useronline"`
-		Username        string `json:"username"`
-		Merchant        bool   `json:"merchant"`
-		Email           string `json:"email"`
-		UUID            string `json:"uuid"`
-		ActivationToken string `json:"activationToken"`
+		PreferredLanguage string `json:"preferredLanguage"`
+		UserOnline        bool   `json:"useronline"`
+		Username          string `json:"username"`
+		Merchant          bool   `json:"merchant"`
+		Email             string `json:"email"`
+		UUID              string `json:"uuid"`
+		ActivationToken   string `json:"activationToken"`
 	}
 
 	// IntUserInfoResponse returns all userdata for internal server connections
@@ -148,7 +149,23 @@ type (
 	Activator interface {
 		activate(c echo.Context) error
 	}
+
+	// LanguageConfigurator sets the language for something (most of the time this will be the current user)
+	LanguageConfigurator interface {
+		Savelanguage(c echo.Context)
+	}
 )
+
+// Savelanguage sets the language to the given string. Should be a string explaining the language in context of this system, e.g. 'en' for english.
+func (userInfo *UserInfo) Savelanguage(c echo.Context) error {
+	span := tracing.Enter(c)
+	defer span.Finish()
+	//parse params default sensible use LanguageHelper
+	language := c.Param("l")
+	tracing.LogString(span, fmt.Sprintf("Selected language for user %s", userInfo.UUID), language)
+	userInfo.PreferredLanguage = language
+	return nil
+}
 
 // activate activates the account and redirects to login page
 func (activation *AccountActivation) activate(c echo.Context) error {
@@ -186,6 +203,7 @@ func (userInfo *UserInfo) createAndStoreActivationTokenForUser(c echo.Context) e
 		tracing.LogStruct(span, "could not update db user with activationToken", user)
 		return db.Error
 	}
+	userInfo.PreferredLanguage = user.PreferredLanguage
 	userInfo.ActivationToken = user.ActivationToken
 	return nil
 
@@ -240,9 +258,9 @@ func main() {
 	//echo does not handle different names for parameters for the same route but different http verbs correctly. Thats why we use ':param' everywhere
 	e.POST("/activation/:param", sendActivationMail)
 	e.GET("/activation/:param", processActivationState)
-	e.GET("/int/userinfos/:useruuid", getIntUserInfos)
 	e.POST("/merchant/activate", activateMerchant)
 	e.POST("/merchant/deactivate", deactivateMerchant)
+	e.POST("user/:l", setPreferredLang)
 	span.Finish()
 	e.Logger.Fatal(e.Start(":" + serverConfig.Port))
 }
@@ -358,6 +376,7 @@ func getLoginStatus(c echo.Context) error {
 
 func getSessionUserInfo(c echo.Context) (*UserInfo, error) {
 	span := tracing.Enter(c)
+	defer span.Finish()
 	userInfo := &UserInfo{
 		UserOnline: false,
 	}
@@ -376,7 +395,7 @@ func getSessionUserInfo(c echo.Context) (*UserInfo, error) {
 	return userInfo, nil
 }
 
-// getUserInfos returns all (session based) Userdata as JSON only it is online
+// getUserInfos returns all (session based) Userdata as JSON only if the user is online
 func getUserInfos(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
@@ -391,33 +410,18 @@ func getUserInfos(c echo.Context) error {
 	return c.JSON(http.StatusOK, userInfo)
 }
 
-// getIntUserInfos returns all Userdata for the given uuid. This is only for internal server-communication.
-func getIntUserInfos(c echo.Context) error {
+func setPreferredLang(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	useruuid := c.Param("useruuid")
-	if useruuid == "" {
-		return c.JSON(http.StatusInternalServerError, "no user-id received")
-	}
-	span.SetTag("useruuid", useruuid)
-	c.Logger().Debugf("Get user with uuid %s", c.Param("useruuid"))
-	intUserInfoResponse := &IntUserInfoResponse{
-		Successful: false,
-	}
-	user, err := models.FindUserByUUID(tracing.GetContext(c), useruuid)
+	userInfo, err := getSessionUserInfo(c)
 	if err != nil {
 		c.Logger().Info(err)
 		tracing.LogError(span, err)
-		return c.JSON(http.StatusOK, intUserInfoResponse)
 	}
-	intUserInfoResponse = &IntUserInfoResponse{
-		Username:   user.Name,
-		Email:      user.Email,
-		Successful: true,
-	}
+	userInfo.Savelanguage(c)
 
-	return c.JSON(http.StatusOK, intUserInfoResponse)
+	return c.JSON(http.StatusOK, "OK")
 }
 
 // sendActivationMail sends an activationMail for the given User (Session)
@@ -443,20 +447,38 @@ func sendActivationMail(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, "error")
 	}
 
+	preparer := prepareI18nActivationMessageText(userInfo)
+	tracing.LogStruct(span, "activation-mail-data", preparer)
+	sendMail(preparer)
+	return c.JSON(http.StatusOK, userInfo.Email)
+}
+
+func prepareI18nActivationMessageText(userInfo UserInfo) MGMessagePreparer {
+	if userInfo.PreferredLanguage == "de" {
+		preparer := &CTAMailContext{
+			templatename: "cta-tpl",
+			recipient:    "support@chckr.de",
+			sender:       "support@chckr.de",
+			subject:      fmt.Sprintf("Zugangs-Aktivierung für %s", userInfo.Email),
+			cta:          "Zugangs-Aktivierung notwendig",
+			body:         "Du hast es fast geschafft: Klicke auf den Aktivierungslink um Die Einrichtung Deines Zugangs abzuschließen. Vielen Dank <3",
+			ctalink:      fmt.Sprintf(serverConfig.Activation.URL, userInfo.ActivationToken),
+			linktext:     "Jetzt klicken und aktivieren",
+		}
+		return preparer
+	}
 	preparer := &CTAMailContext{
 		templatename: "cta-tpl",
 		recipient:    "support@chckr.de",
 		sender:       "support@chckr.de",
-		subject:      fmt.Sprintf("Zugangs-Aktivierung für %s", userInfo.Email),
-		cta:          "Zugangs-Aktivierung notwendig",
-		body:         "Sie haben es fast geschafft: Klicken Sie auf den Aktivierungslink um Die Einrichtung Ihrs Zugangs abzuschließen. Vielen Dank",
+		subject:      fmt.Sprintf("Account-Activation for %s", userInfo.Email),
+		cta:          "Account-Activation necessary",
+		body:         "You almost made it: Click on the activation link to complete the configuration of your account. Thank you <3",
 		ctalink:      fmt.Sprintf(serverConfig.Activation.URL, userInfo.ActivationToken),
-		linktext:     "Jetzt klicken und aktivieren",
+		linktext:     "Click now to activate",
 	}
+	return preparer
 
-	tracing.LogStruct(span, "activation-mail-data", preparer)
-	sendMail(preparer)
-	return c.JSON(http.StatusOK, userInfo.Email)
 }
 
 func processActivationState(c echo.Context) error {
@@ -479,6 +501,8 @@ func processActivationState(c echo.Context) error {
 
 	tracing.LogString(span, "request-activation-state", fmt.Sprintf("Get Activationstate for activationtoken %s", activationtoken))
 	c.Logger().Debugf("Get Activationstate for activationtoken %s", activationtoken)
+
+	//TODO - check if activation code is too old (aka invalid)
 
 	activator := &AccountActivation{
 		Token: activationtoken,

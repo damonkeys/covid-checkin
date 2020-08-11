@@ -5,3 +5,4 @@
 
 ./stopServer.sh service-gateway local
 ./stopServer.sh auth local
+./stopServer.sh react local

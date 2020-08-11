@@ -22,6 +22,7 @@ type (
 		Providers               []Provider `gorm:"foreignkey:UserRefer;association_foreignkey:id"`
 		Active                  bool       `gorm:"type:boolean"`
 		ActivationToken         string     `gorm:"type:varchar(36)"`
+		PreferredLanguage       string     `gorm:"type:varchar(2)"`
 		ActivationTokenCreation time.Time
 		ActiveSince             time.Time
 	}

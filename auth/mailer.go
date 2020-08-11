@@ -49,7 +49,6 @@ func (mailContext CTAMailContext) prepareMessage(mailgun mailgun.Mailgun) *mailg
 }
 
 func sendMail(preparer MGMessagePreparer) {
-	//TODO detect language (i18n)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
 	span := tracing.EnterWithContext(ctx)
@@ -58,12 +57,14 @@ func sendMail(preparer MGMessagePreparer) {
 	// Create an instance of the Mailgun Client
 	mg := mailgun.NewMailgun(yourDomain, privateAPIKey)
 
+	tracing.LogStruct(span, "activation-mail-data", mg)
+
 	message := preparer.prepareMessage(mg)
 
 	// Send the message	with a 10 second timeout
 	resp, id, err := mg.Send(ctx, message)
 	if err != nil {
-		log.Fatal(err)
+		tracing.LogErrorMsg(span, err, "Mail not sent")
 	}
 	tracing.LogString(span, "response from mailgun", resp)
 	tracing.LogString(span, "id from mailgun", id)
@@ -91,5 +92,5 @@ func sendTestMail() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("ID: %s Resp: %s\n", id, resp)
+	log.Printf("Test mail with: ID %s and Resp: %s\n", id, resp)
 }
