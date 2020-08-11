@@ -4,15 +4,23 @@
     import i18n from '../i18n';
 
     type Props = {
-        activationState: 'ongoing' | 'success';
+        activationState: 'ongoing' | 'success'
     }
-    const ActivationInformation = (props: Props) => {
+    const ActivationInformation = (props: Props, { f7router }:any) => {
 
         const [isPopUpVisible, setPopUpVisible] = useState(false);
         const [email, setEmail] = useState('');
 
         const fetchI18NKey = (translationKey: string) => {
             return `activation.${props.activationState}.${translationKey}`;
+        }
+
+        const popUpOrCheckin = ():React.Element => {
+            if(props.activationState === 'success') {
+                return  <Button large fill raised href='/'>{i18n.t(i18n.t(fetchI18NKey('action')))}</Button>
+            }
+            return <Button large fill raised onClick={(event) => setPopUpVisible(isPopUpVisible)}>{i18n.t(i18n.t(fetchI18NKey('action')))}</Button>
+
         }
 
         const emailValid = (): boolean => {
@@ -50,7 +58,7 @@
                 <h2>{i18n.t(fetchI18NKey('title'))}</h2>
                 <h3>{i18n.t(fetchI18NKey('text'))}</h3>
                 <Block>
-                    <Button large fill raised onClick={(event) => setPopUpVisible(!isPopUpVisible)}>{i18n.t(i18n.t(fetchI18NKey('action')))}</Button>
+                    {popUpOrCheckin()}
                 </Block>
             </Block>
             <Popup colorTheme="pink" opened={isPopUpVisible} onPopupClosed={() => setPopUpVisible(!isPopUpVisible)}>

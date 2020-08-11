@@ -57,7 +57,7 @@ func sendMail(preparer MGMessagePreparer) {
 	// Create an instance of the Mailgun Client
 	mg := mailgun.NewMailgun(yourDomain, privateAPIKey)
 
-	tracing.LogStruct(span, "activation-mail-data", mg)
+	tracing.LogStruct(span, "mail-data", mg)
 
 	message := preparer.prepareMessage(mg)
 
