@@ -95,7 +95,6 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 
 		preparer := prepareI18nActivationMessageText(userInfo)
 
-		tracing.LogStruct(span, "activation-mail-data", message)
 		sendMail(preparer)
 
 		return c.Redirect(http.StatusTemporaryRedirect, "/activation/missing")
