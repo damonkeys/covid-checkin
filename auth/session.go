@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/damonkeys/ch3ck1n/monkeys/languagehelper"
 	"log"
 	"net/http"
 	"time"
@@ -36,7 +37,7 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 	defer span.Finish()
 
 	// Save in session
-	sess, _ := session.Get("_monkeycash_session", c)
+	sess, _ := session.Get("_ch3ck1n_session", c)
 	sess.Options = &sessionOptions
 
 	c.Logger().Debugf("email from goth-user: %s", user.Email)
@@ -54,8 +55,8 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 			return err
 		}
 	}
-	c.Logger().Debugf("monkeycash-user with email [%s] found", sessionUser.Email)
-	tracing.LogStruct(span, "monkeycash-user", sessionUser)
+	c.Logger().Debugf("ch3ck1n-user with email [%s] found", sessionUser.Email)
+	tracing.LogStruct(span, "ch3ck1n-user", sessionUser)
 
 	// existing user
 	// does it have a new provider?
@@ -92,18 +93,9 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 			return c.JSON(http.StatusInternalServerError, "error")
 		}
 
-		preparer := &CTAMailContext{
-			templatename: "cta-tpl",
-			recipient:    "support@chckr.de",
-			sender:       "support@chckr.de",
-			subject:      fmt.Sprintf("Zugangs-Aktivierung für %s", userInfo.Email),
-			cta:          "Zugangs-Aktivierung notwendig",
-			body:         "Sie haben es fast geschafft: Klicken Sie auf den Aktivierungslink um Die Einrichtung Ihrs Zugangs abzuschließen. Vielen Dank",
-			ctalink:      fmt.Sprintf(serverConfig.Activation.URL, userInfo.ActivationToken),
-			linktext:     "Jetzt klicken und aktivieren",
-		}
+		preparer := prepareI18nActivationMessageText(userInfo)
 
-		tracing.LogStruct(span, "activation-mail-data", preparer)
+		tracing.LogStruct(span, "activation-mail-data", message)
 		sendMail(preparer)
 
 		return c.Redirect(http.StatusTemporaryRedirect, "/activation/missing")
@@ -140,6 +132,9 @@ func createNewSessionUser(c echo.Context, sessionUser *models.User, user goth.Us
 	if err == nil {
 		sessionUser.AvatarURL = gravatarURL
 	}
+	requestLang := c.Request().Header.Get("Accept - Language")
+	derivedUserLanguage := languagehelper.Retrieve(requestLang)
+	sessionUser.PreferredLanguage = derivedUserLanguage
 	// err = models.CreateUser(tracing.GetContext(c), sessionUser)
 	err = sessionUser.Create(tracing.GetContext(c))
 	if err != nil {
@@ -178,7 +173,7 @@ func removeSessionCookie(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	sess, _ := session.Get("_monkeycash_session", c)
+	sess, _ := session.Get("_ch3ck1n_session", c)
 	sess.Options.MaxAge = -1
 	err := sess.Save(c.Request(), c.Response())
 	return err
@@ -189,7 +184,7 @@ func findSessionUser(c echo.Context) (*models.User, error) {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	sess, err := session.Get("_monkeycash_session", c)
+	sess, err := session.Get("_ch3ck1n_session", c)
 	if err != nil || len(sess.Values) == 0 {
 		// session not valid
 		sessions.NewCookie("userid", "", sess.Options)

@@ -15,7 +15,7 @@ func Middleware(servername string) echo.MiddlewareFunc {
 			span.SetTag("request-path", c.Request().URL)
 
 			// get session user-uuid - we don't need to check valid session, we do it in the middleware
-			sess, _ := session.Get("_monkeycash_session", c)
+			sess, _ := session.Get("_ch3ck1n_session", c)
 			currentUserUUID := sess.Values["userid"]
 			if currentUserUUID != nil {
 				span.SetTag("current-user-uuid", currentUserUUID.(string))

@@ -25,5 +25,5 @@ func CheckLoggedInUserAccess() echo.MiddlewareFunc {
 }
 
 func getSession(e echo.Context) (*sessions.Session, error) {
-	return session.Get("_monkeycash_session", e)
+	return session.Get("_ch3ck1n_session", e)
 }

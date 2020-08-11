@@ -23,5 +23,25 @@
             "step3": "Entferne die ch3ck1n app.",
             "step4": "Gehe zu https://dev.checkin.chckr.de, logge Dich erneut über eine der Möglichkeiten ein ein und erlaube ch3ck1n, Deine Email Adresse zu bekommen."
         }
+    },
+    "activation": {
+        "toStartPage": "Zur Startseite von ch3ck1n",
+        "resendActivation": {
+            "title": "Aktivierung erneut senden",
+            "intro": "Um Dir einen frischen Aktivierungslink zu senden, benötigen wir die Emailadresse mit der Du Dich bei ch3ck1n registriert hast."
+        },
+        "ongoing": {
+            "head": "Aktivierung",
+            "title": "Aktivierung nötig",
+            "text": "Wir haben Dir einen Aktivierungslink per Email gesendet. Bitte schaue in Deinen Emails nach und aktiviere Dein Zugang.",
+            "action": "Aktivierungsmail erneut senden."
+        },
+        "success": {
+            "head": "Aktivierung erfolgt",
+            "title": "Deine Aktivierung war erfolgreich.",
+            "text": "ch3ck1n wurde erfolgreich für Dich aktiviert.",
+            "action": "Zum Dashboard."
+        }
     }
+
 }
