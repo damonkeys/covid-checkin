@@ -18,5 +18,18 @@
         "balancer": "roundrobin",
         "rewrite": true
 
+    }, {
+        "name": "Jaeger-UI",
+        "path": "/jaeger",
+        "description":"Route to jaeger-ui.",
+        "urls": [
+            "http://dev.checkin.chckr.de:16686"
+        ],
+        "auth": {
+            "user":"admin",
+            "password":"REPLACE"
+        },
+        "balancer": "roundrobin",
+        "rewrite": false
     }]
 }
