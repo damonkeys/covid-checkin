@@ -193,6 +193,7 @@ func findSessionUser(c echo.Context) (*models.User, error) {
 	// Find user by user-id
 	sessionUser, err := models.FindUserByUUID(tracing.GetContext(c), sess.Values["userid"].(string))
 	if err != nil {
+		tracing.LogError(span, err)
 		resultError := fmt.Errorf("User with userid %s not found - %s", sess.Values["userid"], err)
 		sessions.NewCookie("userid", "", sess.Options)
 		sess.Values["userid"] = ""
