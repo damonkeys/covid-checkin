@@ -6,4 +6,6 @@
 ./startServer.sh service-gateway local
 ./startServer.sh auth local
 
+echo -e "\nStarting service... react/ client-app LOCAL!"
+echo -e "==========================================================================\n"
 screen -S react -dmS bash -c "cd ../client-app/; yarn start; exec bash"
