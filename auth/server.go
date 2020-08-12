@@ -163,7 +163,17 @@ func (userInfo *UserInfo) SaveLanguage(c echo.Context) error {
 	//parse params default sensible use LanguageHelper
 	language := c.Param("l")
 	tracing.LogString(span, fmt.Sprintf("Selected language for user %s", userInfo.UUID), language)
-	userInfo.PreferredLanguage = language
+	sessionUser, err := models.FindUserByUUID(tracing.GetContext(c), userInfo.UUID)
+	if err != nil {
+		tracing.LogError(span, err)
+		return err
+	}
+	sessionUser.PreferredLanguage = language
+	db := database.DB.Save(sessionUser)
+	if db.Error != nil {
+		tracing.LogError(span, db.Error)
+		return db.Error
+	}
 	return nil
 }
 
@@ -260,7 +270,7 @@ func main() {
 	e.GET("/activation/:param", processActivationState)
 	e.POST("/merchant/activate", activateMerchant)
 	e.POST("/merchant/deactivate", deactivateMerchant)
-	e.POST("user/:l", setPreferredLang)
+	e.POST("/user/:l", setPreferredLang)
 	span.Finish()
 	e.Logger.Fatal(e.Start(":" + serverConfig.Port))
 }
@@ -414,12 +424,12 @@ func setPreferredLang(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	userInfo, err := getSessionUserInfo(c)
+	sessionUser, err := getSessionUserInfo(c)
 	if err != nil {
 		c.Logger().Info(err)
 		tracing.LogError(span, err)
 	}
-	userInfo.Savelanguage(c)
+	sessionUser.SaveLanguage(c)
 
 	return c.JSON(http.StatusOK, "OK")
 }
