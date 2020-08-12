@@ -14,27 +14,27 @@
         "usesmartphone": "Bitte benutze ch3ck1n mit Deinem Smartphone!",
         "contentnotfound": "Angefragter Inhalt nicht gefunden",
         "butcannotusemc": "aber Du kannst ch3ck1n gerade nicht nutzen.",
-        "apologizeemailrequired": "Wir entschuldigen uns, aber wir haben Deine Email Adresse, die notwendig für die Kommunikation mit Dir ist, nicht bekommen",
-        "mailrecievingprohibited": "Anscheinend hast du uns den Zugriff auf die Email während des Login Prozess verweigert.",
-        "changemind": "Falls Du Dich je dazu entschließt, uns doch Deine Email zu überlassen:",
+        "apologizeemailrequired": "Wir entschuldigen uns, aber wir haben Deine E-Mail Adresse, die notwendig für die Kommunikation mit Dir ist, nicht bekommen",
+        "mailrecievingprohibited": "Anscheinend hast du uns den Zugriff auf die E-Mail während des Login Prozess verweigert.",
+        "changemind": "Falls Du Dich je dazu entschließt, uns doch Deine E-Mail zu überlassen:",
         "repair": {
             "step1": "Geht zu Deinem benutzen Login Provider (Facebook, Google oder Apple).",
             "step2": "Geh zu den Einstellungen Deiner oauth apps.",
             "step3": "Entferne die ch3ck1n app.",
-            "step4": "Gehe zu https://dev.checkin.chckr.de, logge Dich erneut über eine der Möglichkeiten ein ein und erlaube ch3ck1n, Deine Email Adresse zu bekommen."
+            "step4": "Gehe zu https://dev.checkin.chckr.de, logge Dich erneut über eine der Möglichkeiten ein ein und erlaube ch3ck1n, Deine E-Mail Adresse zu bekommen."
         }
     },
     "activation": {
         "toStartPage": "Zur Startseite von ch3ck1n",
         "resendActivation": {
             "title": "Aktivierung erneut senden",
-            "intro": "Um Dir einen frischen Aktivierungslink zu senden, benötigen wir die Emailadresse mit der Du Dich bei ch3ck1n registriert hast."
+            "intro": "Um Dir einen frischen Aktivierungslink zu senden, benötigen wir die E-Mail Adresse mit der Du Dich bei ch3ck1n registriert hast."
         },
         "ongoing": {
             "head": "Aktivierung",
             "title": "Aktivierung nötig",
-            "text": "Wir haben Dir einen Aktivierungslink per Email gesendet. Bitte schaue in Deinen Emails nach und aktiviere Dein Zugang.",
-            "action": "Aktivierungsmail erneut senden."
+            "text": "Wir haben Dir einen Aktivierungslink per E-Mail gesendet. Bitte schaue in Deinen E-Mails nach und aktiviere Dein Zugang.",
+            "action": "Aktivierungs E-Mail erneut senden."
         },
         "success": {
             "head": "Aktivierung erfolgt",
