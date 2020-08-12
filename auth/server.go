@@ -471,7 +471,7 @@ func prepareI18nActivationMessageText(userInfo UserInfo) MGMessagePreparer {
 			sender:       "support@chckr.de",
 			subject:      fmt.Sprintf("Zugangs-Aktivierung für %s", userInfo.Email),
 			cta:          "Zugangs-Aktivierung notwendig",
-			body:         "Du hast es fast geschafft: Klicke auf den Aktivierungslink um Die Einrichtung Deines Zugangs abzuschließen. Vielen Dank <3",
+			body:         "Du hast es fast geschafft: Klicke auf den Aktivierungslink um die Einrichtung Deines Zugangs abzuschließen. Vielen Dank <3",
 			ctalink:      fmt.Sprintf(serverConfig.Activation.URL, userInfo.ActivationToken),
 			linktext:     "Jetzt klicken und aktivieren",
 		}
