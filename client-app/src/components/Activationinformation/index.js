@@ -68,7 +68,7 @@
                             <Link popupClose>{i18n.t('basic.close')}</Link>
                         </NavRight>
                     </Navbar>
-                    <Card className="demo-facebook-card">
+                    <Card className="card">
                         <CardHeader className="no-border">
                             <div>{i18n.t('activation.resendActivation.intro')}</div>
                         </CardHeader>
