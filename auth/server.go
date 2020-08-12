@@ -156,8 +156,8 @@ type (
 	}
 )
 
-// Savelanguage sets the language to the given string. Should be a string explaining the language in context of this system, e.g. 'en' for english.
-func (userInfo *UserInfo) Savelanguage(c echo.Context) error {
+// SaveLanguage sets the language to the given string. Should be a string explaining the language in context of this system, e.g. 'en' for english.
+func (userInfo *UserInfo) SaveLanguage(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 	//parse params default sensible use LanguageHelper
