@@ -45,7 +45,8 @@
         }
     },
     "signin": {
-        "explanation": "Nach der Anmeldung kannst Du Deine vergangenen checkins ansehen und Errungenschaften oder spezielle Angebote erhalten."
+        "explanation": "Nach der Anmeldung kannst Du Deine vergangenen checkins ansehen und Errungenschaften oder spezielle Angebote erhalten.",
+        "explanation-short": "Für viele weitere Funktionen melde Dich bitte an."
     },
     "dashboard": {
         "explanation": "Damit Du Dich einchecken kannst, scanne bitte einen QR-Code in einem unserer Partner. Alternativ kannst Du hier den Location-Code eingeben, der in Deinem Checkin-Ort sichtbar unter dem QR-Code zu sehen ist.",
