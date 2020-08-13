@@ -1,1 +1,32 @@
 /* Your app custom styles here */
+.block-title-normal {
+    font-weight: normal;
+}
+
+.margin-no {
+    margin-top: 0;
+}
+
+.margin-small {
+    margin-top: 20px;
+}
+
+.margin-large {
+    margin-top: 40px;
+}
+
+.padding-small {
+    padding-top: 20px;
+}
+
+.padding-large {
+    padding-top: 40px;
+}
+
+.socialmedia-button-compact {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 5px;
+}

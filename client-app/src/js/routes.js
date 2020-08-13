@@ -1,5 +1,6 @@
 
-import HomePage from '../pages/home.jsx';
+import Home from '../pages/Home';
+import Checkin from '../pages/Checkin';
 import Privacy from '../pages/Privacy';
 import NoEmail from '../pages/NoEmail';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -8,7 +9,10 @@ import Activation from '../pages/Activation';
 var routes = [
   {
     path: '/',
-    component: HomePage,
+    component: Home,
+  }, {
+    path: '/checkin/:locationCode',
+    component: Checkin,
   }, {
     path: '/privacy',
     component: Privacy,
