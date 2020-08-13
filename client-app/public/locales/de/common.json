@@ -7,7 +7,8 @@
         "more": "Mehr",
         "start": "Starten",
         "close": "Schließen",
-        "cancel": "Abbrechen"
+        "cancel": "Abbrechen",
+        "checkin": "Checkin"
     },
     "explanation": {
         "bummer": "Tut uns leid!",
@@ -42,6 +43,14 @@
             "text": "ch3ck1n wurde erfolgreich für Dich aktiviert.",
             "action": "Zum Dashboard."
         }
+    },
+    "signin": {
+        "explanation": "Nach der Anmeldung kannst Du Deine vergangenen checkins ansehen und Errungenschaften oder spezielle Angebote erhalten."
+    },
+    "dashboard": {
+        "explanation": "Damit Du Dich einchecken kannst, scanne bitte einen QR-Code in einem unserer Partner. Alternativ kannst Du hier den Location-Code eingeben, der in Deinem Checkin-Ort sichtbar unter dem QR-Code zu sehen ist.",
+        "location-code": "Location-Code",
+        "location-code-placeholder": "z.B. A12345"
     }
 
 }
