@@ -7,7 +7,8 @@
         "more": "More",
         "start": "Start",
         "close": "Close",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "checkin": "checkin"
     },
     "explanation": {
         "bummer": "Bummer!",
@@ -23,7 +24,6 @@
             "step3": "Remove the ch3ck1n app.",
             "step4": "Go to https://ch3ck1n.monkeycash.io login again and allow ch3ck1n to recieve your email address."
         }
-
     },
     "activation": {
         "toStartPage": "Go to ch3ck1n dashboard",
@@ -43,6 +43,14 @@
             "text": "ch3ck1n has been activated for you.",
             "action": "Go to the dashboard."
         }
+    },
+    "signin": {
+        "explanation": "To list your logins and get badges or special offers please login to checkin."
+    },
+    "dashboard": {
+        "explanation": "To checkin please scan the QR code of a partner-location. Alternatively, you can enter the location code here, which can be seen in your check-in location near the QR code.",
+        "location-code": "Location-Code",
+        "location-code-placeholder": "i.e. A12345"
     }
 
 }
