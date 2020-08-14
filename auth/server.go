@@ -594,12 +594,17 @@ func getCallbackURL(c echo.Context, urlPart string) string {
 
 	baseURL := serverConfig.Baseurl
 	if urlPart == "" {
+		tracing.LogString(span, "urlPart is empty, baseURL is used", baseURL)
 		return baseURL
 	}
 	if urlPart[0] != '/' {
-		return baseURL + "/" + urlPart
+		callbackURL := baseURL + "/" + urlPart
+		tracing.LogString(span, "callbackURL", callbackURL)
+		return callbackURL
 	}
-	return baseURL + urlPart
+	callbackURL := baseURL + urlPart
+	tracing.LogString(span, "callbackURL (based on  urlPart with '/' only)", callbackURL)
+	return callbackURL
 }
 
 // getCallbackURLFromSession returns URL-Part from cookie and deletes it after reading. Returning full callback-URL.
@@ -611,8 +616,10 @@ func getCallbackURLFromSession(c echo.Context) string {
 	urlPart := ""
 	if sess.Values["callbackURL"] != nil {
 		urlPart = sess.Values["callbackURL"].(string)
+		tracing.LogString(span, "from session-values 'urlPart'", urlPart)
 	}
 	callbackURL := getCallbackURL(c, urlPart)
+	tracing.LogString(span, "callback-URL", callbackURL)
 	sess.Options.MaxAge = -1
 	sess.Save(c.Request(), c.Response())
 	return callbackURL
