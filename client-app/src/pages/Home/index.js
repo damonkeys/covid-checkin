@@ -25,46 +25,35 @@ export default class Home extends SessionComponent {
             )
         }
 
-        // if (!this.state.session.useronline) {
-        //     return (
-        //         <Page colorTheme="pink" loginScreen>
-        //             <BlockTitle large className="text-align-center block-title-normal">{i18n.t('basic.appname')}</BlockTitle>
-        //             <Block>
-        //                 {i18n.t('signin.explanation')}
-        //             </Block>
-        //             <Logins compact={true}></Logins>
-        //         </Page>
-        //     )
-        // } else {
-            return (
-                <Page colorTheme="pink">
-                    <Navigation  hideBacklink={false} />
-                    <Toolbar tabbar labels bottom>
-                        <Link tabLink="#ch3ck1n" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>ch3ck1n</Link>
-                        <Link tabLink="#account" iconIos="f7:person_crop_circle" iconAurora="f7:person_crop_circle" iconMd="material:account_circle">Account</Link>
-                    </Toolbar>
-                    
-                    <Tabs>
-                        <Tab id="ch3ck1n" tabActive>
-                            <BlockTitle large className="text-align-center block-title-normal">{i18n.t('basic.appname')}</BlockTitle>
-                            { this.state.session.useronline ? (null) :
-                                (
-                                    <Block className="text-align-center margin-no">
-                                        {i18n.t('signin.explanation-short')}
-                                        <Logins compact={true}></Logins>
-                                    </Block>
-                                )
-                            }
-                            <CheckinInput></CheckinInput>
+        // Connected - render page
+        return (
+            <Page colorTheme="pink">
+                <Navigation  hideBacklink={false} />
+                <Toolbar tabbar labels bottom>
+                    <Link tabLink="#ch3ck1n" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>ch3ck1n</Link>
+                    <Link tabLink="#account" iconIos="f7:person_crop_circle" iconAurora="f7:person_crop_circle" iconMd="material:account_circle">Account</Link>
+                </Toolbar>
+                
+                <Tabs>
+                    <Tab id="ch3ck1n" tabActive>
+                        <BlockTitle large className="text-align-center block-title-normal">{i18n.t('basic.appname')}</BlockTitle>
+                        { this.state.session.useronline ? (null) :
+                            (
+                                <Block className="text-align-center margin-no">
+                                    {i18n.t('signin.explanation-short')}
+                                    <Logins compact={true}></Logins>
+                                </Block>
+                            )
+                        }
+                        <CheckinInput></CheckinInput>
 
-                        </Tab>
+                    </Tab>
 
-                        <Tab id="account">
-                            <Account session={this.state.session}></Account>
-                        </Tab>
-                    </Tabs>
-                </Page>            
-            );
-        // }
+                    <Tab id="account">
+                        <Account session={this.state.session}></Account>
+                    </Tab>
+                </Tabs>
+            </Page>            
+        );
     }
 }
