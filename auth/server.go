@@ -238,11 +238,7 @@ func main() {
 	// Init goth-providers that we use
 	e.Logger.Debug("Initialise Goth with Facebook, Google+ and Apple providers")
 	tracing.LogString(span, "goth", "Initialise Goth with Facebook, Google+ and Apple providers")
-	goth.UseProviders(
-		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=facebook"),
-		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=gplus"),
-		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=apple", nil, apple.ScopeEmail, apple.ScopeName),
-	)
+	initGoth()
 
 	if err := database.InitDatabase(serverConfig.Database); err != nil {
 		e.Logger.Fatal(err)
@@ -288,6 +284,14 @@ func readEnvironmentConfig(ctx context.Context, log echo.Logger) {
 		os.Exit(-1)
 	}
 	serverConfig = configInterface.(ServerConfigStruct)
+}
+
+func initGoth() {
+	goth.UseProviders(
+		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=facebook"),
+		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=gplus"),
+		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=apple", nil, apple.ScopeEmail, apple.ScopeName),
+	)
 }
 
 // login calls given provider oauth and show the login dialog
