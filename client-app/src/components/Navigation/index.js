@@ -8,7 +8,7 @@ type Props = {
     searchContainer?: string,
     searchIn?: string,
     hideMenu?: boolean,
-    className?: string
+    className?: string,
 }
 
 type State = {
@@ -28,7 +28,7 @@ type State = {
  * - hideBacklink: boolean true/false to show or hide the back-link in the navigation bar
  */
 export default class Navigation extends Component<Props, State> {
-    $f7: any;
+    $f7: any
 
     constructor(props: Props) {
         super(props);
@@ -40,26 +40,16 @@ export default class Navigation extends Component<Props, State> {
     }
 
     render() {
-        if (!this.state.useronline) {
-            return (
-                <Navbar color="pink" className={this.props.className || 'navbar-main'}>
-                    <NavTitle>{i18n.t('basic.appname')}</NavTitle>
-                </Navbar>
-            );
-        }
-
         return (
             <Navbar color="pink" className={this.props.className || 'navbar-main'}>
 
                 <NavLeft>
-                    {this.props.hideBacklink ? (null) :
+                    {(this.props.hideBacklink || this.$f7.views.main.router.history.length <= 1) ? (null) :
                         (
                             <NavLeft backLink={i18n.t('basic.back')}></NavLeft>
                         )
                     }
                 </NavLeft>
-
-
 
                 {this.props.searchContainer ? (
                     <Searchbar searchContainer={this.props.searchContainer} searchIn={this.props.searchIn} disableButtonText={""}></Searchbar>

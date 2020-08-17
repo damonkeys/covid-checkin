@@ -1,19 +1,16 @@
 // @flow
 import { Component } from 'react';
 import cookie from 'react-cookies'
+import type {Session} from '../../js/types';
 
 type Props = {
     callbackSession: Function
 }
 type State = {
-    session: Object
+    session: Session
 }
 
 export default class SessionComponent extends Component<Props, State> {
-    $f7: any
-    $f7router: any
-    $f7route: any
-
     constructor(props: Object) {
         super(props);
         if (!this.state) {
