@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"github.com/markbates/goth"
 	"os"
 	"testing"
 
@@ -120,6 +121,14 @@ func TestGetCallbackURLFromSession(t *testing.T) {
 	callbackURL = getCallbackURLFromSession(c)
 	if callbackURL != baseURL+"/use" {
 		t.Errorf("callback-URL is %s not %s", callbackURL, baseURL)
+	}
+}
+
+func TestBasiGothInitialisation(t *testing.T) {
+	initGoth()
+	providers := goth.GetProviders()
+	if len(providers) != 3 {
+		t.Errorf("expected provider count to be 3 (fb, google, apple) but insted found: %s", providers)
 	}
 }
 
