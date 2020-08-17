@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react';
 import {
     Block,
@@ -7,9 +8,13 @@ import {
 } from 'framework7-react';
 import Logins from '../../components/Logins/index';
 import i18n from '../../components/i18n.js';
+import type {Session} from '../../js/types';
 
 type Props = {
-    session: Object
+    session: Session,
+}
+
+type State = {
 }
 
 export default class Account extends Component<Props, State> {
@@ -18,7 +23,7 @@ export default class Account extends Component<Props, State> {
             return (
                 <div>
                     <Block>
-                        <BlockTitle large className="text-align-center block-title-normal">{i18n.t('basic.appname')}</BlockTitle>
+                        <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
                         <BlockTitle>Profile</BlockTitle>
                     </Block>
 
@@ -31,7 +36,7 @@ export default class Account extends Component<Props, State> {
     
         return (
             <div>
-                <BlockTitle large className="text-align-center block-title-normal">{i18n.t('basic.appname')}</BlockTitle>
+                <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
                 <Block>
                     {i18n.t('signin.explanation')}
                 </Block>

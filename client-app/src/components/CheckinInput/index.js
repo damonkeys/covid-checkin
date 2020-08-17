@@ -35,10 +35,10 @@ export default class CheckinInput extends Component<Props, State> {
     render() {
         return (
             <Block strong>
-                {i18n.t('dashboard.explanation')}
-                <h3 className="padding-large">{i18n.t('dashboard.location-code')}</h3>
-                <Input id="location-code" label={i18n.t('dashboard.location-code')} type="text" placeholder={i18n.t('dashboard.location-code-placeholder')} onInput={(value) => {this.setState({locationCode: value.currentTarget.value});}}></Input>
-                <Button rasied fill iconF7="checkmark" className="margin-small" href={'/checkin/' + this.state.locationCode} external></Button>
+                {i18n.t('dashboard.explanation')}<br />
+                <h3>{i18n.t('dashboard.location-code')}</h3>
+                <h1><Input id="location-code" label={i18n.t('dashboard.location-code')} type="text" maxlength="5" minlength="5" placeholder={i18n.t('dashboard.location-code-placeholder')} onInput={(value) => {this.setState({locationCode: value.currentTarget.value});}}></Input></h1><br />
+                <Button rasied fill iconF7="checkmark" href={'/checkin/' + this.state.locationCode}></Button>
             </Block>
         )
     }

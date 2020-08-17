@@ -22,33 +22,46 @@ export default class Checkin extends SessionComponent {
     render() {
         return (
             <Page colorTheme="pink">
-                <Navigation hideBacklink={false}/>
+                <Navigation />
                 <Toolbar tabbar labels bottom>
-                    <Link tabLink="#ch3ck1n" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>ch3ck1n</Link>
-                    <Link tabLink="#infos" iconIos="f7:info_circle" iconAurora="f7:info_circle" iconMd="material:info">Infos</Link>
-                    <Link tabLink="#account" iconIos="f7:person_crop_circle" iconAurora="f7:person_crop_circle" iconMd="material:account_circle">Account</Link>
+                    <Link tabLink="#checkin-ch3ck1n" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>ch3ck1n</Link>
+                    <Link tabLink="#checkin-infos" iconIos="f7:info_circle" iconAurora="f7:info_circle" iconMd="material:info">Infos</Link>
+                    <Link tabLink="#checkin-account" iconIos="f7:person_crop_circle" iconAurora="f7:person_crop_circle" iconMd="material:account_circle">Account</Link>
                 </Toolbar>
                 
-                <Tabs>
-                    <Tab id="ch3ck1n" tabActive>
-                    <BlockTitle large className="text-align-center block-title-normal">{i18n.t('basic.appname')}</BlockTitle>
-                            { this.state.session.useronline && this.state.session.connected ? (null) :
+                <Tabs swipeable>
+                    <Tab id="checkin-ch3ck1n" tabActive>
+                    <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
+                            { !this.state.session.useronline && this.state.session.connected ?
                                 (
-                                    <Block className="text-align-center margin-no">
+                                    <Block className="text-align-center">
                                         {i18n.t('signin.explanation-short')}
                                         <Logins compact={true}></Logins>
                                     </Block>
+                                ) : (null)
+                            }
+
+                            { !this.state.session.connected ? (null) :
+                                (
+                                    <BlockTitle>Checkin for {this.$f7route.params.locationCode}</BlockTitle>
                                 )
                             }
-                        <BlockTitle>Checkin for {this.$f7route.params.locationCode}</BlockTitle>
                     </Tab>
 
-                    <Tab id="infos">
-                        <BlockTitle>Infos for {this.$f7route.params.locationCode}</BlockTitle>
+                    <Tab id="checkin-infos">
+                    { !this.state.session.connected ? (null) :
+                        (
+                            <BlockTitle>Infos for {this.$f7route.params.locationCode}</BlockTitle>
+                        )
+                    }
                     </Tab>
 
-                    <Tab id="account">
-                        <Account session={this.state.session}></Account>
+                    <Tab id="checkin-account">
+                        { !this.state.session.connected ? (null) :
+                            (
+                                <Account session={this.state.session}></Account>
+                            )
+                        }
                     </Tab>
                 </Tabs>
             </Page>
