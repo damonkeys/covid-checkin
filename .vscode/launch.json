@@ -17,7 +17,7 @@
                 "DB_USER":"ch3ck1n_user",
                 "DB_PASSWORD":"==>",
                 "SESSION_SECRET":"ThatsASessionStoreSecret",
-                "BASE_URL":"dev.checkin.chckr.de",
+                "BASE_URL":"https://dev.checkin.chckr.de",
                 "P_FACEBOOK_KEY":"",
                 "P_FACEBOOK_SECRET":"",
                 "P_GPLUS_KEY":"",

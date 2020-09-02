@@ -76,7 +76,7 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 		sess.Save(c.Request(), c.Response())
 
 		// build Callback-URL
-		return c.Redirect(http.StatusTemporaryRedirect, getCallbackURLFromSession(c))
+		return c.Redirect(http.StatusFound, getCallbackURLFromSession(c))
 	}
 
 	//non active User
@@ -97,9 +97,9 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 
 		sendMail(preparer)
 
-		return c.Redirect(http.StatusTemporaryRedirect, "/activation/missing")
+		return c.Redirect(http.StatusSeeOther, "/activation/missing")
 	}
-	return c.Redirect(http.StatusTemporaryRedirect, "/activation/start")
+	return c.Redirect(http.StatusSeeOther, "/activation/start")
 }
 
 func createNewSessionUser(c echo.Context, sessionUser *models.User, user goth.User) (*models.User, error) {
@@ -122,7 +122,7 @@ func createNewSessionUser(c echo.Context, sessionUser *models.User, user goth.Us
 
 	sessionUser.Email = user.Email
 	sessionUser.UUID = uuid.New().String()
-	sessionUser.Name = user.Name
+	sessionUser.Name = fetchNameFromGothUser(user)
 	sessionUser.AvatarURL = user.AvatarURL
 	sessionUser.ActivationToken = uuid.New().String()
 	sessionUser.Active = false
@@ -143,6 +143,18 @@ func createNewSessionUser(c echo.Context, sessionUser *models.User, user goth.Us
 	sessionUser.AppendProviderToUser(tracing.GetContext(c), sessionProvider)
 	tracing.LogStruct(span, "created provider data", sessionProvider)
 	return sessionUser, nil
+}
+
+// fetchNameFromGothUser returns the full name either from Name attribute or a combination of firstName and lastName.
+// goth.User has both a name field and FirstName and LastName fields
+// since https://github.com/markbates/goth/commit/b873896ee364896b2f5590231678883314d101e7#diff-eda27065f88a29adbe6d90f48f5006e9.
+// So we need to check wether name or both of the others are set
+func fetchNameFromGothUser(gothUser goth.User) string {
+	name := gothUser.Name
+	if name != "" {
+		return name
+	}
+	return gothUser.FirstName + " " + gothUser.LastName
 }
 
 func createNewSessionProvider(c echo.Context, sessionUser *models.User, user goth.User) *models.Provider {

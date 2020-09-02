@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/amacneil/dbmate v1.9.1 // indirect
+	github.com/damonkeys/goth v1.64.3-0.20200826111136-7eda0d63ec6c
 	github.com/eefret/gravatar v0.0.0-20181201135945-2163a437cdca
 	github.com/gobuffalo/envy v1.9.0 // indirect
 	github.com/google/uuid v1.1.1
@@ -18,6 +19,6 @@ require (
 	github.com/markbates/goth v1.64.2
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
-	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	googlemaps.github.io/maps v1.2.1
 )
