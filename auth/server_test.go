@@ -4,7 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/markbates/goth"
+	"net/http"
+	"net/url"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/gorilla/sessions"
@@ -23,7 +26,9 @@ var (
 func TestParseCommandLineParameter(t *testing.T) {
 	initTest()
 	e := echo.New()
+
 	readEnvironmentConfig(Ctx, e.Logger)
+
 	if serverConfig.Port != os.Getenv("SERVER_PORT") {
 		t.Errorf("wrong port read from default parameter: %s", serverConfig.Port)
 	}
@@ -31,9 +36,9 @@ func TestParseCommandLineParameter(t *testing.T) {
 
 func TestLogin(t *testing.T) {
 	c, _ := setupTest()
-	//setupDatabaseTests(tracing.GetContext(c))
 
 	err := login(c)
+
 	if err != nil {
 		t.Errorf("login failed: %s", err)
 	}
@@ -41,14 +46,15 @@ func TestLogin(t *testing.T) {
 
 func TestGetUsernameInvalidSession(t *testing.T) {
 	c, rec := setupTest()
-	//setupDatabaseTests(tracing.GetContext(c))
 
 	err := getLoginStatus(c)
+
 	if err != nil {
 		t.Errorf("unexpected error: %s", err)
 	}
 	var responseFailed map[string]interface{}
 	json.Unmarshal([]byte(rec.Body.String()), &responseFailed)
+
 	if responseFailed["useronline"] == true {
 		t.Error("JSON-response ended successfully and got a username without a session")
 	}
@@ -57,33 +63,12 @@ func TestGetUsernameInvalidSession(t *testing.T) {
 	}
 }
 
-// ********** WE HAVE TO REWORK THE WHOLE SERVER TO TEST WITHOUT REAL DATABASE-CONNECTIONS!
-
-// func TestGetUsernameValidSession(t *testing.T) {
-// 	// create user and new session
-// 	c, rec := setupTest()
-// 	setupDatabaseTests(tracing.GetContext(c))
-
-// 	var responseSuccess map[string]interface{}
-// 	gothUser := createGothTestUser("TestCreateSessionCookie", "provider")
-// 	createNewSessionCookie(c, gothUser)
-// 	err := getLoginStatus(c)
-// 	if err != nil {
-// 		t.Errorf("unexpected error: %s", err)
-// 	}
-// 	json.Unmarshal([]byte(rec.Body.String()), &responseSuccess)
-// 	if responseSuccess["useronline"] == false {
-// 		t.Error("JSON-response failed with no session and session-user")
-// 	}
-// 	if responseSuccess["username"] == "" {
-// 		t.Error("JSON-response sends NO username!")
-// 	}
-// }
-
 func TestGetCallbackURL(t *testing.T) {
 	initTest()
 	baseURL := serverConfig.Baseurl
+
 	resultURL := getCallbackURL(C, "")
+
 	if resultURL != baseURL {
 		t.Errorf("callback-URL is %s not %s", resultURL, baseURL)
 	}
@@ -103,11 +88,11 @@ func TestGetCallbackURLFromSession(t *testing.T) {
 	c, _ := setupTest()
 	callbackURL := getCallbackURLFromSession(c)
 	baseURL := serverConfig.Baseurl
+
 	// test without cookie set
 	if callbackURL != baseURL {
 		t.Errorf("callback-URL is %s not %s", callbackURL, baseURL)
 	}
-
 	// set cookie and test
 	sess, _ := session.Get(sessionName, c)
 	sess.Options = &sessions.Options{
@@ -118,7 +103,9 @@ func TestGetCallbackURLFromSession(t *testing.T) {
 	sessions.NewCookie("callbackURL", "/use", sess.Options)
 	sess.Values["callbackURL"] = "/use"
 	sess.Save(c.Request(), c.Response())
+
 	callbackURL = getCallbackURLFromSession(c)
+
 	if callbackURL != baseURL+"/use" {
 		t.Errorf("callback-URL is %s not %s", callbackURL, baseURL)
 	}
@@ -126,9 +113,148 @@ func TestGetCallbackURLFromSession(t *testing.T) {
 
 func TestBasiGothInitialisation(t *testing.T) {
 	initGoth()
+
 	providers := goth.GetProviders()
+
 	if len(providers) != 3 {
 		t.Errorf("expected provider count to be 3 (fb, google, apple) but insted found: %s", providers)
+	}
+}
+
+func TestIsExpectedPostRequest(t *testing.T) {
+	t.Parallel()
+	values := url.Values{}
+
+	expectTrue := isExpectedPostRequest(values, "POST")
+
+	if expectTrue == false {
+		t.Fatal("empty post request should return true")
+	}
+}
+
+func TestIsExpectedPostRequestWithGet(t *testing.T) {
+	t.Parallel()
+	values := url.Values{}
+
+	expectFalse := isExpectedPostRequest(values, "GET")
+
+	if expectFalse == true {
+		t.Fatal("empty GET request should return false")
+	}
+}
+
+func TestIsExpectedPostRequestWithFantasyMethod(t *testing.T) {
+	t.Parallel()
+	values := url.Values{}
+
+	expectFalse := isExpectedPostRequest(values, "FANTASY")
+
+	if expectFalse == true {
+		t.Fatal("empty FANTASY request should return false")
+	}
+}
+
+func TestIsExpectedPostRequestWithValues(t *testing.T) {
+	t.Parallel()
+	values := url.Values{"foo": {"bar"}}
+
+	expectFalse := isExpectedPostRequest(values, "FANTASY")
+
+	if expectFalse == true {
+		t.Fatal("POST request with values should return false")
+	}
+}
+
+func TestResolveUserNameFromRequestIfApple(t *testing.T) {
+	// idea from here: https: //www.reddit.com/r/golang/comments/6bortg/how_to_test_post_requests_with_data_other_than/
+	t.Parallel()
+	e := echo.New()
+	userJSON := `{"name":{"firstName":"first", "lastName": "last"}, "email":"foo@example.com"}`
+	form := url.Values{}
+	form.Add("user", userJSON)
+	req, err := http.NewRequest("POST", "http://example.com", strings.NewReader(form.Encode()))
+	req.Form = form
+	if err != nil {
+		t.Fatalf("Couldn't create request. Error: %s", err)
+	}
+	c := e.NewContext(req, nil)
+	context := context.TODO()
+	c.Set("tracingctx", context)
+	gothUser := &goth.User{}
+	gothUser.Provider = "apple"
+
+	err = resolveUserNameFromRequestIfApple(c, gothUser)
+
+	if gothUser.FirstName != "first" {
+		t.Fatalf("Wrong first name: %s", gothUser.FirstName)
+	}
+	if gothUser.LastName != "last" {
+		t.Fatalf("Wrong first name: %s", gothUser.LastName)
+	}
+	if gothUser.Name != "first last" {
+		t.Fatalf("Wrong name: %s", gothUser.Name)
+	}
+}
+
+func TestResolveWrongUserNameFromRequestIfApple(t *testing.T) {
+	// idea from here: https: //www.reddit.com/r/golang/comments/6bortg/how_to_test_post_requests_with_data_other_than/
+	t.Parallel()
+	e := echo.New()
+	userJSON := `{"this_is_invalid"}`
+	form := url.Values{}
+	form.Add("user", userJSON)
+	req, err := http.NewRequest("POST", "http://example.com", strings.NewReader(form.Encode()))
+	req.Form = form
+	if err != nil {
+		t.Fatalf("Couldn't create request. Error: %s", err)
+	}
+	c := e.NewContext(req, nil)
+	context := context.TODO()
+	c.Set("tracingctx", context)
+	gothUser := &goth.User{}
+	gothUser.Provider = "apple"
+
+	err = resolveUserNameFromRequestIfApple(c, gothUser)
+
+	if err == nil {
+		t.Fatalf("expected an  error on invalid json. Error: %s", err)
+	}
+}
+
+func TestResolveAppleUserNamesOnlyOnAppleProvidedUser(t *testing.T) {
+	// idea from here: https: //www.reddit.com/r/golang/comments/6bortg/how_to_test_post_requests_with_data_other_than/
+	t.Parallel()
+	e := echo.New()
+	userJSON := `{"name":{"firstName":"first", "lastName": "last"}, "email":"foo@example.com"}`
+	form := url.Values{}
+	form.Add("user", userJSON)
+	req, err := http.NewRequest("POST", "http://example.com", strings.NewReader(form.Encode()))
+	req.Form = form
+	if err != nil {
+		t.Fatalf("Couldn't create request. Error: %s", err)
+	}
+	c := e.NewContext(req, nil)
+	context := context.TODO()
+	c.Set("tracingctx", context)
+	gothUser := &goth.User{}
+	gothUser.Provider = "xxx"
+
+	err = resolveUserNameFromRequestIfApple(c, gothUser)
+
+	if err != nil {
+		t.Fatalf("did not expect an error on valid json with xxx provider. Error: %s", err)
+	}
+	if gothUser.FirstName != "" {
+		t.Fatalf("gothUser cannot have a FirstName attribute (from apple) as this should not be parsed"+
+			" on a non apple provided request: %s", gothUser)
+	}
+	if gothUser.LastName != "" {
+		t.Fatalf("gothUser cannot have a LastName attribute (from apple) as this should not be parsed"+
+			" on a non apple provided request: %s", gothUser)
+	}
+	if gothUser.Name != "" {
+		t.Fatalf("gothUser cannot have a Name attribute (from apple) as this should not be created"+
+			" on a non apple provided request: %s", gothUser)
 	}
 }
 

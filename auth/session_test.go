@@ -14,8 +14,8 @@ import (
 
 	log "github.com/labstack/gommon/log"
 
+	"github.com/damonkeys/goth/gothic"
 	"github.com/markbates/goth"
-	"github.com/markbates/goth/gothic"
 )
 
 func TestCreateNewProviderData(t *testing.T) {
@@ -72,6 +72,59 @@ func createGothTestUser(funcName string, providerName string) goth.User {
 		Location:     "location",
 		Description:  "description",
 		ExpiresAt:    time.Now(),
+	}
+}
+
+func TestFetchNameFromGothUserWithNoName(t *testing.T) {
+	t.Parallel()
+	gothUser := goth.User{}
+
+	expectSpaceAsName := fetchNameFromGothUser(gothUser)
+
+	if expectSpaceAsName != " " {
+		t.Fatalf("Name isn't space as expected: %s", expectSpaceAsName)
+	}
+}
+
+func TestFetchNameFromGothUserWithName(t *testing.T) {
+	t.Parallel()
+	gothUser := goth.User{
+		Name: "This is the name",
+	}
+
+	expectValidName := fetchNameFromGothUser(gothUser)
+
+	if expectValidName != "This is the name" {
+		t.Fatalf("Name isn't 'This is the name' as expected: %s", expectValidName)
+	}
+}
+
+func TestFetchNameFromGothUserWithFirstAndLastName(t *testing.T) {
+	t.Parallel()
+	gothUser := goth.User{
+		FirstName: "FirstName",
+		LastName:  "LastName",
+	}
+
+	expectValidName := fetchNameFromGothUser(gothUser)
+
+	if expectValidName != "FirstName LastName" {
+		t.Fatalf("Name isn't 'FirstName LastName' as expected: %s", expectValidName)
+	}
+}
+
+func TestFetchNameFromGothUserWithNameAndFirstAndLastName(t *testing.T) {
+	t.Parallel()
+	gothUser := goth.User{
+		Name:      "Name comes first",
+		FirstName: "FirstName",
+		LastName:  "LastName",
+	}
+
+	expectValidName := fetchNameFromGothUser(gothUser)
+
+	if expectValidName != "Name comes first" {
+		t.Fatalf("Name isn't 'Name comes first' as expected: %s", expectValidName)
 	}
 }
 

@@ -22,6 +22,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"time"
 
@@ -31,14 +32,15 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
+	"github.com/damonkeys/goth/gothic"
 	"github.com/markbates/goth"
-	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/apple"
 	"github.com/markbates/goth/providers/facebook"
 	"github.com/markbates/goth/providers/gplus"
 
 	"github.com/damonkeys/ch3ck1n/auth/models"
 
+	"github.com/damonkeys/ch3ck1n/auth/applesupport"
 	bubblesclient "github.com/damonkeys/ch3ck1n/monkeys/bubbles"
 	"github.com/damonkeys/ch3ck1n/monkeys/config"
 	"github.com/damonkeys/ch3ck1n/monkeys/database"
@@ -258,7 +260,8 @@ func main() {
 	// Routes
 	e.GET("/login", login)
 	e.GET("/logout", logout)
-	e.GET("/callback", callback)
+	callbackMethods := []string{"GET", "POST"}
+	e.Match(callbackMethods, "/callback", callback)
 	e.GET("/status", getLoginStatus)
 	e.GET("/userInfos", getUserInfos)
 	//echo does not handle different names for parameters for the same route but different http verbs correctly. Thats why we use ':param' everywhere
@@ -290,7 +293,7 @@ func initGoth() {
 	goth.UseProviders(
 		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=facebook"),
 		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=gplus"),
-		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=apple", nil, apple.ScopeEmail, apple.ScopeName),
+		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, "https://dev.checkin.chckr.de/auth/callback", nil, apple.ScopeName, apple.ScopeEmail),
 	)
 }
 
@@ -304,6 +307,8 @@ func login(c echo.Context) error {
 		Path:     "/auth",
 		MaxAge:   30,
 		HttpOnly: true,
+		SameSite: http.SameSiteNoneMode,
+		Secure:   true,
 	}
 	sessions.NewCookie("callbackURL", c.QueryParam("callbackUrl"), sess.Options)
 	sess.Values["callbackURL"] = c.QueryParam("callbackUrl")
@@ -324,7 +329,7 @@ func login(c echo.Context) error {
 		// user already logged in
 		return createNewSessionCookie(c, gothUser)
 	}
-	// user have to login
+	// user has to login
 	gothic.BeginAuthHandler(c.Response(), c.Request())
 	return nil //c.Redirect(http.StatusTemporaryRedirect, "https://dev.checkin.chckr.de")
 }
@@ -347,12 +352,49 @@ func logout(c echo.Context) error {
 	return c.JSON(http.StatusOK, logoutUserResponse)
 }
 
+func resolveUserNameFromRequestIfApple(c echo.Context, user *goth.User) error {
+	span := tracing.Enter(c)
+	defer span.Finish()
+	if user.Provider == "apple" {
+		r := c.Request()
+		userData := &applesupport.UserNameData{}
+		if isExpectedPostRequest(r.URL.Query(), r.Method) {
+			err := userData.ResolveUserNames(r)
+			if err != nil {
+				tracing.LogError(span, err)
+				return err
+			}
+			if userData.FirstName != "" {
+				user.FirstName = userData.FirstName
+			}
+			if userData.LastName != "" {
+				user.LastName = userData.LastName
+			}
+			if userData.FirstName != "" && userData.LastName != "" {
+				user.Name = userData.FirstName + " " + userData.LastName
+			}
+			return nil
+		}
+		tracing.LogStruct(span, "No apple user data", r)
+		return nil
+	}
+	tracing.LogStruct(span, "No apple provider. Instead: provider:", user.Provider)
+	return nil
+}
+
 // callback after successful oauth login
 func callback(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
 	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
+	if err != nil {
+		tracing.LogError(span, err)
+	}
+	err = resolveUserNameFromRequestIfApple(c, &user)
+	if err != nil {
+		tracing.LogError(span, err)
+	}
 	c.Logger().Debugf("callback-user-data: nickname [%s] / name [%s] / email [%s]", user.NickName, user.FirstName+" "+user.LastName, user.Email)
 	tracing.LogStruct(span, "callback-user-data", user)
 	if user.Email == "" {
@@ -627,4 +669,11 @@ func getCallbackURLFromSession(c echo.Context) string {
 	sess.Options.MaxAge = -1
 	sess.Save(c.Request(), c.Response())
 	return callbackURL
+}
+
+func isExpectedPostRequest(queryParams url.Values, httpMethod string) bool {
+	if queryParams.Encode() == "" && httpMethod == "POST" {
+		return true
+	}
+	return false
 }
