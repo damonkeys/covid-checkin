@@ -28,6 +28,21 @@
                 "ACTIVATION_STATE_URL":"https://dev.checkin.chckr.de/activation/%s"
             },
             "args": []
+        },
+        {
+            "name": "biz",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/biz/",
+            "env": {
+                "SERVER_PORT":4000,
+                "DB_HOST":"",
+                "DB_NAME":"ch3ck1n",
+                "DB_USER":"ch3ck1n_user",
+                "DB_PASSWORD":"==>",
+                "SESSION_SECRET":"ThatsASessionStoreSecret"
+            }
         }
     ]
 }

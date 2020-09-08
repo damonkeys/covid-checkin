@@ -19,33 +19,3 @@ func TestGetDatabasePath(t *testing.T) {
 		t.Error("wrong databasepath will be returned")
 	}
 }
-
-// ********** WE HAVE TO REWORK THE WHOLE SERVER TO TEST WITHOUT REAL DATABASE-CONNECTIONS!
-
-// func TestInitDatabase(t *testing.T) {
-// 	databaseConfig := ConfigStruct{
-// 		Name:     "test_monkey_auth",
-// 		Password: "_not_valid",
-// 		User:     "auth_user",
-// 		Server:   "",
-// 	}
-// 	// global variable DB might be nil
-// 	if DB != nil {
-// 		t.Error("global variable is not nil without calling InitDatabase")
-// 	}
-// 	// test with invalid password
-// 	err := InitDatabase(databaseConfig)
-// 	if err == nil {
-// 		t.Error("database connection doesn't fail - password might be wrong!")
-// 	}
-// 	// test with valid password
-// 	databaseConfig.Password = ""
-// 	err = InitDatabase(databaseConfig)
-// 	if err != nil {
-// 		t.Errorf("database connection failed: %s", err)
-// 	}
-// 	// global variable DB is set
-// 	if DB == nil {
-// 		t.Error("global variable DB for db-connections is nil")
-// 	}
-// }

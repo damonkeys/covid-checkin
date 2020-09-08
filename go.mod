@@ -3,6 +3,8 @@ module github.com/damonkeys/ch3ck1n
 go 1.14
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
+	github.com/TShadwell/go-shorten v0.0.0-20130112221337-10c3157079b5
 	github.com/amacneil/dbmate v1.9.1 // indirect
 	github.com/damonkeys/goth v1.64.3-0.20200826111136-7eda0d63ec6c
 	github.com/eefret/gravatar v0.0.0-20181201135945-2163a437cdca
