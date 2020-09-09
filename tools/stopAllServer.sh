@@ -11,6 +11,14 @@ echo -e "\nauth-server"
 echo -e "==========================================================================\n"
 ./stopServer.sh auth
 
+echo -e "\nbiz-server"
+echo -e "==========================================================================\n"
+./stopServer.sh biz
+
+echo -e "\nadmin-server"
+echo -e "==========================================================================\n"
+./stopServer.sh admin
+
 echo -e "\nservice-gateway"
 echo -e "==========================================================================\n"
 ./stopServer.sh service-gateway

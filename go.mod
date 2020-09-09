@@ -20,6 +20,8 @@ require (
 	github.com/mailgun/mailgun-go/v4 v4.1.3
 	github.com/markbates/goth v1.64.2
 	github.com/opentracing/opentracing-go v1.2.0
+	github.com/qor/admin v0.0.0-20200908023436-0c0a0b041c88
+	github.com/qor/qor v0.0.0-20200729071734-d587cffbbb93
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	googlemaps.github.io/maps v1.2.1

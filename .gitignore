@@ -25,6 +25,7 @@
 logs
 
 # binaries
+admin/admin
 auth/auth
 biz/biz
 sales/locacq/locacq

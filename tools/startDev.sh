@@ -5,6 +5,9 @@
 
 ./startServer.sh service-gateway local
 ./startServer.sh auth local
+./startServer.sh biz local
+./startServer.sh admin local
+
 
 echo -e "\nStarting service... react/ client-app LOCAL!"
 echo -e "==========================================================================\n"

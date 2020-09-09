@@ -1,6 +1,7 @@
 package models
 
 import (
+	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 )
 
@@ -23,3 +24,15 @@ type (
 		BusinessID  uint   `json:"-"`
 	}
 )
+
+// BeforeCreate is a hook to set the UUID of a business at creating a new record
+func (b *Business) BeforeCreate(tx *gorm.DB) (err error) {
+	b.UUID = uuid.New().String()
+	return
+}
+
+// BeforeCreate is a hook to set the UUID of a business at creating a new record
+func (bi *BusinessInfo) BeforeCreate(tx *gorm.DB) (err error) {
+	bi.UUID = uuid.New().String()
+	return
+}
