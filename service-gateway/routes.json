@@ -19,6 +19,19 @@
         "rewrite": true
 
     }, {
+        "name": "Admin",
+        "path": "/admin",
+        "description":"Route to server for simple admin-views.",
+        "urls": [
+            "http://dev.checkin.chckr.de:19000"
+        ],
+        "auth": {
+            "user":"admin",
+            "password":"REPLACE"
+        },
+        "balancer": "roundrobin",
+        "rewrite": false
+    }, {
         "name": "Jaeger-UI",
         "path": "/jaeger",
         "description":"Route to jaeger-ui.",

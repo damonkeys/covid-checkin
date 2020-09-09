@@ -20,6 +20,14 @@ echo -e "\nauth-server"
 echo -e "==========================================================================\n"
 ./deploy.sh auth
 
+echo -e "\nbiz-server"
+echo -e "==========================================================================\n"
+./deploy.sh biz
+
+echo -e "\nadmin-server"
+echo -e "==========================================================================\n"
+./deploy.sh admin
+
 ### ALBERT is the last service to deploy. It has its own deploy-script!
 echo -e "\Service-Gateway"
 echo -e "==========================================================================\n"
