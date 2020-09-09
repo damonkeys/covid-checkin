@@ -27,11 +27,6 @@ type (
 		ExpiresAt    time.Time
 		UserRefer    uint
 	}
-
-	// ProviderInterface defines all functions for User-Model
-	ProviderInterface interface {
-		database.Model
-	}
 )
 
 // Create inserts a new provider record in database

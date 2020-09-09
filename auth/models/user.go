@@ -26,13 +26,6 @@ type (
 		ActivationTokenCreation time.Time
 		ActiveSince             time.Time
 	}
-
-	// UserInterface defines all functions for User-Model
-	UserInterface interface {
-		database.Model
-		AppendProviderToUser(ctx context.Context, provider *Provider) error
-		AfterDelete(tx *gorm.DB) error
-	}
 )
 
 // FindUserByEmail search given email address in user table
