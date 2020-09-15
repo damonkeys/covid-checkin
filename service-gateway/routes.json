@@ -17,7 +17,15 @@
         ],
         "balancer": "roundrobin",
         "rewrite": true
-
+    }, {
+        "name": "Biz",
+        "path": "/biz",
+        "description":"The route to the biz server",
+        "urls": [
+            "http://dev.checkin.chckr.de:4000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
     }, {
         "name": "Admin",
         "path": "/admin",

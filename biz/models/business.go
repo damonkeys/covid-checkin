@@ -10,8 +10,13 @@ type (
 	Business struct {
 		gorm.Model    `json:"-"`
 		UUID          string `json:"uuid" gorm:"type:varchar(36);unique_index"`
-		Name          string `json:"name" gorm:"type:varchar(15)"`
+		Name          string `json:"name" gorm:"type:varchar(50)"`
 		Code          string `json:"code" gorm:"type:varchar(5);unique_index"`
+		Street1       string `json:"street1" gorm:"type:varchar(50)"`
+		Street2       string `json:"street2" gorm:"type:varchar(50)"`
+		Zip           string `json:"zip" gorm:"type:varchar(10)"`
+		City          string `json:"city" gorm:"type:varchar(30)"`
+		Country       string `json:"country" gorm:"type:varchar(30)"`
 		BusinessInfos []BusinessInfo
 	}
 
@@ -19,7 +24,7 @@ type (
 	BusinessInfo struct {
 		gorm.Model  `json:"-"`
 		UUID        string `json:"uuid" gorm:"type:varchar(36);unique_index"`
-		Description string `json:"description"`
+		Description string `json:"description" gorm:"type:mediumtext"`
 		Language    string `json:"language"`
 		BusinessID  uint   `json:"-"`
 	}
