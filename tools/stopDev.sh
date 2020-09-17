@@ -7,4 +7,5 @@
 ./stopServer.sh auth local
 ./stopServer.sh biz local
 ./stopServer.sh admin local
-./stopServer.sh react local
+./stopServer.sh ch3ck1nweb local
+./stopServer.sh pixi local

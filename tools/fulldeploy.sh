@@ -24,13 +24,17 @@ echo -e "\nbiz-server"
 echo -e "==========================================================================\n"
 ./deploy.sh biz
 
+echo -e "\npixi-server"
+echo -e "==========================================================================\n"
+./deploy.sh pixi
+
 echo -e "\nadmin-server"
 echo -e "==========================================================================\n"
 ./deploy.sh admin
 
-### ALBERT is the last service to deploy. It has its own deploy-script!
+### Service-Gateway is the last service to deploy. It has its own deploy-script!
 echo -e "\Service-Gateway"
 echo -e "==========================================================================\n"
 cd ../service-gateway
 tools/deployServiceGateway.sh $@
-### ALBERT is the last service to deploy. It has its own deploy-script!
+### Service-Gateway is the last service to deploy. It has its own deploy-script!

@@ -6,9 +6,7 @@ package main
 //   * SERVER_PORT - the server is listening on this portnumber
 
 import (
-	"net/http"
 	"os"
-	"strings"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -29,13 +27,13 @@ var serverConfig ServerConfigStruct
 
 func main() {
 	// tracer init
-	closer, span, ctx := tracing.InitJaeger("monkeywebserver")
+	closer, span, ctx := tracing.InitJaeger("ch3ck1nweb")
 	defer closer.Close()
 
 	// Initialize echo and set logger
 	e := echo.New()
-	e.Use(tracing.MiddlewareWithoutCurrentUser("monkeywebserver"))
-	l.ConfigureLogger(ctx, "monkeywebserver", e)
+	e.Use(tracing.MiddlewareWithoutCurrentUser("ch3ck1nweb"))
+	l.ConfigureLogger(ctx, "ch3ck1nweb", e)
 
 	// read config from environment variables to struct
 	configInterface, err := config.ReadEnvVars(ctx, ServerConfigStruct{})
@@ -58,13 +56,4 @@ func main() {
 	e.Use(middleware.Recover())
 	span.Finish()
 	e.Logger.Fatal(e.Start(":" + serverConfig.Port))
-}
-
-// acmeChallenge is needed for http-challenge (let's encrypt)
-func acmeChallenge(c echo.Context) error {
-	span := tracing.Enter(c)
-	defer span.Finish()
-
-	urlParts := strings.Split(c.Request().URL.Path, "/")
-	return c.HTML(http.StatusOK, urlParts[len(urlParts)-1]+".5BxlFvZyQkUpolczG8IIeTyCIpCOqVbL2NQhqQJAPao")
 }
