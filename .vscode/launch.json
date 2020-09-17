@@ -43,6 +43,21 @@
                 "DB_PASSWORD":"==>",
                 "SESSION_SECRET":"ThatsASessionStoreSecret"
             }
+        },
+        {
+            "name": "admin",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/admin/",
+            "env": {
+                "SERVER_PORT":"19000",
+                "DB_HOST":"",
+                "DB_NAME":"ch3ck1n",
+                "DB_USER":"ch3ck1n_user",
+                "DB_PASSWORD":"==>",
+                "QR_CODE_FILE_PATH":"../pixi/static/qr"
+            }
         }
     ]
 }

@@ -3,7 +3,7 @@ package business
 import (
 	"context"
 	"fmt"
-	"github.com/damonkeys/ch3ck1n/biz/models"
+
 	"github.com/damonkeys/ch3ck1n/monkeys/database"
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 )
@@ -24,7 +24,7 @@ type (
 
 	// Operations is the struct that enables manupulations on businesses such as CRUD and Finder operations
 	Operations struct {
-		Business models.Business
+		Business Business
 		Context  context.Context
 	}
 )

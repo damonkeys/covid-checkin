@@ -12,7 +12,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	biz "github.com/damonkeys/ch3ck1n/biz/models"
+	biz "github.com/damonkeys/ch3ck1n/biz/business"
 	"github.com/damonkeys/ch3ck1n/monkeys/config"
 	"github.com/damonkeys/ch3ck1n/monkeys/database"
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"

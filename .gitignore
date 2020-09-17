@@ -33,3 +33,6 @@ service-gateway/service-gateway
 service-gateway/.cache/
 ch3ck1nweb/ch3ck1nweb
 **/**foo.*
+pixi/static/qr
+pixi/pixi
+biz/qr/cliqr/cliqr

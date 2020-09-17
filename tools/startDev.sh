@@ -7,8 +7,9 @@
 ./startServer.sh auth local
 ./startServer.sh biz local
 ./startServer.sh admin local
+./startServer.sh pixi local
 
 
 echo -e "\nStarting service... react/ client-app LOCAL!"
 echo -e "==========================================================================\n"
-screen -S react -dmS bash -c "cd ../client-app/; yarn start; exec bash"
+screen -S ch3ck1nweb -dmS bash -c "cd ../client-app/; yarn start; exec bash"

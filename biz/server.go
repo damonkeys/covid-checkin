@@ -24,7 +24,6 @@ import (
 	"github.com/markbates/goth/gothic"
 
 	"github.com/damonkeys/ch3ck1n/biz/business"
-	"github.com/damonkeys/ch3ck1n/biz/models"
 	"github.com/damonkeys/ch3ck1n/monkeys/config"
 	"github.com/damonkeys/ch3ck1n/monkeys/database"
 	l "github.com/damonkeys/ch3ck1n/monkeys/logger"
@@ -33,7 +32,7 @@ import (
 )
 
 type (
-	// ServerConfigStruct holds the server-config for auth
+	// ServerConfigStruct holds the server-config for biz
 	ServerConfigStruct struct {
 		Port          string                `env:"SERVER_PORT"`
 		SessionSecret string                `env:"SESSION_SECRET"`
@@ -44,7 +43,7 @@ type (
 const sessionName = "_ch3ck1n_callback"
 const serverName = "business"
 
-// ServerConfig defines the configuration for auth
+// serverConfig defines the configuration for auth
 var serverConfig ServerConfigStruct
 
 func main() {
@@ -80,7 +79,7 @@ func main() {
 	e.Logger.Fatal(e.Start(":" + serverConfig.Port))
 }
 
-// readEnvironmentConfig reads all needed environment variables and save it in ServerConfig struct
+// readEnvironmentConfig reads all needed environment variables and save it in serverConfig struct
 func readEnvironmentConfig(ctx context.Context, log echo.Logger) {
 	span := tracing.EnterWithContext(ctx)
 	defer span.Finish()
@@ -112,7 +111,7 @@ func getLocation(e echo.Context) error {
 	ctx := tracing.GetContext(e)
 
 	businessOperation := &business.Operations{
-		Business: models.Business{},
+		Business: business.Business{},
 		Context:  ctx,
 	}
 

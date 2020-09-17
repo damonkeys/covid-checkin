@@ -7,3 +7,4 @@ The server uses environment variables. If they are not set the server won't star
    * DB_NAME           - database name for connecting the auth database
    * DB_USER           - database user for connecting the auth database
    * DB_PASSWORD       - database user-password for connecting the auth database
+   * SESSION_SECRET    - The secret that we use for secure sessions

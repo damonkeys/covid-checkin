@@ -26,7 +26,18 @@
         ],
         "balancer": "roundrobin",
         "rewrite": true
-    }, {
+    },
+    {
+        "name": "Pixi",
+        "path": "/p",
+        "description":"The route to the pixi server",
+        "urls": [
+            "http://dev.checkin.chckr.de:5000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+    },
+     {
         "name": "Admin",
         "path": "/admin",
         "description":"Route to server for simple admin-views.",
