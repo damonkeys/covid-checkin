@@ -51,7 +51,7 @@ func main() {
 	// Start webserver
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
 		Root:   "static",
-		Browse: true,
+		Browse: false,
 		HTML5:  true,
 	}))
 	e.Use(middleware.Recover())
