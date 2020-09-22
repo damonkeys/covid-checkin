@@ -12,15 +12,14 @@ type (
 	// Business represents a single location with all its address-data
 	Business struct {
 		gorm.Model    `json:"-"`
-		UUID          string `json:"uuid" gorm:"type:varchar(36);unique_index"`
-		Name          string `json:"name" gorm:"type:varchar(50)"`
-		Code          string `json:"code" gorm:"type:varchar(5);unique_index"`
-		Street1       string `json:"street1" gorm:"type:varchar(50)"`
-		Street2       string `json:"street2" gorm:"type:varchar(50)"`
-		Zip           string `json:"zip" gorm:"type:varchar(10)"`
-		City          string `json:"city" gorm:"type:varchar(30)"`
-		Country       string `json:"country" gorm:"type:varchar(30)"`
-		BusinessInfos []BusinessInfo
+		UUID          string         `json:"uuid" gorm:"type:varchar(36);unique_index"`
+		Name          string         `json:"name" gorm:"type:varchar(50)"`
+		Code          string         `json:"code" gorm:"type:varchar(5);unique_index"`
+		Street        string         `json:"street" gorm:"type:varchar(50)"`
+		Zip           string         `json:"zip" gorm:"type:varchar(10)"`
+		City          string         `json:"city" gorm:"type:varchar(100)"`
+		Country       string         `json:"country" gorm:"type:varchar(60)"`
+		BusinessInfos []BusinessInfo `json:"businessInfos"`
 	}
 
 	// BusinessInfo represents detailed description for a location in different languages

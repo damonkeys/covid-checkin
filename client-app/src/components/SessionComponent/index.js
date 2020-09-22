@@ -6,11 +6,8 @@ import type { Session } from '../../js/types';
 type Props = {
     callbackSession: Function
 }
-type State = {
-    session: Session
-}
 
-export default class SessionComponent extends Component<Props, State> {
+export default class SessionComponent extends Component<Props, Session> {
     constructor(props: Object) {
         super(props);
         if (!this.state) {
@@ -18,7 +15,7 @@ export default class SessionComponent extends Component<Props, State> {
                 session: {}
             }
         }
-        this.state.session = {
+        this.state = {
             useronline: false,
             username: '',
             avatarurl: '',
@@ -58,12 +55,10 @@ export default class SessionComponent extends Component<Props, State> {
 
     sessionCallback = (sessionData: Session) => {
         this.setState({
-            session: {
-                useronline: sessionData.useronline,
-                username: sessionData.username,
-                avatarurl: sessionData.avatarurl,
-                connected: true
-            }
+            useronline: sessionData.useronline,
+            username: sessionData.username,
+            avatarurl: sessionData.avatarurl,
+            connected: true
         });
         if (sessionData.useronline) {
             cookie.save('lastUser', sessionData.username, { path: '/' });
@@ -72,11 +67,9 @@ export default class SessionComponent extends Component<Props, State> {
 
     sessionSetter = (data: Object) => {
         this.setState({
-            session: {
-                useronline: data.useronline || this.state.session.useronline,
-                username: data.username || this.state.session.username,
-                avatarurl: data.avatarurl || this.state.session.avatarurl,
-            }
+            useronline: data.useronline || this.state.useronline,
+            username: data.username || this.state.username,
+            avatarurl: data.avatarurl || this.state.avatarurl,
         })
     }
 }

@@ -49,9 +49,11 @@
         "explanation-short": "Please login for more functions."
     },
     "dashboard": {
-        "explanation": "To checkin please scan the QR code of a partner-location. Alternatively, you can enter the location code here, which can be seen in your check-in location near the QR code.",
-        "location-code": "Location-Code",
-        "location-code-placeholder": "i.e. A12345"
+        "explanation": "Hey! Just type in the 5-letter-chckr code you can see at the chckr restaurant badge or simply scan the qr code over there.",
+        "chckr-code": "Chckr-Code",
+        "chckr-code-placeholder": "i.e. A1234"
+    },
+    "business": {
+        "unknown-code": "Sorry, but your entered/scanned code is unknown in our systems."
     }
-
 }

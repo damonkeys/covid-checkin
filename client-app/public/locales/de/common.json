@@ -49,9 +49,11 @@
         "explanation-short": "Für viele weitere Funktionen melde Dich bitte an."
     },
     "dashboard": {
-        "explanation": "Damit Du Dich einchecken kannst, scanne bitte einen QR-Code in einem unserer Partner. Alternativ kannst Du hier den Location-Code eingeben, der in Deinem Checkin-Ort sichtbar unter dem QR-Code zu sehen ist.",
-        "location-code": "Location-Code",
-        "location-code-placeholder": "z.B. A12345"
+        "explanation": "Hey! Tippe einfach den 5-Buchstaben-Code, den du auf dem chckr-Schild in Deinem Restaurant sehen kannst ein oder scanne bequem mit deinem Smartphone den abgedruckten QR-Code. Dann kann das chckr-Checkin losgehen!",
+        "chckr-code": "Chckr-Code",
+        "chckr-code-placeholder": "z.B. A1234"
+    },
+    "business": {
+        "unknown-code": "Es tut uns leid, aber Deinen gescannter/getippter Code kennen wir nicht."
     }
-
 }
