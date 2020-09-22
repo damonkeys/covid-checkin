@@ -11,7 +11,7 @@ var routes = [
     path: '/',
     component: Home,
   }, {
-    path: '/checkin/:locationCode',
+    path: '/checkin/:chckrCode',
     component: Checkin,
   }, {
     path: '/privacy',

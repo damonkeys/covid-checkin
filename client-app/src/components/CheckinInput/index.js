@@ -1,17 +1,15 @@
 // @flow
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
     Block,
     Button,
-    Input
+    Input,
+    Col, 
+    Row
 } from 'framework7-react';
 import i18n from '../../components/i18n.js';
 
 type Props = {
-}
-
-type State = {
-    locationCode: string
 }
 
 /**
@@ -24,22 +22,22 @@ type State = {
  * - callbackSession: it is a callback-function to return the read usersession-data.
  * - hideBacklink: boolean true/false to show or hide the back-link in the navigation bar
  */
-export default class CheckinInput extends Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            locationCode: ''
-        };
-    }
 
-    render() {
-        return (
-            <Block strong>
-                {i18n.t('dashboard.explanation')}<br />
-                <h3>{i18n.t('dashboard.location-code')}</h3>
-                <h1><Input id="location-code" label={i18n.t('dashboard.location-code')} type="text" maxlength="5" minlength="5" placeholder={i18n.t('dashboard.location-code-placeholder')} onInput={(value) => {this.setState({locationCode: value.currentTarget.value});}}></Input></h1><br />
-                <Button rasied fill iconF7="checkmark" href={'/checkin/' + this.state.locationCode}></Button>
-            </Block>
-        )
-    }
+const CheckinInput = (props: Props) => {
+    const [chckrCode, setChckrCode] = useState('');
+
+    return <Block strong>
+        {i18n.t('dashboard.explanation')}<br />
+        <h3 className="text-align-center">{i18n.t('dashboard.chckr-code')}</h3>
+        <Row>
+            <Col width="15"></Col>
+            <Col width="70">
+                <h1 ><Input inputStyle={{ textAlign: 'center' }} clearButton id="chckr-code" label={i18n.t('dashboard.chckr-code')} type="text" maxlength="5" minlength="5" placeholder={i18n.t('dashboard.chckr-code-placeholder')} onInput={(value) => {setChckrCode(value.currentTarget.value);}}></Input></h1><br />
+                <Button raised fill iconF7="checkmark" href={'/checkin/' + chckrCode}>Checkin</Button>
+            </Col>
+            <Col width="15"></Col>
+        </Row>
+    </Block>
 }
+
+export default CheckinInput;
