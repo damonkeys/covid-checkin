@@ -1,7 +1,7 @@
 // @flow
 import { Component } from 'react';
 import cookie from 'react-cookies'
-import type {Session} from '../../js/types';
+import type { Session } from '../../js/types';
 
 type Props = {
     callbackSession: Function
@@ -23,14 +23,14 @@ export default class SessionComponent extends Component<Props, State> {
             username: '',
             avatarurl: '',
             connected: false        // connected is true after the first status request to get infos about onlinestatus. we need connected for avoid "blinking"
-                                    // after loading the first time. without connected you will see the login-buttons for a short time even though your are logged in!
-                                    // Blinking means:
-                                    //
-                                    // 1. Loading site... It loads one part of the side ie. Login Buttons
-                                    //      - BUT your are logged in already!
-                                    // 2. React connects auth to check a valid session
-                                    // 3. Auth answers, alright, user is logged in!
-                                    // 4. React rendered site-parts again and hides login buttons.
+            // after loading the first time. without connected you will see the login-buttons for a short time even though your are logged in!
+            // Blinking means:
+            //
+            // 1. Loading site... It loads one part of the side ie. Login Buttons
+            //      - BUT your are logged in already!
+            // 2. React connects auth to check a valid session
+            // 3. Auth answers, alright, user is logged in!
+            // 4. React rendered site-parts again and hides login buttons.
         };
     }
 
@@ -40,11 +40,6 @@ export default class SessionComponent extends Component<Props, State> {
         })
             .then((response) => response.json())
             .then(async (json) => {
-                this.setState({
-                    session: {
-                        useronline: json.useronline,
-                        username: json.username                    }
-                });
                 this.sessionCallback(json);
             });
     }
@@ -61,7 +56,7 @@ export default class SessionComponent extends Component<Props, State> {
             });
     }
 
-    sessionCallback = (sessionData: Object) => {
+    sessionCallback = (sessionData: Session) => {
         this.setState({
             session: {
                 useronline: sessionData.useronline,
