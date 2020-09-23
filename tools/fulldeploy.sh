@@ -16,9 +16,9 @@ yarn build
 cd ../tools
 ./deploy.sh ch3ck1nweb
 
-echo -e "\nauth-server"
+echo -e "\nauthx-server"
 echo -e "==========================================================================\n"
-./deploy.sh auth
+./deploy.sh authx
 
 echo -e "\nbiz-server"
 echo -e "==========================================================================\n"

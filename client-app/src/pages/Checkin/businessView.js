@@ -17,10 +17,10 @@ import type {BusinessData, Session} from '../../js/types';
 
 type Props = {
     session: Session,
-    chckrCode: string,
+    chckrCode: string
 }
 
-const TabContent = (props: Props) => {
+const BusinessView = (props: Props) => {
     const [businessData: BusinessData, setBusinessData] = useState(null);
 
     useEffect(() => {
@@ -100,4 +100,4 @@ const TabContent = (props: Props) => {
     </Tabs>
 }
 
-export default TabContent;
+export default BusinessView;

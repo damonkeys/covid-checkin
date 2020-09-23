@@ -4,7 +4,7 @@
     import { List, ListInput, Button, BlockTitle } from 'framework7-react';
 
     const CheckinForm = () => {
-        const saveCheckin = (e: any) => {
+        const saveCheckin = (e: Event) => {
             e.preventDefault();
             var formData = f7.form.convertToData('#checkinform');
         }

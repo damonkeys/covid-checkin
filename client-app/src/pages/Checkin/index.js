@@ -11,7 +11,7 @@ import {
 } from 'framework7-react';
 import SessionComponent from '../../components/SessionComponent/index';
 import i18n from '../../components/i18n.js';
-import TabContent from './tabContent.js'
+import BusinessView from './businessView.js'
 
 export default class Checkin extends SessionComponent {
     render() {
@@ -31,7 +31,7 @@ export default class Checkin extends SessionComponent {
                 
                 {( f7.views.main.router.currentRoute && f7.views.main.router.currentRoute.params) ? 
                     (
-                        <TabContent chckrCode={f7.views.main.router.currentRoute.params.chckrCode} session={this.state}></TabContent>
+                        <BusinessView chckrCode={f7.views.main.router.currentRoute.params.chckrCode} session={this.state}></BusinessView>
                     ) : null
                 }
 

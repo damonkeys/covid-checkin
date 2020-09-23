@@ -4,7 +4,7 @@
 ./hosts.sh add
 
 ./startServer.sh service-gateway local
-./startServer.sh auth local
+./startServer.sh authx local
 ./startServer.sh biz local
 ./startServer.sh admin local
 ./startServer.sh pixi local

@@ -3,12 +3,13 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/damonkeys/ch3ck1n/monkeys/languagehelper"
 	"log"
 	"net/http"
 	"time"
 
-	"github.com/damonkeys/ch3ck1n/auth/models"
+	"github.com/damonkeys/ch3ck1n/monkeys/languagehelper"
+
+	"github.com/damonkeys/ch3ck1n/authx/models"
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 
 	"github.com/eefret/gravatar/default_img"

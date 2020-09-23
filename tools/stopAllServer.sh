@@ -7,9 +7,9 @@ echo -e "\nch3ck1nweb"
 echo -e "==========================================================================\n"
 ./stopServer.sh ch3ck1nweb
 
-echo -e "\nauth-server"
+echo -e "\nauthx-server"
 echo -e "==========================================================================\n"
-./stopServer.sh auth
+./stopServer.sh authx
 
 echo -e "\nbiz-server"
 echo -e "==========================================================================\n"

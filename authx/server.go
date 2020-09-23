@@ -38,9 +38,9 @@ import (
 	"github.com/markbates/goth/providers/facebook"
 	"github.com/markbates/goth/providers/gplus"
 
-	"github.com/damonkeys/ch3ck1n/auth/models"
+	"github.com/damonkeys/ch3ck1n/authx/models"
 
-	"github.com/damonkeys/ch3ck1n/auth/applesupport"
+	"github.com/damonkeys/ch3ck1n/authx/applesupport"
 	bubblesclient "github.com/damonkeys/ch3ck1n/monkeys/bubbles"
 	"github.com/damonkeys/ch3ck1n/monkeys/config"
 	"github.com/damonkeys/ch3ck1n/monkeys/database"
