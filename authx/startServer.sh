@@ -20,4 +20,4 @@ export P_APPLE_SECRET=""
 export ACTIVATION_URL="https://dev.checkin.chckr.de/auth/activation/%s"
 export ACTIVATION_STATE_URL="https://dev.checkin.chckr.de/activation/%s"
 
-./auth
+./authx

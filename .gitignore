@@ -26,7 +26,7 @@ logs
 
 # binaries
 admin/admin
-auth/auth
+authx/authx
 biz/biz
 sales/locacq/locacq
 service-gateway/service-gateway

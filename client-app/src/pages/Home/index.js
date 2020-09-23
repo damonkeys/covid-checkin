@@ -16,7 +16,7 @@ import { f7 } from 'framework7-react';
 import i18n from '../../components/i18n.js';
 import SessionComponent from '../../components/SessionComponent/index';
 import Logins from '../../components/Logins/index';
-import CheckinInput from '../../components/CheckinInput/index.js';
+import FindBusinessByCheckrCodeForm from '../../components/FindBusinessByCheckrCodeForm/index.js';
 import Account from '../../components/Account';
 
 export default class Home extends SessionComponent {
@@ -54,7 +54,7 @@ export default class Home extends SessionComponent {
 
                         { !this.state.connected ? null :
                             (
-                                <CheckinInput></CheckinInput>
+                                <FindBusinessByCheckrCodeForm></FindBusinessByCheckrCodeForm>
                             )
                         }
                     </Tab>

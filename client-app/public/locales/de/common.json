@@ -54,6 +54,6 @@
         "chckr-code-placeholder": "z.B. A1234"
     },
     "business": {
-        "unknown-code": "Es tut uns leid, aber Deinen gescannter/getippter Code kennen wir nicht."
+        "unknown-code": "Entschuldigung, Code {{code}} ist nicht bekannt."
     }
 }

@@ -23,6 +23,6 @@ echo -e "\nadmin"
 echo -e "==========================================================================\n"
 ./startServer.sh admin 
 
-echo -e "\nauth-server"
+echo -e "\nauthx-server"
 echo -e "==========================================================================\n"
-./startServer.sh auth
+./startServer.sh authx
