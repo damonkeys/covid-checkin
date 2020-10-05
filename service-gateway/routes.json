@@ -37,7 +37,17 @@
         "balancer": "roundrobin",
         "rewrite": true
     },
-     {
+    {
+        "name": "Checkin",
+        "path": "/c",
+        "description":"The route to the checkin server",
+        "urls": [
+            "http://dev.checkin.chckr.de:6000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+    },
+    {
         "name": "Admin",
         "path": "/admin",
         "description":"Route to server for simple admin-views.",

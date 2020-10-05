@@ -9,3 +9,4 @@
 ./stopServer.sh admin local
 ./stopServer.sh ch3ck1nweb local
 ./stopServer.sh pixi local
+./stopServer.sh checkins local

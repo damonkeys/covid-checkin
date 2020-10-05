@@ -26,6 +26,7 @@ logs
 
 # binaries
 admin/admin
+checkins/checkins
 authx/authx
 biz/biz
 sales/locacq/locacq

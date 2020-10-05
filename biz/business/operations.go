@@ -14,16 +14,9 @@ type (
 		GetBusinessByCode(code string) error
 	}
 
-	// CRUD is the typical CREATE READ UPDATE DELETE interface for an entity
-	CRUD interface {
-		Create() error
-		Update() error
-		Delete() error
-		Undelete() error
-	}
-
 	// Operations is the struct that enables manupulations on businesses such as CRUD and Finder operations
 	Operations struct {
+		database.CRUD
 		Business Business
 		Context  context.Context
 	}
@@ -41,6 +34,19 @@ func (o *Operations) GetBusinessByCode(code string) error {
 		return dbResult.Error
 	}
 	tracing.LogStruct(span, "foundLBusinessInDB", &o.Business)
+	return nil
+}
+
+// Create stores the whole Business record. The UUID will be created automatically.
+func (o *Operations) Create() error {
+	span := tracing.EnterWithContext(o.Context)
+	defer span.Finish()
+	tracing.LogStruct(span, "business", o.Business)
+	result := database.DB.Create(o.Business)
+	if result.Error != nil {
+		tracing.LogError(span, result.Error)
+		return result.Error
+	}
 	return nil
 }
 

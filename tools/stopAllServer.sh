@@ -15,6 +15,14 @@ echo -e "\nbiz-server"
 echo -e "==========================================================================\n"
 ./stopServer.sh biz
 
+echo -e "\npixi-server"
+echo -e "==========================================================================\n"
+./stopServer.sh pixi
+
+echo -e "\ncheckins-server"
+echo -e "==========================================================================\n"
+./stopServer.sh checkins
+
 echo -e "\nadmin-server"
 echo -e "==========================================================================\n"
 ./stopServer.sh admin

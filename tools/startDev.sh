@@ -8,6 +8,7 @@
 ./startServer.sh biz local
 ./startServer.sh admin local
 ./startServer.sh pixi local
+./startServer.sh checkins local
 
 
 echo -e "\nStarting service... react/ client-app LOCAL!"
