@@ -1,12 +1,10 @@
     // @flow
     import React from 'react';
-    import { f7 } from 'framework7-react';
     import { List, ListInput, Button, BlockTitle } from 'framework7-react';
 
     const CheckinForm = () => {
         const saveCheckin = (e: Event) => {
             e.preventDefault();
-            var formData = f7.form.convertToData('#checkinform');
         }
 
         return <List form id="checkinform" onSubmit={saveCheckin}>

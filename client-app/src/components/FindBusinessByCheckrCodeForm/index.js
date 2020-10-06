@@ -28,16 +28,18 @@ const FindBusinessByCheckrCodeForm = (props: Props) => {
             <Col width="70">
                 <h1 >
                     <Input
-                        inputStyle={{ textAlign: 'center' }}
-                        clearButton id="chckr-code"
-                        label={i18n.t('dashboard.chckr-code')}
-                        type="text"
-                        maxlength="5"
-                        minlength="2"
-                        placeholder={i18n.t('dashboard.chckr-code-placeholder')}
-                        onInput={(value) => { setChckrCode(value.currentTarget.value); }}
-                        data-error-message="Five letter code please!"></Input></h1><br />
-                <Button raised fill iconF7="checkmark" href={'/checkin/' + chckrCode}>Checkin</Button>
+                    inputStyle={{ textAlign: 'center' }}
+                    clearButton id="chckr-code"
+                    label={i18n.t('dashboard.chckr-code')}
+                    type="text"
+                    maxlength="5"
+                    minlength="2"
+                    placeholder={i18n.t('dashboard.chckr-code-placeholder')}
+                    onInput={(value) => {setChckrCode(value.currentTarget.value);}}>
+                    </Input>
+                </h1>
+                <br />
+                <Button large raised fill iconF7="checkmark" href={'/checkin/' + chckrCode}>{i18n.t('business.findBizAndCheckin')}</Button>
             </Col>
             <Col width="15"></Col>
         </Row>

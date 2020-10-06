@@ -54,6 +54,7 @@
         "chckr-code-placeholder": "i.e. A1234"
     },
     "business": {
-        "unknown-code": "Sorry, code {{code}} is unknown."
+        "unknown-code": "Sorry, code {{code}} is unknown.",
+        "findBizAndCheckin": "Search to checkin"
     }
 }
