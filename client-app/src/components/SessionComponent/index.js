@@ -3,12 +3,11 @@ import { Component } from 'react';
 import cookie from 'react-cookies'
 import type { Session } from '../../js/types';
 
-type Props = {
-    callbackSession: Function
+type Props =  {
 }
 
 export default class SessionComponent extends Component<Props, Session> {
-    constructor(props: Object) {
+    constructor(props: Props) {
         super(props);
         if (!this.state) {
             this.state = {

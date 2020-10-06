@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react';
+import React from 'react';
 import {
     Block,
     BlockTitle,
@@ -8,40 +8,38 @@ import {
 } from 'framework7-react';
 import Logins from '../../components/Logins/index';
 import i18n from '../../components/i18n.js';
-import type {Session} from '../../js/types';
+import type { Session } from '../../js/types';
 
 type Props = {
     session: Session,
 }
 
-type State = {
-}
+const Account = (props: Props) => {
 
-export default class Account extends Component<Props, State> {
-    render() {
-        if (this.props.session.useronline) {
-            return (
-                <div>
-                    <Block>
-                        <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
-                        <BlockTitle>Profile</BlockTitle>
-                    </Block>
-
-                    <List simple-list>
-                        <ListItem title="Name" after={this.props.session.username}></ListItem>
-                    </List>
-                </div>
-            )
-        }
-    
+    if (props.session.useronline) {
         return (
             <div>
-                <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
                 <Block>
-                    {i18n.t('signin.explanation')}
+                    <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
+                    <BlockTitle>Profile</BlockTitle>
                 </Block>
-                <Logins></Logins>
+
+                <List simple-list>
+                    <ListItem title="Name" after={props.session.username}></ListItem>
+                </List>
             </div>
         )
     }
+
+    return (
+        <div>
+            <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
+            <Block>
+                {i18n.t('signin.explanation')}
+            </Block>
+            <Logins></Logins>
+        </div>
+    )
 }
+
+export default Account;
