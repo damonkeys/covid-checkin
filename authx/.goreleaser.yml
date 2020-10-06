@@ -8,7 +8,7 @@ builds:
 
     # Name of the binary.
     # Default is the name of the project directory.
-    binary: auth
+    binary: authx
 
     # Set flags for custom build tags.
     # Default is empty.
