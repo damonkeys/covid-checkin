@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source checkin/.env
+source .env
 export SERVER_PORT=${SERVER_PORT}
 export DB_HOST=${DB_HOST}
 export DB_NAME=${DB_NAME}
