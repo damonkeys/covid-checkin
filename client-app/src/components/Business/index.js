@@ -4,18 +4,20 @@ import {
     Block,
     BlockTitle
 } from 'framework7-react';
-import i18n from '../../components/i18n.js';
 import type { BusinessData } from '../../js/types';
+import { useTranslation } from 'react-i18next';
 
 
-type Props = {
+type BusinessProps = {
     businessData: BusinessData
 }
 
-const Business = (props: Props) => {
+const Business = (props: BusinessProps) => {
+    const [t] = useTranslation();
+
     if (props.businessData.uuid === undefined) {
         return <Block className="margin-half text-align-center">
-            <BlockTitle textColor="red">{i18n.t('business.unknown-code', { 'code': props.businessData.code })}</BlockTitle>
+            <BlockTitle textColor="red">{t('business.unknown-code', { 'code': props.businessData.code })}</BlockTitle>
         </Block>
     }
 

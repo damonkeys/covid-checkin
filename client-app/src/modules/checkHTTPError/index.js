@@ -2,9 +2,9 @@
 const checkHTTPError = (response) => {
   if (response.ok) {
     return response.json();
-  } else {
+ } else {
     throw Error(response.status);
   }
-}
+};
 
-export { checkHTTPError };
+export default checkHTTPError;
