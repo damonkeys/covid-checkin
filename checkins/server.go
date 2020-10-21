@@ -34,8 +34,14 @@ type (
 	// ServerConfigStruct holds the server-config for checkin
 	ServerConfigStruct struct {
 		Port          string                `env:"SERVER_PORT"`
+		DomainName    string                `env:"DOMAIN_NAME"`
 		SessionSecret string                `env:"SESSION_SECRET"`
 		Database      database.ConfigStruct `json:"database"`
+	}
+
+	// SuccessResponse will be returned after an API-Call and will define the response status of the API-Call.
+	SuccessResponse struct {
+		Success bool `json:"success"`
 	}
 )
 
@@ -72,7 +78,7 @@ func main() {
 
 	// Routes
 	e.POST("/checkin", checkinAtBusiness)
-
+	e.GET("/userdata", getUserDataFromCookie)
 	span.Finish()
 	e.Logger.Fatal(e.Start(":" + serverConfig.Port))
 }
@@ -92,47 +98,39 @@ func readEnvironmentConfig(ctx context.Context, log echo.Logger) {
 	serverConfig = configInterface.(ServerConfigStruct)
 }
 
-// checkinAtBusiness saves a checkin of a chckr to the checkin-database. The request contains the chckr- and the
+// checkinAtBusiness saves a checkin of a user to the checkin-database. The request contains the user- and the
 // business-data. Checkin will store in database with timestamp for checkin of the request.
+// All user-data will be stored in in a http-cookie "user" for later faster checkins.
 func checkinAtBusiness(e echo.Context) error {
 	span := tracing.Enter(e)
 	defer span.Finish()
 
-	checkinRequest := &checkinRequest{}
-	if err := e.Bind(checkinRequest); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, "bad checkin")
-	}
-	tracing.LogStruct(span, "request", checkinRequest)
-
-	checkinData := buildCheckinModel(tracing.GetContext(e), *checkinRequest)
-	sess, err := session.Get("_ch3ck1n_session", e)
-	if err == nil {
-		if sess.Values["userid"] != nil {
-			checkinData.ChckrUUID = sess.Values["userid"].(string)
-		}
+	checkinData, err := buildCheckinModel(e)
+	if err != nil {
+		tracing.LogError(span, err)
+		return e.JSON(http.StatusBadRequest, SuccessResponse{Success: false})
 	}
 	operations := &checkin.Operations{
 		Context:     tracing.GetContext(e),
 		CheckinData: checkinData,
 	}
-
 	err = operations.Create()
 	if err != nil {
 		tracing.LogError(span, err)
-		return echo.NewHTTPError(http.StatusInternalServerError, "checkin failed")
+		return e.JSON(http.StatusBadRequest, SuccessResponse{Success: false})
 	}
-	return e.String(http.StatusOK, "")
+	return e.JSON(http.StatusOK, SuccessResponse{Success: true})
 }
 
-// serverErrorOnError returns an internalServerError for a given err
-func serverErrorOnError(err error, e echo.Context) error {
+// getUserDataFromCookie returns all User-Data read out from the user-cookie if available.
+func getUserDataFromCookie(e echo.Context) error {
 	span := tracing.Enter(e)
 	defer span.Finish()
 
+	userData, err := readUserDataFromCookie(e)
 	if err != nil {
 		tracing.LogError(span, err)
-		e.Logger().Warnf("serverErrorOnError error: %s", err)
-		return e.JSON(http.StatusInternalServerError, "error")
+		return e.JSON(http.StatusBadRequest, SuccessResponse{Success: false})
 	}
-	return nil
+	return e.JSON(http.StatusOK, userData)
 }

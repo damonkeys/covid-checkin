@@ -20,12 +20,12 @@ type (
 func (o *Operations) Create() error {
 	span := tracing.EnterWithContext(o.Context)
 	defer span.Finish()
-	tracing.LogStruct(span, "checkin", o.CheckinData)
 	result := database.DB.Create(o.CheckinData)
 	if result.Error != nil {
 		tracing.LogError(span, result.Error)
 		return result.Error
 	}
+	tracing.LogStruct(span, "Checkin in database", result.Value)
 	return nil
 }
 

@@ -76,3 +76,4 @@ archives:
       - startServer.sh
       - dbmate/*
       - dbmate/**/*
+      - .env

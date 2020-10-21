@@ -8,7 +8,7 @@ import (
 )
 
 type (
-	// Checkin represents a single checkin of a chckr at a business-location. we save all data in a separate database
+	// Checkin represents a single checkin of a user at a business-location. we save all data in a separate database
 	// with any dependencies to other databases for user- or business-data. generally the stored checkin-data never
 	// won't be updated expect the checkout-timestamp.
 	Checkin struct {
@@ -17,14 +17,14 @@ type (
 		BusinessUUID    string    `json:"-" gorm:"type:varchar(36)"`
 		BusinessName    string    `json:"businessName" gorm:"type:varchar(50)"`
 		BusinessAddress string    `json:"businessAddress" gorm:"type:varchar(300)"`
-		ChckrUUID       string    `json:"-" gorm:"type:varchar(36)"`
-		ChckrName       string    `json:"chckrname" gorm:"type:varchar(500)"`
-		ChckrPhone      string    `json:"chckrphone" gorm:"type:varchar(100)"`
-		ChckrEmail      string    `json:"chckremail" gorm:"type:varchar(255)"`
-		ChckrStreet     string    `json:"chckrstreet" gorm:"type:varchar(500)"`
-		ChckrCity       string    `json:"chckrcity" gorm:"type:varchar(100)"`
-		ChckrCountry    string    `json:"chckrcountry" gorm:"type:varchar(100)"`
-		ChckrRegistered bool      `json:"-" gorm:"type:boolean;default:false"`
+		UserUUID        string    `json:"-" gorm:"type:varchar(36)"`
+		UserName        string    `json:"username" gorm:"type:varchar(500)"`
+		UserPhone       string    `json:"userphone" gorm:"type:varchar(100)"`
+		UserEmail       string    `json:"useremail" gorm:"type:varchar(255)"`
+		UserStreet      string    `json:"userstreet" gorm:"type:varchar(500)"`
+		UserCity        string    `json:"usercity" gorm:"type:varchar(100)"`
+		UserCountry     string    `json:"usercountry" gorm:"type:varchar(100)"`
+		UserRegistered  bool      `json:"-" gorm:"type:boolean;default:false"`
 		Paper           bool      `json:"-" gorm:"type:boolean;default:false"`
 		CheckedInAt     time.Time `json:"checkedInAt"`
 		CheckedOutAt    time.Time `json:"checkedOutAt"`
