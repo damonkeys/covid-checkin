@@ -10,7 +10,6 @@ import (
 type (
 	// Operations is the struct that holds all possible opertaions on the business-data
 	Operations struct {
-		database.CRUD
 		Context     context.Context
 		CheckinData *Checkin
 	}
