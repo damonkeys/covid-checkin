@@ -16,7 +16,6 @@ type (
 
 	// Operations is the struct that enables manupulations on businesses such as CRUD and Finder operations
 	Operations struct {
-		database.CRUD
 		Business Business
 		Context  context.Context
 	}
