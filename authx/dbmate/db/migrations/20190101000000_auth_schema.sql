@@ -17,12 +17,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `ch3ck1n`
---
-
-USE `ch3ck1n`;
-
---
 -- Table structure for table `providers`
 --
 

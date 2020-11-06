@@ -88,8 +88,6 @@ func main() {
 	defer closer.Close()
 
 	setProxyConfig(ctx)
-	// Trace config
-	tracing.LogStruct(span, "proxyConfig", proxyConfig)
 
 	// init echo
 	e := echo.New()

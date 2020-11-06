@@ -60,7 +60,6 @@ func main() {
 	e := echo.New()
 	l.ConfigureLogger(ctx, serverName, e)
 	readEnvironmentConfig(ctx, e.Logger)
-	tracing.LogStruct(span, "serverConfig", serverConfig)
 
 	if err := database.InitDatabase(serverConfig.Database); err != nil {
 		e.Logger.Fatal(err)

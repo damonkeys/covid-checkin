@@ -4,13 +4,14 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"os"
 	"regexp"
 	"runtime"
 
 	"github.com/labstack/echo/v4"
 	opentracing "github.com/opentracing/opentracing-go"
 	jaeger "github.com/uber/jaeger-client-go"
-	config "github.com/uber/jaeger-client-go/config"
+	jaegercfg "github.com/uber/jaeger-client-go/config"
 )
 
 var (
@@ -29,19 +30,16 @@ var (
 //  defer closer.Close()
 //  defer span.Finish()
 func InitJaeger(service string, params ...string) (io.Closer, opentracing.Span, context.Context) {
-	cfg := &config.Configuration{
-		Sampler: &config.SamplerConfig{
-			Type:  "const",
-			Param: 1,
-		},
-		Reporter: &config.ReporterConfig{
-			LogSpans: true,
-		},
-	}
-	var err error
-	Tracer, Closer, err = cfg.New(service, config.Logger(jaeger.StdLogger))
+	cfg, err := jaegercfg.FromEnv()
 	if err != nil {
-		panic(fmt.Sprintf("ERROR: cannot init Jaeger: %v\n", err))
+		// parsing errors might happen here, such as when we get a string where we expect a number
+		fmt.Printf("Could not parse Jaeger env vars: %v\n", err.Error())
+		os.Exit(-1)
+	}
+	Tracer, Closer, err = cfg.New(service, jaegercfg.Logger(jaeger.StdLogger))
+	if err != nil {
+		fmt.Printf("ERROR: cannot init Jaeger: %v\n", err)
+		os.Exit(-1)
 	}
 	opentracing.SetGlobalTracer(Tracer)
 	var spanName string

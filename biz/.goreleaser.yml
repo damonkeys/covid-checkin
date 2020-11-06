@@ -76,3 +76,22 @@ archives:
       - startServer.sh
       - dbmate/*
       - dbmate/**/*
+
+dockers:
+  -
+    binaries:
+    - biz
+    image_templates:
+    - chckr/biz
+
+    # Path to the Dockerfile (from the project root).
+    dockerfile: Dockerfile
+
+    skip_push: true
+
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}-biz"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"

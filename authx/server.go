@@ -26,6 +26,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/sessions"
 
 	"github.com/labstack/echo-contrib/session"
@@ -47,7 +48,6 @@ import (
 	l "github.com/damonkeys/ch3ck1n/monkeys/logger"
 	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
 
-	"github.com/google/uuid"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
@@ -228,14 +228,13 @@ var serverConfig ServerConfigStruct
 
 func main() {
 	// tracer init
-	closer, span, ctx := tracing.InitJaeger("auth")
+	closer, span, ctx := tracing.InitJaeger("authx")
 	defer closer.Close()
 
 	// Init echo
 	e := echo.New()
 	l.ConfigureLogger(ctx, "auth", e)
 	readEnvironmentConfig(ctx, e.Logger)
-	tracing.LogStruct(span, "serverConfig", serverConfig)
 
 	// Init goth-providers that we use
 	e.Logger.Debug("Initialise Goth with Facebook, Google+ and Apple providers")
@@ -291,9 +290,9 @@ func readEnvironmentConfig(ctx context.Context, log echo.Logger) {
 
 func initGoth() {
 	goth.UseProviders(
-		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=facebook"),
-		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, "https://dev.checkin.chckr.de/auth/callback?provider=gplus"),
-		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, "https://dev.checkin.chckr.de/auth/callback", nil, apple.ScopeName, apple.ScopeEmail),
+		facebook.New(serverConfig.Providers.Facebook.Key, serverConfig.Providers.Facebook.Secret, serverConfig.Baseurl+"/auth/callback?provider=facebook"),
+		gplus.New(serverConfig.Providers.Gplus.Key, serverConfig.Providers.Gplus.Secret, serverConfig.Baseurl+"/auth/callback?provider=gplus"),
+		apple.New(serverConfig.Providers.Apple.Key, serverConfig.Providers.Apple.Secret, serverConfig.Baseurl+"/auth/callback", nil, apple.ScopeName, apple.ScopeEmail),
 	)
 }
 

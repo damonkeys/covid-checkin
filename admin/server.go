@@ -35,8 +35,10 @@ var serverConfig ServerConfigStruct
 func main() {
 	// Initalize
 	// tracer init
-	closer, _, ctx := tracing.InitJaeger("admin")
+	closer, span, ctx := tracing.InitJaeger("admin")
 	defer closer.Close()
+
+	tracing.LogString(span, "Welcome", "Admin-Server started")
 
 	// read config from environment variables to struct
 	readEnvVars(ctx)
@@ -69,7 +71,7 @@ func addBizAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 	span := tracing.EnterWithContext(c)
 	defer span.Finish()
 	// open database connection
-	db, err := gorm.Open("mysql", serverConfig.DatabaseBiz.User+":"+serverConfig.DatabaseBiz.Password+"@"+serverConfig.DatabaseBiz.Server+"/"+serverConfig.DatabaseBiz.Name+"?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", serverConfig.DatabaseBiz.User+":"+serverConfig.DatabaseBiz.Password+"@("+serverConfig.DatabaseBiz.Server+")/"+serverConfig.DatabaseBiz.Name+"?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Println(err)
 		db.Close()
@@ -97,7 +99,7 @@ func addCheckinsAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 	span := tracing.EnterWithContext(c)
 	defer span.Finish()
 	// open database connection
-	db, err := gorm.Open("mysql", serverConfig.DatabaseCheckins.User+":"+serverConfig.DatabaseCheckins.Password+"@"+serverConfig.DatabaseCheckins.Server+"/"+serverConfig.DatabaseCheckins.Name+"?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", serverConfig.DatabaseCheckins.User+":"+serverConfig.DatabaseCheckins.Password+"@("+serverConfig.DatabaseCheckins.Server+")/"+serverConfig.DatabaseCheckins.Name+"?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Println(err)
 		db.Close()

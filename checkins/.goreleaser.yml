@@ -77,3 +77,22 @@ archives:
       - dbmate/*
       - dbmate/**/*
       - .env
+
+dockers:
+  -
+    binaries:
+    - checkins
+    image_templates:
+    - chckr/checkins
+
+    # Path to the Dockerfile (from the project root).
+    dockerfile: Dockerfile
+
+    skip_push: true
+
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}-checkins"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"

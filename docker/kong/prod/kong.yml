@@ -1,0 +1,71 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+- name: admin
+  url: http://admin:19000/admin
+  routes:
+    - name: admin-route
+      paths:
+        - /admin
+  plugins:
+    - name: basic-auth
+
+
+- name: authx
+  url: http://authx:2000
+  routes:
+    - name: authx-route
+      paths:
+        - /auth
+ 
+      
+- name: biz
+  url: http://biz:4000
+  routes:
+    - name: biz-route
+      paths:
+        - /biz
+
+  
+- name: ch3ck1nweb
+  url: http://ch3ck1nweb:3000
+  routes:
+    - name: ch3ck1nweb-route
+      paths:
+        - /
+
+
+- name: checkins
+  url: http://checkins:6000
+  routes:
+    - name: checkins-route
+      paths:
+        - /c
+
+
+- name: pixi
+  url: http://pixi:5000
+  routes:
+    - name: pixi-route
+      paths:
+        - /p
+
+
+- name: jaeger
+  url: http://jaeger:16686/jaeger
+  routes:
+    - name: jaeger-route
+      paths:
+        - /jaeger
+  plugins:
+    - name: basic-auth
+
+    
+consumers:
+    - username: Admin
+
+basicauth_credentials:
+    - consumer: Admin
+      username: admin
+      password: 
