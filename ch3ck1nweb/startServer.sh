@@ -1,5 +1,6 @@
 #!/bin/bash         
 
-export SERVER_PORT=3000
+source .env
+export SERVER_PORT=${SERVER_PORT}
 
 ./ch3ck1nweb

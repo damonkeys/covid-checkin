@@ -1,0 +1,244 @@
+version: "3.8"
+networks:
+    chckr_default:
+      external: false
+    # Maybe we should use this network to protect the databases from localhost
+    # database:
+    #   internal: true
+
+
+services:
+    admin:
+        image: chckr/admin:latest
+        container_name: chckr-admin
+        # ports:
+        #     - "19000:19000"
+        expose:
+            - "19000"
+        volumes: 
+            - ./logs:/logs
+            - ./pixi:/pixi
+        depends_on:
+            - "db-chckr"
+            - "db-checkins"
+            - "jaeger"
+        restart: always
+        networks:
+            - chckr_default
+        env_file:
+            - ../admin/.env
+            - ./env/${STAGE}/global.env
+        environment: 
+            DB_BIZ_HOST: db-chckr
+            DB_CHECKINS_HOST: db-checkins
+            DEEP_LINK_TO_BUSINESS_BY_CODE: ${BASE_URL}/checkin/
+
+
+    authx:
+        image: chckr/authx:latest
+        container_name: chckr-authx
+        # ports:
+        #     - "2000:2000"
+        expose:
+            - "2000"
+        volumes: 
+            - ./logs:/logs
+        depends_on:
+            - "db-chckr"
+            - "jaeger"
+        restart: always
+        networks:
+            - chckr_default
+        env_file:
+            - ../authx/.env
+            - ./env/${STAGE}/global.env
+        environment: 
+            DB_HOST: db-chckr
+            BASE_URL: ${BASE_URL}
+            ACTIVATION_URL: ${BASE_URL}/auth/activation/%s
+            ACTIVATION_STATE_URL: ${BASE_URL}/activation/%s
+    
+
+    biz:
+        image: chckr/biz:latest
+        container_name: chckr-biz
+        # ports:
+        #     - "4000:4000"
+        expose:
+            - "4000"
+        volumes: 
+            - ./logs:/logs
+        depends_on:
+            - "db-chckr"
+            - "jaeger"
+        restart: always
+        networks:
+            - chckr_default
+        env_file:
+            - ../biz/.env
+            - ./env/${STAGE}/global.env
+        environment: 
+            DB_HOST: db-chckr
+
+            
+    ch3ck1nweb:
+        image: chckr/ch3ck1nweb:latest
+        container_name: chckr-ch3ck1nweb
+        # ports:
+        #     - "3000:3000"
+        expose:
+            - "3000"
+        volumes: 
+            - ./logs:/logs
+        depends_on:
+            - "jaeger"
+            - "authx"
+            - "biz"
+            - "pixi"
+            - "checkins"
+        restart: always
+        networks:
+            - chckr_default
+        env_file:
+            - ../ch3ck1nweb/.env
+            - ./env/${STAGE}/global.env
+   
+
+    checkins:
+        image: chckr/checkins:latest
+        container_name: chckr-checkins
+        # ports:
+        #     - "6000:6000"
+        expose:
+            - "6000"
+        volumes: 
+            - ./logs:/logs
+        depends_on:
+            - "db-checkins"
+            - "jaeger"
+        restart: always
+        networks:
+            - chckr_default
+        env_file:
+            - ../checkins/.env
+            - ./env/${STAGE}/global.env
+        environment:
+            DB_HOST: db-checkins
+            DOMAIN_NAME: ${DOMAIN_NAME}
+
+
+    pixi:
+        image: chckr/pixi:latest
+        container_name: chckr-pixi
+        # ports:
+        #     - "5000:5000"
+        expose:
+            - "5000"
+        volumes: 
+            - ./logs:/logs
+            - ./pixi:/static
+        depends_on:
+            - "jaeger"
+        restart: always
+        networks:
+            - chckr_default
+        env_file:
+            - ../pixi/.env
+            - ./env/${STAGE}/global.env
+
+            
+    db-chckr:
+        image: mariadb:latest
+        container_name: chckr-db-chckr
+        hostname: db-chckr.docker
+        ports:
+            - "127.0.0.1:3306:3306/tcp"
+        expose:
+            - "3306"
+        volumes:
+            - ./mariadb-chckr:/var/lib/mysql
+        networks:
+            - chckr_default
+        environment:
+            MYSQL_ROOT_PASSWORD: 
+            MYSQL_DATABASE: chckr
+            MYSQL_USER: chckr_user
+            MYSQL_PASSWORD: 
+
+
+    db-checkins:
+        image: mariadb:latest
+        container_name: chckr-db-checkins
+        hostname: db-checkins.docker
+        ports:
+            - "127.0.0.1:3307:3306/tcp"
+        expose:
+            - "3306"
+        volumes:
+            - ./mariadb-checkins:/var/lib/mysql
+        networks:
+            - chckr_default
+        environment:
+            MYSQL_ROOT_PASSWORD: 
+            MYSQL_DATABASE: checkins
+            MYSQL_USER: checkins_user
+            MYSQL_PASSWORD: 
+    
+    jaeger:
+        image: jaegertracing/all-in-one:latest
+        container_name: chckr-jaeger
+        ports:
+            - 5775:5775/udp
+            - 6831:6831/udp
+            - 6832:6832/udp
+            - 5778:5778
+            - 16686:16686
+            - 14268:14268
+            - 9411:9411
+        environment: 
+            COLLECTOR_ZIPKIN_HTTP_PORT: 9411
+            QUERY_BASE_PATH: /jaeger
+        networks:
+            - chckr_default
+
+
+    kong:
+        image: kong:latest
+        container_name: chckr-kong
+        ports:
+            - 8000:8000
+            - 443:8443
+            - 127.0.0.1:8001:8001/tcp
+            - 127.0.0.1:8444:8444/tcp
+        volumes:
+            - ./kong/${STAGE}:/usr/local/kong/declarative
+        networks:
+            - chckr_default
+        healthcheck:
+            test: ["CMD", "kong", "health"]
+            interval: 10s
+            timeout: 10s
+            retries: 10
+        restart: on-failure
+        environment:
+            KONG_DATABASE: "off"
+            KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+            KONG_PROXY_ACCESS_LOG: /dev/stdout
+            KONG_ADMIN_ACCESS_LOG: /dev/stdout
+            KONG_PROXY_ERROR_LOG: /dev/stderr
+            KONG_ADMIN_ERROR_LOG: /dev/stderr
+            KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+
+
+    # KONGA - admin-ui for kong but I think we don't need it at the moment!
+    # konga:
+    #     image: pantsel/konga
+    #     container_name: chckr-konga
+    #     ports:
+    #         - 1337:1337
+    #     networks:
+    #         - chckr_default
+    #     links:
+    #         - kong:kong
+    #     environment: 
+    #         - TOKEN_SECRET={{somerandomstring}}

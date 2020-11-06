@@ -45,8 +45,6 @@ func main() {
 		os.Exit(-1)
 	}
 	serverConfig = configInterface.(ServerConfigStruct)
-	// Trace config
-	tracing.LogStruct(span, "config", serverConfig)
 
 	// Start webserver
 	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{

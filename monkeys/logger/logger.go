@@ -17,7 +17,6 @@ import (
 
 // Log-Config... maybe a todo to make it configurable
 const logLevel = log.DEBUG
-const logPath = "../logs/"
 
 // ANSI colors
 const white = "\033[37m"
@@ -28,11 +27,16 @@ const blue = "\033[94m"
 const lightwhite = "\033[97m"
 const cyan = "\033[36m"
 
-// ConfigureLogger do a consitient logger-configuration for all microservices
+// ConfigureLogger do a consistent logger-configuration for all microservices. If environment-varbiable LOG_PATH is set,
+// this will be the log-path. Otherwise it will be logged to ../logs/
 func ConfigureLogger(ctx context.Context, name string, e *echo.Echo) {
 	span := tracing.EnterWithContext(ctx)
 	defer span.Finish()
 
+	logPath := "../logs/"
+	if os.Getenv("LOG_PATH") != "" {
+		logPath = os.Getenv("LOG_PATH")
+	}
 	err := os.MkdirAll(logPath, 0755)
 	if err != nil {
 		fmt.Printf("Something went wrong during log directory initialisation: %s", err)

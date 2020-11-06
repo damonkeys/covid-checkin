@@ -33,6 +33,6 @@ func InitDatabase(dbConfig ConfigStruct) error {
 // the config parameters
 func getDatabasePath(dbConfig ConfigStruct) string {
 	return dbConfig.User + ":" + dbConfig.Password +
-		"@" + dbConfig.Server + "/" + dbConfig.Name +
+		"@(" + dbConfig.Server + ")/" + dbConfig.Name +
 		"?charset=utf8&parseTime=True&loc=Local"
 }

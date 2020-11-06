@@ -22,7 +22,12 @@
 **/dist
 
 # log file should be ignored
-logs
+*.log
+
+# Docker-data
+docker/mariadb-chckr/*
+docker/mariadb-checkins/*
+docker/pixi/qr/*
 
 # binaries
 admin/admin
@@ -34,6 +39,9 @@ service-gateway/service-gateway
 service-gateway/.cache/
 ch3ck1nweb/ch3ck1nweb
 **/**foo.*
-pixi/static/qr
+pixi/static/qr/*
 pixi/pixi
 biz/qr/cliqr/cliqr
+
+# keep empty directories
+!.gitkeep

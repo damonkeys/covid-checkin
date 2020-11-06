@@ -1,11 +1,12 @@
 #!/bin/bash         
 
-export SERVER_PORT=4000
+source .env
+export SERVER_PORT=${SERVER_PORT}
 
-export DB_HOST=""
-export DB_NAME="ch3ck1n"
-export DB_USER="ch3ck1n_user"
-export DB_PASSWORD="==>"
-export SESSION_SECRET="ThatsASessionStoreSecret"
+export DB_HOST=${DB_HOST}
+export DB_NAME=${DB_NAME}
+export DB_USER=${DB_USER}
+export DB_PASSWORD=${DB_PASSWORD}
+export SESSION_SECRET=${SESSION_SECRET}
 
 ./biz

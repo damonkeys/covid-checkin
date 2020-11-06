@@ -77,3 +77,25 @@ archives:
       - app/**
       - app/**/**
       - app/**/**/**
+
+dockers:
+  -
+    binaries:
+    - admin
+    image_templates:
+    - chckr/admin
+
+    # Path to the Dockerfile (from the project root).
+    dockerfile: Dockerfile
+
+    skip_push: true
+
+    extra_files:
+      - app/
+
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}-admin"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"

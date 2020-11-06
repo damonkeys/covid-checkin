@@ -41,7 +41,7 @@ type (
 )
 
 const sessionName = "_ch3ck1n_callback"
-const serverName = "business"
+const serverName = "biz"
 
 // serverConfig defines the configuration for auth
 var serverConfig ServerConfigStruct
@@ -55,7 +55,6 @@ func main() {
 	e := echo.New()
 	l.ConfigureLogger(ctx, serverName, e)
 	readEnvironmentConfig(ctx, e.Logger)
-	tracing.LogStruct(span, "serverConfig", serverConfig)
 
 	if err := database.InitDatabase(serverConfig.Database); err != nil {
 		e.Logger.Fatal(err)

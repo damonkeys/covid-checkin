@@ -76,3 +76,25 @@ archives:
       - startServer.sh
       - static/**
       - static/**/**
+
+dockers:
+  -
+    binaries:
+    - ch3ck1nweb
+    image_templates:
+    - chckr/ch3ck1nweb
+
+    # Path to the Dockerfile (from the project root).
+    dockerfile: Dockerfile
+
+    skip_push: true
+
+    extra_files:
+      - static/
+
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}-ch3ck1nweb"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
