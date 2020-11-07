@@ -11,16 +11,13 @@ import Logins from '../../components/Logins/index';
 import Account from '../../components/Account/index';
 import Business from '../../components/Business/index';
 import BusinessInfos from '../../components/BusinessInfos/index';
-import type { BusinessData } from '../../js/types';
-import CheckinForm from '../../components/CheckinForm/index.js';
+import type { BusinessProps } from '../../js/types';
+import UserForm from '../../components/UserForm/index.js';
 import { getSession } from '../../modules/session';
 import { useTranslation } from 'react-i18next';
 
-type BusinessViewProps = {
-    businessData: BusinessData
-}
 
-const BusinessView = (props: BusinessViewProps) => {
+const BusinessView = (props: BusinessProps) => {
     const [t] = useTranslation();
 
     if (props.businessData === null) {
@@ -47,7 +44,7 @@ const BusinessView = (props: BusinessViewProps) => {
                 (
                     <Block>
                         <Business businessData={props.businessData}></Business>
-                        <CheckinForm></CheckinForm>
+                        <UserForm businessData={props.businessData}></UserForm>
                     </Block>
                 )
             }

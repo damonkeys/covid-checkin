@@ -45,6 +45,22 @@
             }
         },
         {
+            "name": "checkins",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/checkins/",
+            "env": {
+                "SERVER_PORT":6000,
+                "DB_HOST":"",
+                "DB_NAME":"checkins",
+                "DB_USER":"checkins_user",
+                "DB_PASSWORD":"",
+                "SESSION_SECRET":"ThatsASessionStoreSecret",
+                "DOMAIN_NAME":"dev.checkin.chckr.de"
+            }
+        },
+        {
             "name": "admin",
             "type": "go",
             "request": "launch",

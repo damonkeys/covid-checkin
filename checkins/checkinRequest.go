@@ -45,6 +45,7 @@ func buildCheckinModel(e echo.Context) (*checkin.Checkin, error) {
 		tracing.LogError(span, err)
 		return nil, err
 	}
+
 	tracing.LogStruct(span, "checkin-request", checkinRequest)
 	checkin := &checkin.Checkin{
 		BusinessName:    checkinRequest.Business.Name,
@@ -57,18 +58,37 @@ func buildCheckinModel(e echo.Context) (*checkin.Checkin, error) {
 		UserCity:        checkinRequest.User.City,
 		UserCountry:     checkinRequest.User.Country,
 		Paper:           false,
+		UserRegistered:  false,
 		CheckedInAt:     time.Now(),
 	}
 	tracing.LogStruct(span, "checkin-model", checkin)
-	// get User-UUID from session-cookie, if user is logged in
+
+	lastCheckinCookie, err := readUserDataFromCookie(e)
+	// if no cookie we are happy and ignore that fact
+	if err == nil {
+		// if we find a cookie from last checkin we apply that userUUID to the new checkin for consistency
+		checkin.UserUUID = lastCheckinCookie.UserUUID
+	}
+
 	sess, err := session.Get("_ch3ck1n_session", e)
+	// if no session we are happy and ignore that fact (means the user hasn't logged in via authx yet)
 	if err == nil {
 		if sess.Values["userid"] != nil {
-			tracing.LogString(span, "Session", "User logged in, session available.")
-			checkin.UserUUID = sess.Values["userid"].(string)
-			tracing.LogString(span, "User-ID", checkin.UserUUID)
+			tracing.LogString(span, "Session", "User logged in, session available. I set a flag for this in the checkin data")
+			authxUserUUID := sess.Values["userid"].(string)
+			if authxUserUUID != "" {
+				checkin.UserRegistered = true
+			}
 		}
 	}
+
+	// store user-data from request in cookie for later checkins
+	err = storeUserDataToCookie(e, checkin)
+	if err != nil {
+		tracing.LogError(span, err)
+		return nil, err
+	}
+	tracing.LogString(span, "final User-UUID", checkin.UserUUID)
 	return checkin, nil
 }
 
@@ -89,12 +109,7 @@ func getCheckinRequestData(e echo.Context) (*checkinRequest, error) {
 		tracing.LogError(span, err)
 		return nil, err
 	}
-	// store user-data from request in cookie for later checkins
-	err = storeUserDataToCookie(e, checkinRequest.User)
-	if err != nil {
-		tracing.LogError(span, err)
-		return nil, err
-	}
+
 	return checkinRequest, nil
 }
 

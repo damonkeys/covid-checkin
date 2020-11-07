@@ -9,14 +9,12 @@ import {
     Toolbar
 } from 'framework7-react';
 import BusinessView from '../../components/BusinessView/businessView.js'
-import type { BusinessData } from '../../js/types';
+import type {BusinessProps } from '../../js/types';
 import { useTranslation } from 'react-i18next';
 
-type CheckinProps = {
-    businessData: BusinessData
-}
 
-const Checkin = (props: CheckinProps) => {
+
+const Checkin = (props: BusinessProps) => {
     const [t] = useTranslation();
     
     return (<Page colorTheme="pink">

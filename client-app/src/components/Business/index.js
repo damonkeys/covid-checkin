@@ -4,13 +4,8 @@ import {
     Block,
     BlockTitle
 } from 'framework7-react';
-import type { BusinessData } from '../../js/types';
 import { useTranslation } from 'react-i18next';
-
-
-type BusinessProps = {
-    businessData: BusinessData
-}
+import type { BusinessProps } from '../../js/types';
 
 const Business = (props: BusinessProps) => {
     const [t] = useTranslation();

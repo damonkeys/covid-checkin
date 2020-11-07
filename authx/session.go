@@ -28,8 +28,9 @@ import (
 // sessionOptions for session token
 var sessionOptions = sessions.Options{
 	Path:     "/",
-	MaxAge:   86400 * 7,
+	MaxAge:   2147483648, // https://stackoverflow.com/questions/3290424/set-a-cookie-to-never-expire#3290474
 	HttpOnly: true,
+	SameSite: http.SameSiteStrictMode,
 }
 
 // createSession cookies creates a new cookie and adds or find the user from known users
