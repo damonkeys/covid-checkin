@@ -1,8 +1,8 @@
 // checkHTTPError checks a failes server-response and throws an error.
-const checkHTTPError = (response) => {
+const checkHTTPError = (response): Promise<string> | Error => {
   if (response.ok) {
-    return response.json();
- } else {
+    return Promise.resolve(response.json());
+  } else {
     throw Error(response.status);
   }
 };

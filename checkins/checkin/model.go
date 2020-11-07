@@ -14,10 +14,10 @@ type (
 	Checkin struct {
 		gorm.Model      `json:"-"`
 		UUID            string    `json:"uuid" gorm:"type:varchar(36);unique_index"`
-		BusinessUUID    string    `json:"-" gorm:"type:varchar(36)"`
+		BusinessUUID    string    `json:"businessUUID" gorm:"type:varchar(36)"`
 		BusinessName    string    `json:"businessName" gorm:"type:varchar(50)"`
 		BusinessAddress string    `json:"businessAddress" gorm:"type:varchar(300)"`
-		UserUUID        string    `json:"-" gorm:"type:varchar(36)"`
+		UserUUID        string    `json:"userUUID" gorm:"type:varchar(36)"`
 		UserName        string    `json:"username" gorm:"type:varchar(500)"`
 		UserPhone       string    `json:"userphone" gorm:"type:varchar(100)"`
 		UserEmail       string    `json:"useremail" gorm:"type:varchar(255)"`

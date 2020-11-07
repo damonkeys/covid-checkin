@@ -60,6 +60,32 @@
     "checkin": {
         "initialInfo": "Bitte chckr code eingeben",
         "invalidCode": "Sorry. Vertippt? Code falsch",
-        "validCode": "Ja das ist ein chckr code! Los gehts"
+        "validCode": "Ja das ist ein chckr code! Los gehts",
+        "userForm": {
+            "title": "Jetzt bei {{bizname}} einchecken (Daten hinterlegen)",
+            "user": {
+                "placeholder": "Hier eintragen",
+                "name": "Vor- und Nachname",
+                "street": "Straße und Hausnummer",
+                "city": "Postleitzahl und Stadt",
+                "email": "E-Mail",
+                "phone": "Telefon"
+            },
+            "cta": "Jetzt hier einchecken",
+            "notification": {
+                "success": {
+                    "title": "Du hast es geschafft!",
+                    "titleRightText": "MEGA",
+                    "subtitle": "Checkin verarbeitet",
+                    "text": "Danke für's kümmern"
+                },
+                "error": {
+                    "title": "Entschuldigung...",
+                    "titleRightText": "FEHLER",
+                    "subtitle": "Dein checkin wurde nicht verarbeitet",
+                    "text": "Bitte versuche es später nochmal"
+                }
+            }
+        }
     }
 }

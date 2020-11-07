@@ -60,6 +60,32 @@
     "checkin": {
         "initialInfo": "Please type the chckr code",
         "invalidCode": "Sorry. Typo? Code invalid",
-        "validCode": "That's a chckr code! Go ahead"
+        "validCode": "That's a chckr code! Go ahead",
+        "userForm": {
+            "title": "Checkin now at {{bizname}} (Store your data)",
+            "user": {
+                "placeholder": "Type here",
+                "name": "Your first and last name",
+                "street": "Street and house number",
+                "city": "Your zip code and city",
+                "email": "Email",
+                "phone": "Phone number"
+            },
+            "cta":"Checkin at this place now",
+            "notification": {
+                "success": {
+                    "title": "You did it!",
+                    "titleRightText": "NICE",
+                    "subtitle": "Checkin processed",
+                    "text": "Thank you for caring"
+                },
+                "error": {
+                    "title": "We are sorry...",
+                    "titleRightText": "ERROR",
+                    "subtitle": "We couldn't process your checkin",
+                    "text": "Please try it again."
+                }
+            }
+        }
     }
 }
