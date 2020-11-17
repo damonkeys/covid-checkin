@@ -42,13 +42,13 @@ For the first time starting the docker-composer envrionment there will be an ins
 
 ```
 cd authx/dbmate
-./run.sh chckr up
+./run.sh up
 
 cd ../../biz/dbmate
-./run.sh chckr up
+./run.sh up
 
 cd ../../checkins/dbmate
-./run.sh checkins up
+./run.sh up
 ```
 
 ## Second time ;-)

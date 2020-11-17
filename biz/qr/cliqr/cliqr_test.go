@@ -24,7 +24,7 @@ func TestSVGSwitch(t *testing.T) {
 	}
 	c := flags.createPngOrSVGCall()
 	cfh := c.Handler.(*CliqrFileHandler)
-	if strings.Contains(cfh.pathAndFileName, "qr.svg") {
+	if !strings.Contains(cfh.pathAndFileName, "qr.svg") {
 		t.Fatal("Did not find .svg filename in call created with svg flags.")
 	}
 }
