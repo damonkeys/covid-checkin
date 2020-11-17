@@ -29,6 +29,7 @@ services:
             - ../admin/.env
             - ./env/${STAGE}/global.env
         environment: 
+            QR_CODE_FILE_PATH: /pixi/qr
             DB_BIZ_HOST: db-chckr
             DB_CHECKINS_HOST: db-checkins
             DEEP_LINK_TO_BUSINESS_BY_CODE: ${BASE_URL}/checkin/
