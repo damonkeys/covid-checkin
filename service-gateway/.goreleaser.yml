@@ -1,4 +1,5 @@
 # .goreleaser.yml
+project_name: service-gateway
 builds:
   # You can have multiple builds defined as a yaml list
   -

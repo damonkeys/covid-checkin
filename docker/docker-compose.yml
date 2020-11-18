@@ -11,8 +11,8 @@ services:
     admin:
         image: chckr/admin:latest
         container_name: chckr-admin
-        # ports:
-        #     - "19000:19000"
+        ports:
+            - "19000:19000"
         expose:
             - "19000"
         volumes: 
@@ -207,7 +207,7 @@ services:
         image: kong:latest
         container_name: chckr-kong
         ports:
-            - 8000:8000
+            #- 80:8000
             - 443:8443
             - 127.0.0.1:8001:8001/tcp
             - 127.0.0.1:8444:8444/tcp
@@ -232,14 +232,14 @@ services:
 
 
     # KONGA - admin-ui for kong but I think we don't need it at the moment!
-    # konga:
-    #     image: pantsel/konga
-    #     container_name: chckr-konga
-    #     ports:
-    #         - 1337:1337
-    #     networks:
-    #         - chckr_default
-    #     links:
-    #         - kong:kong
-    #     environment: 
-    #         - TOKEN_SECRET={{somerandomstring}}
+    konga:
+        image: pantsel/konga
+        container_name: chckr-konga
+        ports:
+            - 1337:1337
+        networks:
+            - chckr_default
+        links:
+            - kong:kong
+        environment: 
+            - TOKEN_SECRET={{somerandomstring}}
