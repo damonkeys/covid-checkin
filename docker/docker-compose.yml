@@ -11,8 +11,8 @@ services:
     admin:
         image: chckr/admin:latest
         container_name: chckr-admin
-        ports:
-            - "19000:19000"
+        # ports:
+        #     - "19000:19000"
         expose:
             - "19000"
         volumes: 
