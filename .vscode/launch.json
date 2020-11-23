@@ -9,13 +9,13 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "${workspaceFolder}/auth/",
+            "program": "${workspaceFolder}/authx/",
             "env": {
                 "SERVER_PORT":2000,
-                "DB_HOST":"",
-                "DB_NAME":"ch3ck1n",
-                "DB_USER":"ch3ck1n_user",
-                "DB_PASSWORD":"==>",
+                "DB_HOST":"localhost",
+                "DB_NAME":"chckr",
+                "DB_USER":"chckr_user",
+                "DB_PASSWORD":"",
                 "SESSION_SECRET":"ThatsASessionStoreSecret",
                 "BASE_URL":"https://dev.checkin.chckr.de",
                 "P_FACEBOOK_KEY":"",
@@ -67,11 +67,16 @@
             "mode": "debug",
             "program": "${workspaceFolder}/admin/",
             "env": {
-                "SERVER_PORT":"19000",
-                "DB_HOST":"",
-                "DB_NAME":"ch3ck1n",
-                "DB_USER":"ch3ck1n_user",
-                "DB_PASSWORD":"==>",
+                "PORT": 19000,
+                "DB_BIZ_HOST": "localhost",
+                "DB_BIZ_NAME":"chckr",
+                "DB_BIZ_USER":"chckr_user",
+                "DB_BIZ_PASSWORD": "",
+                
+                "DB_CHECKINS_HOST": "localhost",
+                "DB_CHECKINS_NAME": "checkins",
+                "DB_CHECKINS_USER": "checkins_user",
+                "DB_CHECKINS_PASSWORD": "",
                 "QR_CODE_FILE_PATH":"../pixi/static/qr"
             }
         }

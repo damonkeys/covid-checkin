@@ -37,6 +37,7 @@ const FindBusinessByCheckrCodeForm = (props: FindBusinessByCheckrCodeFormProps) 
             .then((response: BusinessData) => {
                 setInfoMessage(t("checkin.validCode"));
                 response.formattedAddress = formatAddress(response);
+                response.fetched = true;
                 setBusinessData(response);
             })
             .catch((error: number) => {

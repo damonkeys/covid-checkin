@@ -30,7 +30,7 @@ services:
       paths:
         - /biz
 
-  
+
 - name: ch3ck1nweb
   #url: http://ch3ck1nweb:3000
   url: http://host.docker.internal:3000
@@ -38,7 +38,9 @@ services:
     - name: ch3ck1nweb-route
       paths:
         - /
-
+        - /checkin
+        - /activation
+        
 
 - name: checkins
   url: http://checkins:6000

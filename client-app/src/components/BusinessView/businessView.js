@@ -11,14 +11,15 @@ import Logins from '../../components/Logins/index';
 import Account from '../../components/Account/index';
 import Business from '../../components/Business/index';
 import BusinessInfos from '../../components/BusinessInfos/index';
-import type { BusinessProps } from '../../js/types';
+import type { BusinessProps, Session } from '../../js/types';
 import UserForm from '../../components/UserForm/index.js';
-import { getSession } from '../../modules/session';
+import { useSession } from '../../modules/session';
 import { useTranslation } from 'react-i18next';
 
 
 const BusinessView = (props: BusinessProps) => {
     const [t] = useTranslation();
+    const session: Session = useSession();
 
     if (props.businessData === null) {
         return <Block className="text-align-center">
@@ -26,7 +27,6 @@ const BusinessView = (props: BusinessProps) => {
         </Block>
     }
 
-    const session = getSession();
 
     return <Tabs>
         <Tab id="checkin-ch3ck1n" tabActive>
@@ -40,7 +40,7 @@ const BusinessView = (props: BusinessProps) => {
                 ) : null
             }
 
-            {!session.connected ? null :
+            {!session.connected  || !props.businessData.fetched ? null :
                 (
                     <Block>
                         <Business businessData={props.businessData}></Business>
@@ -51,7 +51,7 @@ const BusinessView = (props: BusinessProps) => {
         </Tab>
 
         <Tab id="checkin-infos">
-            {!session.connected ? null :
+            {!session.connected || !props.businessData.fetched ? null :
                 (
                     <BusinessInfos businessData={props.businessData}></BusinessInfos>
                 )

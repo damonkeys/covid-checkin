@@ -1,42 +1,51 @@
 // @flow
+import { useState, useEffect } from 'react';
 import cookie from 'react-cookies'
 import type { Session } from '../../js/types';
 
 
-const state = {
+const initialState: Session = {
     useronline: false,
     username: '',
     avatarurl: '',
-    connected: false
+    connected: false,
 };
 
-const updateSession = (): void => {
-    fetch('/auth/status', {
-        method: 'GET'
-    })
-        .then((response) => response.json())
-        .then(async (json) => {
-            state.useronline = json.useronline;
-            state.username = json.username;
-            state.avatarurl = json.avatarurl;
-            state.connected = true;
-        });
-    if (state.useronline) {
-        cookie.save('lastUser', state.username, { path: '/' });
-    }
+const useSession = (): Session => {
+    const [session: Session, setSession] = useState(initialState);
+
+    useEffect(() => {
+        if (session.connected) {
+            return;
+        }
+        // Session not yet connected: try to get the auth-status from server and build session-object
+        fetch('/auth/status', {
+            method: 'GET'
+        })
+            .then((response) => response.json())
+            .then(async (json) => {
+                setSession({
+                    useronline: json.useronline,
+                    username: json.username,
+                    avatarurl: json.avatarurl,
+                    connected: true
+                })
+                
+            });
+        if (session.useronline) {
+            cookie.save('lastUser', session.username, { path: '/' });
+        }
+    });
+
+    // const isUserOnline = (): boolean => {
+    //     return session.useronline;
+    // }
+
+    // const isSessionConnected = (): boolean => {
+    //     return session.connected;
+    // }
+
+    return session;
 };
 
-const isUserOnline = (): boolean => {
-    return state.useronline;
-}
-
-const isSessionConnected = (): boolean => {
-    return state.connected;
-}
-
-const getSession = () :Session => {
-    return state;
-}
-
-
-export { updateSession, isUserOnline, isSessionConnected, getSession };
+export { useSession };

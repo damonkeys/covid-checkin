@@ -1,9 +1,9 @@
 // @flow
 type Session = {
-  useronline?: boolean,
+  useronline: boolean,
   username?: string,
   avatarurl?: string,
-  connected?: boolean
+  connected: boolean
 }
 
 type BusinessData = {
@@ -14,7 +14,8 @@ type BusinessData = {
   zip?: string,
   city?: string,
   formattedAddress?: string,
-  businessInfos?: BusinessInfo[]
+  businessInfos?: BusinessInfo[],
+  fetched?: boolean
 }
 
 type BusinessInfo = {
@@ -45,5 +46,14 @@ type BusinessProps = {
   businessData: BusinessData
 }
 
+type CheckinProps = {
+  businessData: BusinessData,
+  chckrCode: string,
+  $f7route: Object,
+  $f7router: Object,
+  f7route: Object,
+  f7router: Object
+}
 
-export type { BusinessData, BusinessInfo, Session, UserDataResponse, BusinessProps};
+
+export type { BusinessData, BusinessInfo, Session, UserDataResponse, BusinessProps, CheckinProps };

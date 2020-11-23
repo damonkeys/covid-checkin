@@ -79,6 +79,11 @@ const UserForm = (props: BusinessProps) => {
             });
     }, []);
 
+    // hide checkin user-form if businessData isn't available
+    if (!props.businessData.uuid) {
+        return <div></div>;
+    }
+
     return <List form id="userForm" formStoreData={true}>
         <BlockTitle>{t("checkin.userForm.title", { bizname: businessName })}</BlockTitle>
         <ListInput
