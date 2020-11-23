@@ -27,6 +27,7 @@
 # Docker-data
 docker/mariadb-chckr/*
 docker/mariadb-checkins/*
+docker/pixi/*
 docker/pixi/qr/*
 
 # binaries

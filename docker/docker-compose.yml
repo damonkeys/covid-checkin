@@ -33,6 +33,7 @@ services:
             DB_BIZ_HOST: db-chckr
             DB_CHECKINS_HOST: db-checkins
             DEEP_LINK_TO_BUSINESS_BY_CODE: ${BASE_URL}/checkin/
+            QR_CODE_FILE_PATH: /pixi/qr
 
 
     authx:
@@ -232,14 +233,14 @@ services:
 
 
     # KONGA - admin-ui for kong but I think we don't need it at the moment!
-    konga:
-        image: pantsel/konga
-        container_name: chckr-konga
-        ports:
-            - 1337:1337
-        networks:
-            - chckr_default
-        links:
-            - kong:kong
-        environment: 
-            - TOKEN_SECRET={{somerandomstring}}
+    # konga:
+    #     image: pantsel/konga
+    #     container_name: chckr-konga
+    #     ports:
+    #         - 1337:1337
+    #     networks:
+    #         - chckr_default
+    #     links:
+    #         - kong:kong
+    #     environment: 
+    #         - TOKEN_SECRET={{somerandomstring}}

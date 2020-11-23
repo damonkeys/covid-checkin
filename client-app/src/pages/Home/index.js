@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     Block,
     BlockTitle,
@@ -17,18 +17,11 @@ import i18n from '../../components/i18n.js';
 import Logins from '../../components/Logins/index';
 import FindBusinessByCheckrCodeForm from '../../components/FindBusinessByCheckrCodeForm/index.js';
 import Account from '../../components/Account';
-import { updateSession, getSession } from '../../modules/session';
-;
+import { useSession } from '../../modules/session';
+import type { Session } from '../../js/types';
 
 const Home = () => {
-
-    const [session: Session, setSession] = useState({});
-
-    useEffect(() => {
-        updateSession();
-        setSession(getSession());
-    }, [session]);
-
+    const session: Session = useSession();
     return (<Page colorTheme="pink">
         <Navbar color="pink" className="navbar-main">
             <NavLeft>
@@ -50,7 +43,7 @@ const Home = () => {
         <Tabs swipeable>
             <Tab id="home-ch3ck1n" tabActive>
                 <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
-                {!session.useronline ? null :
+                { session.useronline || !session.connected ? null :
                     (
                         <Block className="text-align-center">
                             {i18n.t('signin.explanation-short')}
@@ -62,11 +55,7 @@ const Home = () => {
             </Tab>
 
             <Tab id="home-account">
-                {session.useronline ? null :
-                    (
-                        <Account session={session}></Account>
-                    )
-                }
+                <Account session={session}></Account>
             </Tab>
         </Tabs>
     </Page>
