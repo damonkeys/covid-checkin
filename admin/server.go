@@ -13,6 +13,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
+	authx "github.com/damonkeys/ch3ck1n/authx/models"
 	biz "github.com/damonkeys/ch3ck1n/biz/business"
 	"github.com/damonkeys/ch3ck1n/checkins/checkin"
 	"github.com/damonkeys/ch3ck1n/monkeys/database"
@@ -79,9 +80,11 @@ func addBizAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 
 	Admin := admin.New(&admin.AdminConfig{DB: db})
 	Admin.MountTo("/admin/biz", mux)
+	// Remove CSRF-check for working behind Kong
+	Admin.GetRouter().GetMiddleware("csrf_check").Handler = func(context *admin.Context, middleware *admin.Middleware) { middleware.Next(context) }
 
 	// Create resources from GORM-backend model
-	businesses := Admin.AddResource(&biz.Business{})
+	businesses := Admin.AddResource(&biz.Business{}, &admin.Config{Menu: []string{"Biz"}})
 	businesses.NewAttrs("-UUID")
 	businessInfoMeta := businesses.Meta(&admin.Meta{Name: "BusinessInfos"})
 	businessInfoResource := businessInfoMeta.Resource
@@ -89,9 +92,16 @@ func addBizAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 	businessInfoResource.Meta(&admin.Meta{Name: "Description", Type: "rich_editor"})
 	addDefaultScopes(c, businesses)
 
-	businessInfos := Admin.AddResource(&biz.BusinessInfo{})
+	businessInfos := Admin.AddResource(&biz.BusinessInfo{}, &admin.Config{Menu: []string{"Biz"}})
 	businessInfos.NewAttrs("-UUID")
 	addDefaultScopes(c, businessInfos)
+
+	users := Admin.AddResource(&authx.User{}, &admin.Config{Menu: []string{"Authentications"}})
+	addDefaultScopes(c, users)
+
+	providers := Admin.AddResource(&authx.Provider{}, &admin.Config{Menu: []string{"Authentications"}})
+	addDefaultScopes(c, providers)
+
 	return db
 }
 
@@ -107,6 +117,8 @@ func addCheckinsAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 
 	Admin := admin.New(&admin.AdminConfig{DB: db})
 	Admin.MountTo("/admin/checkins", mux)
+	// Remove CSRF-check for working behind Kong
+	Admin.GetRouter().GetMiddleware("csrf_check").Handler = func(context *admin.Context, middleware *admin.Middleware) { middleware.Next(context) }
 
 	// Create resources from GORM-backend model
 	checkins := Admin.AddResource(&checkin.Checkin{})
