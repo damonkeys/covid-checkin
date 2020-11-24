@@ -32,7 +32,7 @@ const UserForm = (props: BusinessProps) => {
         const formData = f7.form.convertToData('#userForm');
         f7.form.storeFormData('#userForm', formData);
         const { name, street, city, email, phone } = formData;
-        fetch('c/checkin', {
+        fetch('/c/checkin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
