@@ -1,0 +1,31 @@
+name: deploy
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: GoReleaser Install
+      # You may pin to the exact commit or the version.
+      # uses: goreleaser/goreleaser-action@499c61b7c56d4c281b7120dcc74f130e5b0b9a18
+      uses: goreleaser/goreleaser-action@v2.3.0
+      with:
+        # Just install GoReleaser
+        install-only: true
+        
+    - name: Yarn CLI
+      # You may pin to the exact commit or the version.
+      # uses: CultureHQ/actions-yarn@661c6f3a66041c2432bcfb78096b9207304614c8
+      uses: CultureHQ/actions-yarn@v1.0.1
+    
+    - name: git-bash
+      # You may pin to the exact commit or the version.
+      # uses: pkg-src/github-action-git-bash@d7e3f57b86fcf5d919a5ba685d459583735b7611
+      uses: pkg-src/github-action-git-bash@v1.1
+      with:
+        args: 'bash -c "cd docker; ./buildAll.sh"'
