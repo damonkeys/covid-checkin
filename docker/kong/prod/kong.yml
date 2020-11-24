@@ -61,7 +61,17 @@ services:
   plugins:
     - name: basic-auth
 
+
+- name: acme-dummy
+  url: http://127.0.0.1:65535
+  routes:
+    - name: acme-dummy
+      protocols:
+        - http
+      paths:
+        - /.well-known/acme-challenge
     
+
 consumers:
     - username: Admin
 
@@ -69,3 +79,13 @@ basicauth_credentials:
     - consumer: Admin
       username: admin
       password: 
+
+
+plugins:
+  - name: acme
+    enabled: true
+    config:
+      account_email: info@monkeycash.io
+      domains:
+        - "*.monkeycash.io"
+      tos_accepted: true
