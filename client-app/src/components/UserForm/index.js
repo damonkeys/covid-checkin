@@ -30,6 +30,7 @@ const UserForm = (props: BusinessProps) => {
     };
     const saveCheckin = (e: any) => {
         const formData = f7.form.convertToData('#userForm');
+        f7.form.storeFormData('#userForm', formData);
         const { name, street, city, email, phone } = formData;
         fetch('c/checkin', {
             method: 'POST',
@@ -60,7 +61,12 @@ const UserForm = (props: BusinessProps) => {
     };
 
     useEffect(() => {
-        fetch('c/userdata', {
+        const formData =  f7.form.convertToData('f7form-userForm');// dont ask why this is the name. I don't know.
+        f7.form.fillFromData('#userForm',formData);
+    });
+
+    useEffect(() => {
+        fetch('/c/userdata', {
             method: 'GET'
         })
             .then(response => checkHTTPError(response)) //TODO serverside -> alerting
