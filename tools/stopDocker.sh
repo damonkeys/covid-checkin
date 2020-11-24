@@ -9,9 +9,3 @@ fi
 
 cd ../docker
 docker-compose -p chckr --env-file ./env/$1/.env down
-
-if [ $1 = 'prod' ]
-then
-    cd ../tools
-    ./hosts.sh remove
-fi

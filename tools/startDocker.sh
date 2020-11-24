@@ -16,9 +16,3 @@ then
 fi
 
 docker-compose -p chckr --env-file ./env/$1/.env up -d
-
-if [ "$1" = "prod" ]
-then
-    cd ../tools
-    ./hosts.sh add
-fi
