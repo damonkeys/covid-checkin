@@ -4,4 +4,16 @@
 ./buildDockerImage.sh biz
 ./buildDockerImage.sh checkins
 ./buildDockerImage.sh pixi
-cd ../client-app/; yarn build; cd ../docker; ./buildDockerImage.sh ch3ck1nweb
+
+# Cleanup ch3ck1nweb-static-folder
+cd ../ch3ck1nweb
+rm -Rf static/
+mkdir static
+
+# Build yarn app and copy all static files
+cd ../client-app/
+yarn build
+cp -R build/* ../ch3ck1nweb/static/
+
+cd ../docker
+./buildDockerImage.sh ch3ck1nweb

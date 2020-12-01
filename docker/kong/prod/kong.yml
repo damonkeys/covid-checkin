@@ -34,7 +34,9 @@ services:
     - name: ch3ck1nweb-route
       paths:
         - /
-
+        - /checkin
+        - /activation
+        
 
 - name: checkins
   url: http://checkins:6000

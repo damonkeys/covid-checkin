@@ -3,7 +3,7 @@ All microservices are dockerized. You can start the whole development-environmen
 servers, app and all other needed servers like MariaDB and KONG.
 
 ## First time
-Starting the docker environment for the first time you have to build all Docker Images before. To build an image of a golang-server will do goreleaser which builds the binary before.
+Starting the docker environment for the first time you have to build all Docker Images before.
 
 In the tools-folder you find a script for starting the docker-environment called `startDocker.sh`. Call this command at the first time to build the whole environment and start all containers.
 
