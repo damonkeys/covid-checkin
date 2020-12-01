@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3"
 networks:
     chckr_default:
       external: false
@@ -9,7 +9,7 @@ networks:
 
 services:
     admin:
-        image: chckr/admin:latest
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/admin:latest
         container_name: chckr-admin
         # ports:
         #     - "19000:19000"
@@ -37,7 +37,7 @@ services:
 
 
     authx:
-        image: chckr/authx:latest
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/authx:latest
         container_name: chckr-authx
         # ports:
         #     - "2000:2000"
@@ -62,7 +62,7 @@ services:
     
 
     biz:
-        image: chckr/biz:latest
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/biz:latest
         container_name: chckr-biz
         # ports:
         #     - "4000:4000"
@@ -84,7 +84,7 @@ services:
 
             
     ch3ck1nweb:
-        image: chckr/ch3ck1nweb:latest
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/ch3ck1nweb:latest
         container_name: chckr-ch3ck1nweb
         # ports:
         #     - "3000:3000"
@@ -107,7 +107,7 @@ services:
    
 
     checkins:
-        image: chckr/checkins:latest
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/checkins:latest
         container_name: chckr-checkins
         # ports:
         #     - "6000:6000"
@@ -130,7 +130,7 @@ services:
 
 
     pixi:
-        image: chckr/pixi:latest
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/pixi:latest
         container_name: chckr-pixi
         # ports:
         #     - "5000:5000"

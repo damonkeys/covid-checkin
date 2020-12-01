@@ -1,0 +1,102 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@master
+
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.15
+        
+
+    - name: Cache Go modules
+      uses: actions/cache@v2
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
+
+    - name: Docker Login
+      run: docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_SERVER }}
+
+
+  ########### ch3ck1nweb ######################
+    - name: Install yarn CLI
+      #uses: CultureHQ/actions-yarn@v1.0.1
+      run: sudo apt-get update; sudo apt-get install yarn
+
+
+    - name: Build app with yarn
+      run: cd client-app; yarn install; yarn build; ls -la build; cd ..
+
+
+    - name: Copy client-app build
+      run: cd ch3ck1nweb; rm -Rf static; mkdir static; cp -R ../client-app/build/* ./static/; cd ..
+
+    - name: ch3ck1nweb Build
+      run: cd ch3ck1nweb; go build
+
+
+    - name: ch3ck1nweb Docker Build & Push to registry
+      run: cd ch3ck1nweb; docker build -t chckr/ch3ck1nweb -t ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb
+        
+  
+########### admin ######################
+    - name: admin Build
+      run: cd admin; go build
+
+
+    - name: admin Docker Build & Push to registry
+      run: cd admin; docker build -t chckr/admin -t ${{ secrets.REGISTRY_SERVER }}/chckr/admin .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/admin
+
+
+
+########### authx ######################
+    - name: authx Build
+      run: cd authx; go build
+
+
+    - name: authx Docker Build & Push to registry
+      run: cd authx; docker build -t chckr/authx -t ${{ secrets.REGISTRY_SERVER }}/chckr/authx .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/authx
+
+
+
+########### biz ######################
+    - name: biz Build
+      run: cd biz; go build
+
+
+    - name: biz Docker Build & Push to registry
+      run: cd biz; docker build -t chckr/biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/biz
+
+
+
+########### checkins ######################
+    - name: checkins Build
+      run: cd checkins; go build
+
+
+    - name: checkins Docker Build & Push to registry
+      run: cd checkins; docker build -t chckr/checkins -t ${{ secrets.REGISTRY_SERVER }}/chckr/checkins .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/checkins
+
+
+
+########### pixi ######################
+    - name: pixi Build
+      run: cd pixi; go build
+
+
+    - name: pixi Docker Build & Push to registry
+      run: cd pixi; docker build -t chckr/pixi -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/pixi
