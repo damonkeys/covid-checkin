@@ -18,7 +18,7 @@ export default class extends React.Component {
     this.state = {
       // Framework7 Parameters
       f7params: {
-        name: 'ch3ck1n', // App name
+        name: 'chckr', // App name
         theme: 'auto', // Automatic theme detection
 
 
@@ -29,7 +29,7 @@ export default class extends React.Component {
         //
         // IMPORTANT COMMENT:
         // service-worker.js uses precacheAndRoute. We have to configure it with URL outside of the app.
-        // With service-worker.js included we now have the problem to a not working app. External ch3ck1n-calls
+        // With service-worker.js included we now have the problem to a not working app. External chckr-calls
         // like connecting the auth-server doesn't work.
         // For more informations: https://developers.google.com/web/tools/workbox/modules/workbox-precaching#clean_urls 
         //

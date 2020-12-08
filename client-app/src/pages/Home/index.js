@@ -2,7 +2,6 @@
 import React from 'react';
 import {
     Block,
-    BlockTitle,
     Link,
     Navbar,
     NavLeft,
@@ -17,6 +16,7 @@ import i18n from '../../components/i18n.js';
 import Logins from '../../components/Logins/index';
 import FindBusinessByCheckrCodeForm from '../../components/FindBusinessByCheckrCodeForm/index.js';
 import Account from '../../components/Account';
+import Logo from '../../components/Logo';
 import { useSession } from '../../modules/session';
 import type { Session } from '../../js/types';
 
@@ -36,13 +36,16 @@ const Home = () => {
         </Navbar>
 
         <Toolbar tabbar labels bottom>
-            <Link tabLink="#home-ch3ck1n" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>ch3ck1n</Link>
+            <Link tabLink="#home-chckr" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>chckr</Link>
             <Link tabLink="#home-account" iconIos="f7:person_crop_circle" iconAurora="f7:person_crop_circle" iconMd="material:account_circle">Account</Link>
         </Toolbar>
 
         <Tabs swipeable>
-            <Tab id="home-ch3ck1n" tabActive>
-                <BlockTitle large className="text-align-center">{i18n.t('basic.appname')}</BlockTitle>
+            <Tab id="home-chckr" tabActive>
+                <Block>
+                    <Logo direction="horizontal" />
+                </Block>
+  
                 { session.useronline || !session.connected ? null :
                     (
                         <Block className="text-align-center">

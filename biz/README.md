@@ -1,4 +1,4 @@
-# Biz - Business-Server for all known businesses in ch3ck1n
+# Biz - Business-Server for all known businesses in chckr
 
 ## Environment variables
 The server uses environment variables. If they are not set the server won't start. It expects the following environment variables:

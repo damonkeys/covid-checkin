@@ -69,11 +69,11 @@ const Checkin = (props: CheckinProps) => {
 
       <Toolbar tabbar labels bottom>
         <Link
-          tabLink="#checkin-ch3ck1n"
+          tabLink="#checkin-chckr"
           iconIos="f7:checkmark_shield"
           iconAurora="f7:checkmark_shield"
           iconMd="material:verified_user"
-          tabLinkActive>ch3ck1n</Link>
+          tabLinkActive>chckr</Link>
         <Link
           tabLink="#checkin-infos"
           iconIos="f7:info_circle"

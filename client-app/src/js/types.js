@@ -55,5 +55,10 @@ type CheckinProps = {
   f7router: Object
 }
 
+type LogoProps = {
+  plain?: boolean,
+  direction?: string
+}
 
-export type { BusinessData, BusinessInfo, Session, UserDataResponse, BusinessProps, CheckinProps };
+
+export type { BusinessData, BusinessInfo, Session, UserDataResponse, BusinessProps, CheckinProps, LogoProps };

@@ -1,6 +1,7 @@
     // @flow
     import React, { useState } from 'react';
     import { Page, Navbar, Block, Button, Popup, NavRight, Link, Card, CardHeader, CardContent, List, ListInput } from 'framework7-react';
+    import Logo from '../../components/Logo';
     import i18n from '../i18n';
 
     type Props = {
@@ -54,6 +55,9 @@
 
         return <Page colorTheme="pink">
             <Navbar color="pink" title={i18n.t(fetchI18NKey('head'))} />
+            <Block>
+                <Logo direction="horizontal" />
+            </Block>
             <Block strong>
                 <h2>{i18n.t(fetchI18NKey('title'))}</h2>
                 <h3>{i18n.t(fetchI18NKey('text'))}</h3>

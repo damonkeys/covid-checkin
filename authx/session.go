@@ -39,7 +39,7 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 	defer span.Finish()
 
 	// Save in session
-	sess, _ := session.Get("_ch3ck1n_session", c)
+	sess, _ := session.Get("_chckr_session", c)
 	sess.Options = &sessionOptions
 
 	c.Logger().Debugf("email from goth-user: %s", user.Email)
@@ -57,8 +57,8 @@ func createNewSessionCookie(c echo.Context, user goth.User) error {
 			return err
 		}
 	}
-	c.Logger().Debugf("ch3ck1n-user with email [%s] found", sessionUser.Email)
-	tracing.LogStruct(span, "ch3ck1n-user", sessionUser)
+	c.Logger().Debugf("chckr-user with email [%s] found", sessionUser.Email)
+	tracing.LogStruct(span, "chckr-user", sessionUser)
 
 	// existing user
 	// does it have a new provider?
@@ -186,7 +186,7 @@ func removeSessionCookie(c echo.Context) error {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	sess, _ := session.Get("_ch3ck1n_session", c)
+	sess, _ := session.Get("_chckr_session", c)
 	sess.Options.MaxAge = -1
 	err := sess.Save(c.Request(), c.Response())
 	return err
@@ -197,7 +197,7 @@ func findSessionUser(c echo.Context) (*models.User, error) {
 	span := tracing.Enter(c)
 	defer span.Finish()
 
-	sess, err := session.Get("_ch3ck1n_session", c)
+	sess, err := session.Get("_chckr_session", c)
 	if err != nil || len(sess.Values) == 0 {
 		// session not valid
 		sessions.NewCookie("userid", "", sess.Options)

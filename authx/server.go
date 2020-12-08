@@ -221,7 +221,7 @@ func (userInfo *UserInfo) createAndStoreActivationTokenForUser(c echo.Context) e
 
 }
 
-const sessionName = "_ch3ck1n_callback"
+const sessionName = "_chckr_callback"
 
 // ServerConfig defines the configuration for auth
 var serverConfig ServerConfigStruct
