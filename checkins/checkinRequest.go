@@ -70,7 +70,7 @@ func buildCheckinModel(e echo.Context) (*checkin.Checkin, error) {
 		checkin.UserUUID = lastCheckinCookie.UserUUID
 	}
 
-	sess, err := session.Get("_ch3ck1n_session", e)
+	sess, err := session.Get("_chckr_session", e)
 	// if no session we are happy and ignore that fact (means the user hasn't logged in via authx yet)
 	if err == nil {
 		if sess.Values["userid"] != nil {

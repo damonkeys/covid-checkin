@@ -2,12 +2,12 @@
 import React from 'react';
 import {
     Block,
-    BlockTitle,
     Preloader,
     Tab,
     Tabs
 } from 'framework7-react';
 import Logins from '../../components/Logins/index';
+import Logo from '../../components/Logo';
 import Account from '../../components/Account/index';
 import Business from '../../components/Business/index';
 import BusinessInfos from '../../components/BusinessInfos/index';
@@ -29,8 +29,10 @@ const BusinessView = (props: BusinessProps) => {
 
 
     return <Tabs>
-        <Tab id="checkin-ch3ck1n" tabActive>
-            <BlockTitle large className="text-align-center">{t('basic.appname')}</BlockTitle>
+        <Tab id="checkin-chckr" tabActive>
+            <Block>
+                <Logo direction="horizontal" />
+            </Block>
             {!session.useronline && session.connected ?
                 (
                     <Block className="text-align-center">
@@ -59,11 +61,7 @@ const BusinessView = (props: BusinessProps) => {
         </Tab>
 
         <Tab id="checkin-account">
-            {!session.connected ? null :
-                (
-                    <Account></Account>
-                )
-            }
+            <Account session={session}></Account>
         </Tab>
     </Tabs>
 }

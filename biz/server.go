@@ -1,6 +1,6 @@
 package main
 
-// # business - Server for all known business in ch3ck1n
+// # business - Server for all known business in chckr
 //
 // ## The server uses environment variables. If they are not set the server won't start. It expects the following environment variables:
 //   * SERVER_PORT       - the server is listening on this portnumber
@@ -40,7 +40,7 @@ type (
 	}
 )
 
-const sessionName = "_ch3ck1n_callback"
+const sessionName = "_chckr_callback"
 const serverName = "biz"
 
 // serverConfig defines the configuration for auth

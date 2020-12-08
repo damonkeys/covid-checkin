@@ -1,2 +1,2 @@
-# ch3ck1n
+# chckr
 the monorepo for the checkin project

@@ -1,4 +1,4 @@
-# ch3ck1n
+# chckr
 
 ## Framework7 CLI Options
 
@@ -11,7 +11,7 @@ Framework7 app created with following options:
     "pwa",
     "web"
   ],
-  "name": "ch3ck1n",
+  "name": "chckr",
   "framework": "react",
   "template": "blank",
   "bundler": "webpack",

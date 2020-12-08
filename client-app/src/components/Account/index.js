@@ -7,6 +7,7 @@ import {
     ListItem
 } from 'framework7-react';
 import Logins from '../../components/Logins/index';
+import Logo from '../../components/Logo';
 import { useSession } from '../../modules/session';
 import { useTranslation } from 'react-i18next';
 import type { Session } from '../../js/types';
@@ -20,7 +21,9 @@ const Account = (props: Props) => {
     if (session.useronline) {
         return <div>
             <Block>
-                <BlockTitle large className="text-align-center">{t('basic.appname')}</BlockTitle>
+                <Logo direction="horizontal" />
+            </Block>
+            <Block>
                 <BlockTitle>Profile</BlockTitle>
             </Block>
 
@@ -32,7 +35,9 @@ const Account = (props: Props) => {
     }
 
     return <div>
-        <BlockTitle large className="text-align-center">{t('basic.appname')}</BlockTitle>
+        <Block>
+            <Logo direction="horizontal" />
+        </Block>
         <Block>
             {t('signin.explanation')}
         </Block>

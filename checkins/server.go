@@ -45,7 +45,7 @@ type (
 	}
 )
 
-const sessionName = "_ch3ck1n_callback"
+const sessionName = "_chckr_callback"
 const serverName = "checkins"
 
 // serverConfig defines the configuration for checkin
