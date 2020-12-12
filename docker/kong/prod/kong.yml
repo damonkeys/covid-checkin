@@ -89,5 +89,5 @@ plugins:
     config:
       account_email: info@monkeycash.io
       domains:
-        - "*.monkeycash.io"
+        - "dev.checkin.chckr.de"
       tos_accepted: true
