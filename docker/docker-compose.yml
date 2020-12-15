@@ -214,6 +214,7 @@ services:
             - 127.0.0.1:8444:8444/tcp
         volumes:
             - ./kong/${STAGE}:/usr/local/kong/declarative
+            - ./kong-plugins/acme:/usr/local/share/lua/5.1/kong/plugins/acme    # Workarround to get latest acme-plugin
         networks:
             - chckr_default
         healthcheck:
@@ -227,7 +228,7 @@ services:
             KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
             KONG_DEBUG_LEVEL: debug
             KONG_LOG_LEVEL: debug
-            KONG_LUA_SSL_TRUSTED_CERTIFICATE: /etc/ssl/certs/ca-certificates.crt
+            KONG_LUA_SSL_TRUSTED_CERTIFICATE: /etc/ssl/cert.pem
             KONG_PROXY_ACCESS_LOG: /dev/stdout
             KONG_ADMIN_ACCESS_LOG: /dev/stdout
             KONG_PROXY_ERROR_LOG: /dev/stderr
