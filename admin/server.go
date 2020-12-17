@@ -26,7 +26,7 @@ type (
 	// ServerConfigStruct holds the server-config
 	ServerConfigStruct struct {
 		Port             string `env:"SERVER_PORT"`
-		DatabaseBiz      database.ConfigStruct
+		DatabaseChckr    database.ConfigStruct
 		DatabaseCheckins database.ConfigStruct
 	}
 )
@@ -54,10 +54,10 @@ func main() {
 	// amount to /admin, so visit `/admin` to view the admin interface
 	Admin.MountTo("/admin", mux)
 
-	// Biz
-	dbBiz := addBizAdmin(ctx, mux)
-	defer dbBiz.Close()
-	Admin.AddMenu(&admin.Menu{Name: "DBBiz", RelativePath: "/biz"})
+	// Chckr
+	dbChckr := addChckrAdmin(ctx, mux)
+	defer dbChckr.Close()
+	Admin.AddMenu(&admin.Menu{Name: "DBChckr", RelativePath: "/chckr"})
 
 	// Checkins
 	dbCheckins := addCheckinsAdmin(ctx, mux)
@@ -68,18 +68,18 @@ func main() {
 	http.ListenAndServe(":"+serverConfig.Port, mux)
 }
 
-func addBizAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
+func addChckrAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 	span := tracing.EnterWithContext(c)
 	defer span.Finish()
 	// open database connection
-	db, err := gorm.Open("mysql", serverConfig.DatabaseBiz.User+":"+serverConfig.DatabaseBiz.Password+"@("+serverConfig.DatabaseBiz.Server+")/"+serverConfig.DatabaseBiz.Name+"?charset=utf8&parseTime=True&loc=Local")
+	db, err := gorm.Open("mysql", serverConfig.DatabaseChckr.User+":"+serverConfig.DatabaseChckr.Password+"@("+serverConfig.DatabaseChckr.Server+")/"+serverConfig.DatabaseChckr.Name+"?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Println(err)
 		db.Close()
 	}
 
 	Admin := admin.New(&admin.AdminConfig{DB: db})
-	Admin.MountTo("/admin/biz", mux)
+	Admin.MountTo("/admin/chckr", mux)
 	// Remove CSRF-check for working behind Kong
 	Admin.GetRouter().GetMiddleware("csrf_check").Handler = func(context *admin.Context, middleware *admin.Middleware) { middleware.Next(context) }
 
@@ -143,10 +143,10 @@ func readEnvVars(c context.Context) {
 	serverConfig = ServerConfigStruct{}
 	serverConfig.Port = os.Getenv("SERVER_PORT")
 
-	serverConfig.DatabaseBiz.Name = os.Getenv("DB_BIZ_NAME")
-	serverConfig.DatabaseBiz.Password = os.Getenv("DB_BIZ_PASSWORD")
-	serverConfig.DatabaseBiz.Server = os.Getenv("DB_BIZ_HOST")
-	serverConfig.DatabaseBiz.User = os.Getenv("DB_BIZ_USER")
+	serverConfig.DatabaseChckr.Name = os.Getenv("DB_CHCKR_NAME")
+	serverConfig.DatabaseChckr.Password = os.Getenv("DB_CHCKR_PASSWORD")
+	serverConfig.DatabaseChckr.Server = os.Getenv("DB_CHCKR_HOST")
+	serverConfig.DatabaseChckr.User = os.Getenv("DB_CHCKR_USER")
 
 	serverConfig.DatabaseCheckins.Name = os.Getenv("DB_CHECKINS_NAME")
 	serverConfig.DatabaseCheckins.Password = os.Getenv("DB_CHECKINS_PASSWORD")
