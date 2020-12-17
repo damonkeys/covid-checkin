@@ -204,47 +204,22 @@ services:
             - chckr_default
 
 
-    kong:
-        image: kong:latest
-        container_name: chckr-kong
+    albert:
+        image: ${DOCKER_REGISTRY_SERVER}/chckr/service-gateway:latest
+        container_name: chckr-service-gateway
         ports:
-            - 80:8000
-            - 443:8443
-            - 127.0.0.1:8001:8001/tcp
-            - 127.0.0.1:8444:8444/tcp
+            - "80:80"
+            - "443:443"
         volumes:
-            - ./kong/${STAGE}:/usr/local/kong/declarative
-            - ./kong-plugins/acme:/usr/local/share/lua/5.1/kong/plugins/acme    # Workarround to get latest acme-plugin
+            - ./albert/${STAGE}:/config
+            - ./albert/.cache:/.cache
+        depends_on:
+            - "jaeger"
+        restart: always
         networks:
             - chckr_default
-        healthcheck:
-            test: ["CMD", "kong", "health"]
-            interval: 10s
-            timeout: 10s
-            retries: 10
-        restart: on-failure
+        env_file:
+            - ../service-gateway/.env
+            - ./env/${STAGE}/global.env
         environment:
-            KONG_DATABASE: "off"
-            KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
-            KONG_DEBUG_LEVEL: debug
-            KONG_LOG_LEVEL: debug
-            KONG_LUA_SSL_TRUSTED_CERTIFICATE: /etc/ssl/cert.pem
-            KONG_PROXY_ACCESS_LOG: /dev/stdout
-            KONG_ADMIN_ACCESS_LOG: /dev/stdout
-            KONG_PROXY_ERROR_LOG: /dev/stderr
-            KONG_ADMIN_ERROR_LOG: /dev/stderr
-            KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
-
-
-    # KONGA - admin-ui for kong but I think we don't need it at the moment!
-    # konga:
-    #     image: pantsel/konga
-    #     container_name: chckr-konga
-    #     ports:
-    #         - 1337:1337
-    #     networks:
-    #         - chckr_default
-    #     links:
-    #         - kong:kong
-    #     environment: 
-    #         - TOKEN_SECRET={{somerandomstring}}
+            ROUTES_CONFIG: /config/routes.json
