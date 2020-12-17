@@ -84,7 +84,7 @@ func addChckrAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 	Admin.GetRouter().GetMiddleware("csrf_check").Handler = func(context *admin.Context, middleware *admin.Middleware) { middleware.Next(context) }
 
 	// Create resources from GORM-backend model
-	businesses := Admin.AddResource(&biz.Business{}, &admin.Config{Menu: []string{"Biz"}})
+	businesses := Admin.AddResource(&biz.Business{}, &admin.Config{Menu: []string{"Chckr"}})
 	businesses.NewAttrs("-UUID")
 	businessInfoMeta := businesses.Meta(&admin.Meta{Name: "BusinessInfos"})
 	businessInfoResource := businessInfoMeta.Resource
@@ -92,7 +92,7 @@ func addChckrAdmin(c context.Context, mux *http.ServeMux) *gorm.DB {
 	businessInfoResource.Meta(&admin.Meta{Name: "Description", Type: "rich_editor"})
 	addDefaultScopes(c, businesses)
 
-	businessInfos := Admin.AddResource(&biz.BusinessInfo{}, &admin.Config{Menu: []string{"Biz"}})
+	businessInfos := Admin.AddResource(&biz.BusinessInfo{}, &admin.Config{Menu: []string{"Chckr"}})
 	businessInfos.NewAttrs("-UUID")
 	addDefaultScopes(c, businessInfos)
 
