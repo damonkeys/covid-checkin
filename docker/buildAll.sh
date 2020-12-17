@@ -4,6 +4,7 @@
 ./buildDockerImage.sh biz
 ./buildDockerImage.sh checkins
 ./buildDockerImage.sh pixi
+./buildDockerImage.sh service-gateway
 
 # Cleanup ch3ck1nweb-static-folder
 cd ../ch3ck1nweb

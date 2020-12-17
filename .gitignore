@@ -29,6 +29,7 @@ docker/mariadb-chckr/*
 docker/mariadb-checkins/*
 docker/pixi/*
 docker/pixi/qr/*
+docker/albert/.cache/*
 
 # binaries
 admin/admin

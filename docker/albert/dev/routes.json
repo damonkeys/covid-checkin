@@ -1,0 +1,77 @@
+{
+    "routes": [{
+        "name": "Authx",
+        "path": "/authx",
+        "description":"The route to the authx server",
+        "urls": [
+            "http://authx:2000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+    }, {
+        "name": "Biz",
+        "path": "/biz",
+        "description":"The route to the biz server",
+        "urls": [
+            "http://biz:4000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+    },
+    {
+        "name": "Pixi",
+        "path": "/p",
+        "description":"The route to the pixi server",
+        "urls": [
+            "http://pixi:5000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+    },
+    {
+        "name": "Checkins",
+        "path": "/c",
+        "description":"The route to the checkins server",
+        "urls": [
+            "http://checkins:6000"
+        ],
+        "balancer": "roundrobin",
+        "rewrite": true
+    },
+    {
+        "name": "Admin",
+        "path": "/admin",
+        "description":"Route to server for simple admin-views.",
+        "urls": [
+            "http://admin:19000"
+        ],
+        "auth": {
+            "user":"admin",
+            "password":"REPLACE"
+        },
+        "balancer": "roundrobin",
+        "rewrite": false
+    }, {
+        "name": "Jaeger-UI",
+        "path": "/jaeger",
+        "description":"Route to jaeger-ui.",
+        "urls": [
+            "http://jaeger:16686"
+        ],
+        "auth": {
+            "user":"admin",
+            "password":"REPLACE"
+        },
+        "balancer": "roundrobin",
+        "rewrite": false
+    }, {
+        "name": "Client-App",
+        "path": "/*",
+        "description": "The route to the (react based) webserver for monkeycash",
+        "urls": [
+            "http://host.docker.internal:3000"
+        ],
+        "balancer": "random",
+        "rewrite": true
+    }]
+}

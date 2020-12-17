@@ -1,19 +1,10 @@
 {
     "routes": [{
-        "name": "Client-App",
-        "path": "/*",
-        "description": "The route to the (react based) webserver for monkeycash",
+        "name": "Authx",
+        "path": "/authx",
+        "description":"The route to the authx server",
         "urls": [
-            "http://dev.checkin.chckr.de:3000"
-        ],
-        "balancer": "random",
-        "rewrite": true
-    }, {
-        "name": "Auth",
-        "path": "/auth",
-        "description":"The route to the auth server",
-        "urls": [
-            "http://dev.checkin.chckr.de:2000"
+            "http://authx:2000"
         ],
         "balancer": "roundrobin",
         "rewrite": true
@@ -22,7 +13,7 @@
         "path": "/biz",
         "description":"The route to the biz server",
         "urls": [
-            "http://dev.checkin.chckr.de:4000"
+            "http://biz:4000"
         ],
         "balancer": "roundrobin",
         "rewrite": true
@@ -32,17 +23,17 @@
         "path": "/p",
         "description":"The route to the pixi server",
         "urls": [
-            "http://dev.checkin.chckr.de:5000"
+            "http://pixi:5000"
         ],
         "balancer": "roundrobin",
         "rewrite": true
     },
     {
-        "name": "Checkin",
+        "name": "Checkins",
         "path": "/c",
-        "description":"The route to the checkin server",
+        "description":"The route to the checkins server",
         "urls": [
-            "http://dev.checkin.chckr.de:6000"
+            "http://checkins:6000"
         ],
         "balancer": "roundrobin",
         "rewrite": true
@@ -52,7 +43,7 @@
         "path": "/admin",
         "description":"Route to server for simple admin-views.",
         "urls": [
-            "http://dev.checkin.chckr.de:19000"
+            "http://admin:19000"
         ],
         "auth": {
             "user":"admin",
@@ -65,7 +56,7 @@
         "path": "/jaeger",
         "description":"Route to jaeger-ui.",
         "urls": [
-            "http://dev.checkin.chckr.de:16686"
+            "http://jaeger:16686"
         ],
         "auth": {
             "user":"admin",
@@ -73,5 +64,14 @@
         },
         "balancer": "roundrobin",
         "rewrite": false
+    }, {
+        "name": "Client-App",
+        "path": "/*",
+        "description": "The route to the (react based) webserver for monkeycash",
+        "urls": [
+            "http://ch3ck1nweb:3000"
+        ],
+        "balancer": "random",
+        "rewrite": true
     }]
 }
