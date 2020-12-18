@@ -1,7 +1,16 @@
 {
     "routes": [{
+        "name": "Client-App",
+        "path": "/*",
+        "description": "The route to the (react based) webserver for monkeycash",
+        "urls": [
+            "http://ch3ck1nweb:3000"
+        ],
+        "balancer": "random",
+        "rewrite": true
+    }, {
         "name": "Authx",
-        "path": "/authx",
+        "path": "/auth",
         "description":"The route to the authx server",
         "urls": [
             "http://authx:2000"
@@ -64,14 +73,5 @@
         },
         "balancer": "roundrobin",
         "rewrite": false
-    }, {
-        "name": "Client-App",
-        "path": "/*",
-        "description": "The route to the (react based) webserver for monkeycash",
-        "urls": [
-            "http://ch3ck1nweb:3000"
-        ],
-        "balancer": "random",
-        "rewrite": true
     }]
 }
