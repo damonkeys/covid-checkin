@@ -18,3 +18,7 @@ cp -R build/* ../ch3ck1nweb/static/
 
 cd ../docker
 ./buildDockerImage.sh ch3ck1nweb
+
+# dbmate container
+cd ../dbmate
+docker build -t chckr/dbmate -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate .

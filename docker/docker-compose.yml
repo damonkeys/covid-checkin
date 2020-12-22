@@ -1,20 +1,12 @@
-version: "3"
+version: "3.2"
 networks:
     chckr_default:
-      external: false
-    # Maybe we should use this network to protect the databases from localhost
-    # database:
-    #   internal: true
+        attachable: true
 
 
 services:
     admin:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/admin:latest
-        container_name: chckr-admin
-        # ports:
-        #     - "19000:19000"
-        expose:
-            - "19000"
         volumes: 
             - ./logs:/logs
             - ./pixi:/pixi
@@ -22,7 +14,6 @@ services:
             - "db-chckr"
             - "db-checkins"
             - "jaeger"
-        restart: always
         networks:
             - chckr_default
         env_file:
@@ -38,17 +29,11 @@ services:
 
     authx:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/authx:latest
-        container_name: chckr-authx
-        # ports:
-        #     - "2000:2000"
-        expose:
-            - "2000"
         volumes: 
             - ./logs:/logs
         depends_on:
             - "db-chckr"
             - "jaeger"
-        restart: always
         networks:
             - chckr_default
         env_file:
@@ -63,17 +48,11 @@ services:
 
     biz:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/biz:latest
-        container_name: chckr-biz
-        # ports:
-        #     - "4000:4000"
-        expose:
-            - "4000"
         volumes: 
             - ./logs:/logs
         depends_on:
             - "db-chckr"
             - "jaeger"
-        restart: always
         networks:
             - chckr_default
         env_file:
@@ -85,11 +64,6 @@ services:
             
     ch3ck1nweb:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/ch3ck1nweb:latest
-        container_name: chckr-ch3ck1nweb
-        # ports:
-        #     - "3000:3000"
-        expose:
-            - "3000"
         volumes: 
             - ./logs:/logs
         depends_on:
@@ -98,7 +72,6 @@ services:
             - "biz"
             - "pixi"
             - "checkins"
-        restart: always
         networks:
             - chckr_default
         env_file:
@@ -108,17 +81,11 @@ services:
 
     checkins:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/checkins:latest
-        container_name: chckr-checkins
-        # ports:
-        #     - "6000:6000"
-        expose:
-            - "6000"
         volumes: 
             - ./logs:/logs
         depends_on:
             - "db-checkins"
             - "jaeger"
-        restart: always
         networks:
             - chckr_default
         env_file:
@@ -131,17 +98,11 @@ services:
 
     pixi:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/pixi:latest
-        container_name: chckr-pixi
-        # ports:
-        #     - "5000:5000"
-        expose:
-            - "5000"
         volumes: 
             - ./logs:/logs
             - ./pixi:/static
         depends_on:
             - "jaeger"
-        restart: always
         networks:
             - chckr_default
         env_file:
@@ -151,12 +112,7 @@ services:
             
     db-chckr:
         image: mariadb:latest
-        container_name: chckr-db-chckr
         hostname: db-chckr.docker
-        ports:
-            - "127.0.0.1:3306:3306/tcp"
-        expose:
-            - "3306"
         volumes:
             - ./mariadb-chckr:/var/lib/mysql
         networks:
@@ -170,12 +126,7 @@ services:
 
     db-checkins:
         image: mariadb:latest
-        container_name: chckr-db-checkins
         hostname: db-checkins.docker
-        ports:
-            - "127.0.0.1:3307:3306/tcp"
-        expose:
-            - "3306"
         volumes:
             - ./mariadb-checkins:/var/lib/mysql
         networks:
@@ -188,15 +139,6 @@ services:
     
     jaeger:
         image: jaegertracing/all-in-one:latest
-        container_name: chckr-jaeger
-        ports:
-            - 5775:5775/udp
-            - 6831:6831/udp
-            - 6832:6832/udp
-            - 5778:5778
-            - 16686:16686
-            - 14268:14268
-            - 9411:9411
         environment: 
             COLLECTOR_ZIPKIN_HTTP_PORT: 9411
             QUERY_BASE_PATH: /jaeger
@@ -206,7 +148,6 @@ services:
 
     albert:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/service-gateway:latest
-        container_name: chckr-service-gateway
         ports:
             - "80:80"
             - "443:443"
@@ -215,7 +156,6 @@ services:
             - ./albert/.cache:/.cache
         depends_on:
             - "jaeger"
-        restart: always
         networks:
             - chckr_default
         env_file:

@@ -16,11 +16,10 @@ You should have a decent package manager running through which you should instal
 
 ### Initialisation - the docker way
 * clone the repo
-* in the tools folder run the script `./startDocker.sh dev build`
-* Edge case for folder _/checkins_: We need to initialise the seperate db first. The script `createDBAndUser.sh` in the _/checkins_ folder should do that.
-* in the tools folder run the script `install_dbmate.sh`
-* check the directories  _admin/ authx/ /biz /checkins_ for a folder _/dbmate_ and run the script `./run.sh [database]` with the correct database name from within that folder.
-_If you don't know the correct name ask a developer/ mentor_
+* run the command `docker swarm init`
+* in the tools folder run the script `./startStack.sh dev build`
+* in the tools folder run the script `enter_dbmate.sh`
+* change in the dbmate-docker container to the directories _db-chckr/ and db-checkins_ and run the script `./run.sh up` to execute all migrations.
 
 For further informations about the docker environment look at the README.md at the docker folder!
 
@@ -34,10 +33,11 @@ For further informations about the docker environment look at the README.md at t
 _If you don't know the correct name ask a developer/ mentor_
 
 ### First run - the docker way
-* change into _/tools folder. restart all docker containers with `./stopDocker.sh dev; ./startDocker.sh dev`
+* change into _/tools_ folder and start the script `./host.sh add` to add an ip-routing for checkins.monkeycash.io to your localhost.
+* change into _/tools_ folder. restart all docker containers with `./stopStack.sh dev; ./startStack.sh dev`
 * change into _/client-app folder to start the react-app with `yarn start`
 
-In general your default system browser should be open itself and try to `GET` _localhost:3000_ <- this is wrong unfortunately. use the https-kong-route and start the app with https://localhost
+In general your default system browser should be open itself and try to `GET` _localhost:3000_ <- this is wrong unfortunately. use the https-albert-route and start the app with https://dev.checkin.chckr.de
 
 Your browser should render the checkin service by now.
 
