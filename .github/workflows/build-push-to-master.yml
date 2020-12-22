@@ -100,3 +100,9 @@ jobs:
 
     - name: pixi Docker Build & Push to registry
       run: cd pixi; docker build -t chckr/pixi -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/pixi
+
+
+
+########### dbmate ######################
+    - name: dbmate Docker Build & Push to registry
+      run: cd dbmate; docker build -t chckr/dbmate -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate

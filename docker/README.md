@@ -1,28 +1,35 @@
 # Docker
-All microservices are dockerized. You can start the whole development-environment with docker-compose to bring up all
-servers, app and all other needed servers like MariaDB and KONG.
+All microservices are dockerized. You can start the chckr-environment with docker stacks to bring up the whole swarm.
 
 ## First time
-Starting the docker environment for the first time you have to build all Docker Images before.
+Starting the docker environment for the first time you have to build all Docker Images before. But to start the docker
+swarm you need to init it with following docker command:
 
-In the tools-folder you find a script for starting the docker-environment called `startDocker.sh`. Call this command at the first time to build the whole environment and start all containers.
+```
+docker swarm init
+```
+
+In the tools-folder you find a script for starting the docker-environment called `startStack.sh`. Call this command at
+the first time to build the whole environment and start all containers.
 
 ```
 cd tools
-./startDocker.sh dev build
+./startStack.sh dev build
 ```
-For the dev-stage you are not able to reach the react-app becaus kong is configured to call the local running app. You have to start it manually via
+For the dev-stage you are not able to reach the react-app because kong is configured to call the local running app. You
+have to start it manually via
 ```
 cd client-app
 yarn start
 ```
-It will be started locally because of developing without deploying the react-app. Now you are ready to call the app via https://localhost.
+It will be started locally because of developing without deploying the react-app. Now you are ready to call the app via
+https://dev.checkin.chckr.de. __Don't forget to call the ./host.sh add script.__
 
-To stop all docker containers call the `stopDocker.sh` script.
+To stop all docker containers call the `stopStack.sh` script.
 
 ```
 cd tools
-./stopDocker.sh dev
+./stopStack.sh
 ```
 
 ### Stage prod
@@ -30,32 +37,38 @@ Stage prod works the same as dev but it starts ch3ck1nweb-server with static bui
 
 ```
 cd tools
-./startDocker prod build
+./startStack.sh prod build
 ```
 
 ### Other stages
-You can define freely any stage you need. The env-files and Kong-config is grouped by folders named like the given stage.
+You can define freely any stage you need. The env-files and Albert-config are grouped by folders named like the given stage.
 
 
 ### Database
-For the first time starting the docker-composer envrionment there will be an instance of MariaDB created but without any tables. Please run the following dbmate-scripts to create all necessary tables and users:
+During the first start of the docker environment there will be two clean instances of MariaDB created but without any
+tables. To run the dbmate-scripts for migrations you need to start another docker container called chckr/dbmate. To enter
+the commandline of this container there is a script in the tools-directory:
 
 ```
-cd authx/dbmate
+cd tools
+./enter_dbmate.sh
+```
+
+Then you are in the bash of the dbmate container. There are two directories: db-chckr and db-checkins. These are all
+migrations for both databases. You need to enter the directories for each database and run the following script:
+```
+cd /db-chckr
 ./run.sh up
 
-cd ../../biz/dbmate
-./run.sh up
-
-cd ../../checkins/dbmate
+cd /db-checkins
 ./run.sh up
 ```
 
 ## Second time ;-)
-For the second time you don't need tob build or initialize something. Enter the tools folder and start the docker-environment:
+During the second time you don't need to build or initialize something. Enter the tools folder and start the docker-environment:
 ```
 cd tools
-./startDocker dev
+./startStack.sh dev
 
 cd ../client-app
 yarn start
@@ -79,23 +92,24 @@ cd docker
 ./buildDockerImage.sh biz
 ```
 
-To build all containers there is a script for multiple call the buildDockerImage.sh script. _This script is needed to add new servers if we add one to our environment!_
+To build all containers there is a script for multiple call the buildDockerImage.sh script. _This script is needed to
+add new servers if we add one to our environment!_ The script builds the dbmate-image with all migrations too.
 ```
 cd docker
 ./buildAll.sh
 ```
 
 ## Start-Scripts
-For starting the docker-containers in tools folder you find the `startDocker.sh` script.
+To start the containers in the tools folder you find the `startStack.sh` script.
 
 ```
 cd tools
-./startDocker.sh <stage> <build>
+./startStack.sh <stage> <build>
 ```
 
 The two parameters are for controlling the starting.
 
-1. The first parameter stage expect dev or prod. With this parameter you control some environment-variables for the docker-container. You find this environment-variables in the folder `docker/env`. For both stages there are one env-file:
+1. The first parameter stage expect dev or prod. With this parameter you control some environment-variables for the container. You find this environment-variables in the folder `docker/env`. For both stages there are one env-file:
     ```
     .env.dev
     .env.prod
@@ -112,32 +126,40 @@ For developing it is very slow to rebuild the docker iamge for testing your chan
 cd biz
 ./startServer.sh
 ```
-At this moment kong doesn't knows your local server and will call the docker-container via the route config. Before you start the whole docker-environment you have to adjust the kong-route-file. You find it in `docker/kong/dev/kong.yml`.
+At this moment Albert doesn't know your local server and will call the container via the route config. Before you start the whole docker-environment you have to adjust the Albert-route-file. You find it in `docker/albert/dev/route.json`.
 
-This file is prepared for development-routes. For example if you want to use the local running biz server you have to tell it kong. change the kong-route section from:
+For example if you want to use the local running biz server you have to tell it Albert. change the Albert-route from:
 ```
-- name: biz
-  url: http://biz:4000
-  routes:
-    - name: biz-route
-      paths:
-        - /biz
+{
+  "name": "Biz",
+  "path": "/biz",
+  "description":"The route to the biz server",
+  "urls": [
+      "http://biz:4000"
+  ],
+  "balancer": "roundrobin",
+  "rewrite": true
+}
 ```
 to this:
 ```
-- name: biz
-  url: http://host.docker.internal:4000
-  routes:
-    - name: biz-route
-      paths:
-        - /biz
+{
+  "name": "Biz",
+  "path": "/biz",
+  "description":"The route to the biz server",
+  "urls": [
+      "http://host.docker.internal:4000"
+  ],
+  "balancer": "roundrobin",
+  "rewrite": true
+}
 ```
-Now kong will route all biz-calls to your locally running server.
+Now Albert will route all biz-calls to your locally running server.
 
 After this adjustments you start the docker environment:
 ```
 cd tools
-./startDocker dev
+./startStack.sh dev
 ```
 All your biz-server-changes can be tested locally. Then you have to rebuild and restart the server locally:
 ```
@@ -147,20 +169,12 @@ go build
 ```
 
 ## Logging
-The `./startDocker.sh`script starts the docker-composer container in detached mode. You won't see any logs. To get the
+The `./startStack.sh`script starts the docker swarm containers in detached mode. You won't see any logs. To get the
 logs of a service try this command:
 ```
-docker-compose -f ./docker/docker-compose.yml -p chckr logs -f biz
+docker service logs -f chckr_biz
 ```
 Or use the simple script `dockerLog.sh <servicename>` from tools folder.
-
-## changing Kong-route-config: kong-yml
-We use kong database-less so it uses a simple config-file for all route-definition. You will find it in `docker/kong/<stage>`. After adjusting the routes in kong.yml you have to tell kong to reload the configuration. You will do it with curl:
 ```
-curl --data-urlencode "config@../docker/kong/dev/kong.yml" -X POST http://localhost:8001/config
-```
-Or simple with the reload-script in tools folder:
-```
-cd tools
-./relaodKongConfig.sh
+./dockerLog.sh biz
 ```
