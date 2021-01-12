@@ -29,7 +29,8 @@ docker/mariadb-chckr/*
 docker/mariadb-checkins/*
 docker/pixi/*
 docker/pixi/qr/*
-docker/albert/.cache/*
+docker/albert/.cache/acme_account+key
+docker/albert/.cache/dev.checkin.chckr.de
 
 # binaries
 admin/admin
@@ -42,7 +43,7 @@ service-gateway/.cache/
 ch3ck1nweb/ch3ck1nweb
 ch3ck1nweb/static
 **/**foo.*
-pixi/static/qr/*
+pixi/static/qr
 pixi/pixi
 biz/qr/cliqr/cliqr
 
