@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
-
 import {
   App,
   View,
+  f7ready,
 } from 'framework7-react';
 import routes from '../js/routes';
 import { I18nextProvider, Translation } from 'react-i18next';
@@ -42,7 +42,7 @@ export default class extends React.Component {
   }
   render() {
     return (
-      <App params={ this.state.f7params } >
+      <App name="chckr" theme="auto" routes={routes}>
         {/* Your main view, should have "view-main" class */}
         <Suspense fallback={<Block className="text-align-center"><Preloader color="pink"></Preloader></Block>}>
           <I18nextProvider i18n={i18n}>
@@ -59,7 +59,7 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    this.$f7ready((f7) => {
+    f7ready(() => {
 
       // Call F7 APIs here
     });
