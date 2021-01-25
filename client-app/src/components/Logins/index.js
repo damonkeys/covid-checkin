@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from 'react';
-import { f7 } from 'framework7-react';
+import { getDevice } from 'framework7';
 import {
     Button,
     Col,
@@ -13,9 +13,11 @@ type Props = {
     callbackURL?: string
 }
 
+const device = getDevice();
 export default class Logins extends Component<Props> {
+
     isAppleDevice = () => {
-        return f7.device.ios || f7.device.macos;
+        return device.ios || device.macos;
     };
 
     render() {
