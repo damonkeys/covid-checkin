@@ -1,0 +1,7 @@
+landing.chckr.de:443 {
+        reverse_proxy initial-acquire-biz:4444
+        encode {
+                zstd
+                gzip
+        }
+}

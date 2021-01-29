@@ -46,6 +46,7 @@ ch3ck1nweb/static
 pixi/static/qr
 pixi/pixi
 biz/qr/cliqr/cliqr
+landing/initial-acquire-biz/initial-acquire-biz
 
 # keep empty directories
 !.gitkeep
