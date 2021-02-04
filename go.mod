@@ -6,7 +6,6 @@ require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/TShadwell/go-shorten v0.0.0-20130112221337-10c3157079b5
 	github.com/amacneil/dbmate v1.9.1 // indirect
-	github.com/damonkeys/goth v1.64.3-0.20200826111136-7eda0d63ec6c
 	github.com/eefret/gravatar v0.0.0-20181201135945-2163a437cdca
 	github.com/gobuffalo/envy v1.9.0 // indirect
 	github.com/gobuffalo/packr v1.30.1
@@ -23,7 +22,7 @@ require (
 	github.com/labstack/gommon v0.3.0
 	github.com/lib/pq v1.8.0 // indirect
 	github.com/mailgun/mailgun-go/v4 v4.1.3
-	github.com/markbates/goth v1.64.2
+	github.com/markbates/goth v1.67.1
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/qor/admin v0.0.0-20200908023436-0c0a0b041c88
 	github.com/qor/qor v0.0.0-20200729071734-d587cffbbb93

@@ -33,13 +33,13 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"github.com/damonkeys/goth/gothic"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/providers/apple"
 	"github.com/markbates/goth/providers/facebook"
 	"github.com/markbates/goth/providers/gplus"
 
 	"github.com/damonkeys/ch3ck1n/authx/models"
+	"github.com/markbates/goth/gothic"
 
 	"github.com/damonkeys/ch3ck1n/authx/applesupport"
 	bubblesclient "github.com/damonkeys/ch3ck1n/monkeys/bubbles"
