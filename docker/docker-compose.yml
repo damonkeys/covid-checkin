@@ -7,6 +7,7 @@ networks:
 services:
     admin:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/admin:latest
+        restart: always
         volumes: 
             - ./logs:/logs
             - ./pixi:/pixi
@@ -29,6 +30,7 @@ services:
 
     authx:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/authx:latest
+        restart: always
         volumes: 
             - ./logs:/logs
         depends_on:
@@ -48,6 +50,7 @@ services:
 
     biz:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/biz:latest
+        restart: always
         volumes: 
             - ./logs:/logs
         depends_on:
@@ -64,6 +67,7 @@ services:
             
     ch3ck1nweb:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/ch3ck1nweb:latest
+        restart: always
         volumes: 
             - ./logs:/logs
         depends_on:
@@ -81,6 +85,7 @@ services:
 
     checkins:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/checkins:latest
+        restart: always
         volumes: 
             - ./logs:/logs
         depends_on:
@@ -98,6 +103,7 @@ services:
 
     pixi:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/pixi:latest
+        restart: always
         volumes: 
             - ./logs:/logs
             - ./pixi:/static
@@ -112,6 +118,7 @@ services:
             
     db-chckr:
         image: mariadb:latest
+        restart: always
         hostname: db-chckr.docker
         volumes:
             - ./mariadb-chckr:/var/lib/mysql
@@ -126,6 +133,7 @@ services:
 
     db-checkins:
         image: mariadb:latest
+        restart: always
         hostname: db-checkins.docker
         volumes:
             - ./mariadb-checkins:/var/lib/mysql
@@ -139,6 +147,7 @@ services:
     
     jaeger:
         image: jaegertracing/all-in-one:latest
+        restart: always
         environment: 
             COLLECTOR_ZIPKIN_HTTP_PORT: 9411
             QUERY_BASE_PATH: /jaeger
@@ -148,6 +157,7 @@ services:
 
     albert:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/service-gateway:latest
+        restart: always
         ports:
             - "80:80"
             - "443:443"
