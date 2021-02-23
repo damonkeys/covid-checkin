@@ -55,7 +55,7 @@
     },
     "business": {
         "unknown-code": "Entschuldigung, Code {{code}} ist nicht bekannt.",
-        "findBizAndCheckin": "Suchen zum einchecken"
+        "findBizAndCheckin": "weiter"
     },
     "checkin": {
         "initialInfo": "Bitte chckr code eingeben",
