@@ -8,6 +8,7 @@ services:
     ports:
       - 8080:80
     volumes:
+      - ./php/chckr.ini:/usr/local/etc/php/conf.d/chckr.ini
       - wordpress:/var/www/html
     env_file:
       - ./env/dev.env
