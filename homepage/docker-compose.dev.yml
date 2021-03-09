@@ -5,8 +5,6 @@ services:
   wordpress:
     image: wordpress
     restart: always
-    ports:
-      - 8080:80
     volumes:
       - ./php/chckr.ini:/usr/local/etc/php/conf.d/chckr.ini
       - wordpress:/var/www/html

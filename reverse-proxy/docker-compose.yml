@@ -1,0 +1,24 @@
+version: "3.7"
+
+networks:
+  wordpress:
+    external:
+      name: www_default
+
+services:
+  caddy:
+    image: caddy:2.3.0
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - wordpress
+
+volumes:
+  caddy_data:
+  caddy_config:
