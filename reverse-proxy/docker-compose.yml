@@ -1,14 +1,16 @@
 version: "3.7"
 
 networks:
-  wordpress:
+  homepage:
     external:
-      name: www_default
+      name: homepage_default
+  landingpages:
+    external:
+      name: landing_default
 
 services:
   caddy:
     image: caddy:2.3.0
-    restart: always
     ports:
       - "80:80"
       - "443:443"
@@ -17,7 +19,8 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     networks:
-      - wordpress
+      - homepage
+      - landingpages
 
 volumes:
   caddy_data:

@@ -1,23 +1,28 @@
-version: '3.1'
+version: '3.7'
+
+networks:
+  homepage:
+    name: homepage_default
 
 services:
-
   wordpress:
     image: wordpress
-    restart: always
     volumes:
       - ./php/chckr.ini:/usr/local/etc/php/conf.d/chckr.ini
       - wordpress:/var/www/html
     env_file:
       - ./env/dev.env
+    networks:
+      - homepage
 
   db:
     image: mysql:8.0.23
-    restart: always
     volumes:
       - db:/var/lib/mysql
     env_file:
       - ./env/dev.env
+    networks:
+      - homepage
 
 volumes:
   wordpress:

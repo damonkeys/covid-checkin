@@ -1,22 +1,16 @@
 version: "3.7"
 
-services:
-  caddy:
-    image: caddy:2.3.0
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+networks:
+  landingpages:
+    name: landing_default
 
+services:
   initial-acquire-biz:
     image: ${{ secrets.REGISTRY_SERVER }}/chckr/landing-initial-acquire-biz
-    restart: always
     environment:
       SERVER_PORT: 4444
+    networks:
+      - landingpages
 
 volumes:
   caddy_data:
