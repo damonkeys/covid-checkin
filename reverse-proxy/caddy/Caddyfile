@@ -13,3 +13,11 @@ landing.chckr.de:443 {
                 gzip
         }
 }
+
+checkin.chckr.de:443 {
+        reverse_proxy albert:8080
+        encode {
+                zstd
+                gzip
+        }
+}

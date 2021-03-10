@@ -35,7 +35,8 @@ Simple SSL-Proxy-Server using echo. It uses a json (default routes.json in curre
 
 ## Environment variables
 Service-Gateway uses environment variables. If they are not set the server won't start. It expects the following environment variables:
-   * SERVER_PORT_SSL       - the server is listening on this portnumber and starts an HTTPS-Server
+   * SSL_ACTIVE            - defines SSL-mode for HTTP-Server. If it is set to falls the server will starts as HTTP-Server
+   * SERVER_PORT           - the server is listening on this portnumber and starts an HTTP(S)-Server
    * ROUTES_CONFIG         - path and filename where to find the routes.json config file to define all known routes
 
 ---

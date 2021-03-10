@@ -4,6 +4,9 @@ networks:
   homepage:
     external:
       name: homepage_default
+  chckr:
+    external: 
+      name: chckr_default
   landingpages:
     external:
       name: landing_default
@@ -19,6 +22,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     networks:
+      - chckr
       - homepage
       - landingpages
 

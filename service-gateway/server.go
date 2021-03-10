@@ -42,7 +42,8 @@ type RouteStruct struct {
 
 // ProxyConfigStruct defines the whole configuration for the reverse proxy. It will be filled via commandline parameters
 type ProxyConfigStruct struct {
-	HTTPSPort        string `env:"SERVER_PORT_SSL"`
+	ServerPort       string `env:"SERVER_PORT"`
+	SSLActive        bool   `env:"SSL_ACTIVE"`
 	RoutesConfigFile string `env:"ROUTES_CONFIG"`
 }
 
@@ -92,21 +93,26 @@ func main() {
 	// init echo
 	e := echo.New()
 	e.Use(tracing.MiddlewareWithoutCurrentUser("service-gateway"))
-	e.Pre(middleware.HTTPSRedirect()) // Add https-redirect
+	if proxyConfig.SSLActive {
+		e.Pre(middleware.HTTPSRedirect()) // Add https-redirect
 
-	// needed for AutoTLS
-	e.Use(middleware.Recover())
+		// needed for AutoTLS
+		e.Use(middleware.Recover())
+		e.AutoTLSManager.Cache = autocert.DirCache("./.cache")
+	}
 
 	// Logger config
 	l.ConfigureLogger(ctx, "service-gateway", e)
-
-	e.AutoTLSManager.Cache = autocert.DirCache("./.cache")
 
 	parseJSONConfig(ctx, e)
 
 	// Start Proxy
 	span.Finish()
-	e.Logger.Fatal(e.StartAutoTLS(":" + proxyConfig.HTTPSPort))
+	if proxyConfig.SSLActive {
+		e.Logger.Fatal(e.StartAutoTLS(":" + proxyConfig.ServerPort))
+	} else {
+		e.Logger.Fatal(e.Start(":" + proxyConfig.ServerPort))
+	}
 }
 
 // setProxyConfig gets environment variables and stores them into the ProxyConfigStruct
