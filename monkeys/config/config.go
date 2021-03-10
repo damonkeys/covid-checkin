@@ -59,7 +59,15 @@ func iterateStruct(ctx context.Context, structBlock interface{}, copyStructBlock
 		}
 		if envvar != "" {
 			if _, exists := os.LookupEnv(envvar); exists {
-				copyStruct.Field(i).SetString(os.Getenv(envvar))
+				fieldType := copyStruct.Field(i).Type().String()
+				switch fieldType {
+				case "string":
+					copyStruct.Field(i).SetString(os.Getenv(envvar))
+
+				case "bool":
+					boolValue := (strings.ToLower(os.Getenv(envvar)) == "true")
+					copyStruct.Field(i).SetBool(boolValue)
+				}
 			} else {
 				// remember all missing environment variables
 				unsettedEnvVars = append(unsettedEnvVars, envvar)

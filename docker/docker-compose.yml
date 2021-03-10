@@ -1,6 +1,7 @@
-version: "3.2"
+version: "3.7"
 networks:
     chckr_default:
+        name: chckr_default
         attachable: true
 
 
@@ -158,9 +159,6 @@ services:
     albert:
         image: ${DOCKER_REGISTRY_SERVER}/chckr/service-gateway:latest
         restart: always
-        ports:
-            - "80:80"
-            - "443:443"
         volumes:
             - ./albert/${STAGE}:/config
             - ./albert/.cache:/.cache
