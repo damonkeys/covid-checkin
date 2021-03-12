@@ -106,3 +106,12 @@ jobs:
 ########### dbmate ######################
     - name: dbmate Docker Build & Push to registry
       run: cd dbmate; docker build -t chckr/dbmate -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate
+
+
+########### intial-acquire-biz ########################
+    - name: intial-acquire-biz Build
+      run: cd intial-acquire-biz; go build
+
+
+    - name: intial-acquire-biz Docker Build & Push to registry
+      run: cd intial-acquire-biz; docker build -t chckr/intial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz
