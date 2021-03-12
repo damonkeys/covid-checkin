@@ -102,6 +102,14 @@ jobs:
       run: cd pixi; docker build -t chckr/pixi -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/pixi
 
 
+########### albert ######################
+    - name: albert service-gateway Build
+      run: cd service-gateway; go build
+
+
+    - name: albert service-gateway Docker Build & Push to registry
+      run: cd service-gateway; docker build -t chckr/service-gateway -t ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway
+
 
 ########### dbmate ######################
     - name: dbmate Docker Build & Push to registry
