@@ -108,10 +108,10 @@ jobs:
       run: cd dbmate; docker build -t chckr/dbmate -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate
 
 
-########### intial-acquire-biz ########################
-    - name: intial-acquire-biz Build
-      run: cd landing/intial-acquire-biz; go get -u github.com/gobuffalo/packr/packr; go get -u github.com/gobuffalo/packr; packr; packr build
+########### initial-acquire-biz ########################
+    - name: initial-acquire-biz Build
+      run: cd landing/initial-acquire-biz; go get -u github.com/gobuffalo/packr/packr; go get -u github.com/gobuffalo/packr; packr; packr build
 
 
-    - name: intial-acquire-biz Docker Build & Push to registry
-      run: cd landing; docker build -t chckr/intial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz
+    - name: initial-acquire-biz Docker Build & Push to registry
+      run: cd landing; docker build -t chckr/initial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz
