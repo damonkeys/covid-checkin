@@ -1,4 +1,4 @@
-chckr.de:443 {
+chckr.de:443, www.chckr.de:443 {
         reverse_proxy wordpress:80
         encode {
                 zstd
