@@ -110,8 +110,8 @@ jobs:
 
 ########### intial-acquire-biz ########################
     - name: intial-acquire-biz Build
-      run: cd intial-acquire-biz; go build
+      run: cd landing/intial-acquire-biz; go get -u github.com/gobuffalo/packr/packr; go get -u github.com/gobuffalo/packr; packr; packr build
 
 
     - name: intial-acquire-biz Docker Build & Push to registry
-      run: cd intial-acquire-biz; docker build -t chckr/intial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz
+      run: cd landing; docker build -t chckr/intial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/intial-acquire-biz
