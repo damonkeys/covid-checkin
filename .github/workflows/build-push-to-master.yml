@@ -114,4 +114,4 @@ jobs:
 
 
     - name: initial-acquire-biz Docker Build & Push to registry
-      run: cd landing; docker build -t chckr/initial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz
+      run: cd landing/initial-acquire-biz; docker build -t chckr/initial-acquire-biz -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz
