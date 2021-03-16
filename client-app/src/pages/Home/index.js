@@ -59,7 +59,6 @@ const Home = () => {
             <Link tabLink="#home-chckr" iconIos="f7:checkmark_shield" iconAurora="f7:checkmark_shield" iconMd="material:verified_user" tabLinkActive>chckr</Link>
             <Link tabLink="#home-account" iconIos="f7:person_crop_circle" iconAurora="f7:person_crop_circle" iconMd="material:account_circle">Account</Link>
         </Toolbar>
-
     </Page>
     );
 }
