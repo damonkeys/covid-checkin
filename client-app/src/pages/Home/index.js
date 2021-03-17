@@ -34,7 +34,7 @@ const Home = () => {
 
             <NavTitle>{i18n.t('basic.appname')}</NavTitle>
         </Navbar>
-        <Tabs swipeable>
+        <Tabs>
             <Tab id="home-chckr" tabActive>
                 <Block>
                     <Logo direction="horizontal" />
