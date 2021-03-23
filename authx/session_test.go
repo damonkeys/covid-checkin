@@ -14,8 +14,8 @@ import (
 
 	log "github.com/labstack/gommon/log"
 
-	"github.com/damonkeys/goth/gothic"
 	"github.com/markbates/goth"
+	"github.com/markbates/goth/gothic"
 )
 
 func TestCreateNewProviderData(t *testing.T) {
