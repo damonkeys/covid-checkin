@@ -1,0 +1,23 @@
+chckr.de:80, www.chckr.de:80 {
+        reverse_proxy wordpress:80
+        encode {
+                zstd
+                gzip
+        }
+}
+
+landing.chckr.de:80 {
+        reverse_proxy initial-acquire-biz:4444
+        encode {
+                zstd
+                gzip
+        }
+}
+
+checkin.chckr.de:80 {
+        reverse_proxy albert:8080
+        encode {
+                zstd
+                gzip
+        }
+}

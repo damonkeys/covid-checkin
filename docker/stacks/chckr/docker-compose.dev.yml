@@ -1,0 +1,168 @@
+version: "3.7"
+networks:
+    chckr_default:
+        external: true
+        name: chckr_default
+        attachable: true
+
+
+services:
+    admin:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/admin:latest
+        volumes: 
+            - ../../../logs:/logs
+            - ./pixi-dev:/pixi
+        depends_on:
+            - "db-chckr"
+            - "db-checkins"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../admin/.env
+            - ./env/dev/global.env
+        environment: 
+            QR_CODE_FILE_PATH: /pixi/qr
+            DB_CHCKR_HOST: db-chckr
+            DB_CHECKINS_HOST: db-checkins
+            DEEP_LINK_TO_BUSINESS_BY_CODE: ${BASE_URL}/checkin/
+            QR_CODE_FILE_PATH: /pixi/qr
+
+
+    authx:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/authx:latest
+        volumes: 
+            - ../../../logs:/logs
+        depends_on:
+            - "db-chckr"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../authx/.env
+            - ./env/dev/global.env
+        environment: 
+            DB_HOST: db-chckr
+            BASE_URL: ${BASE_URL}
+            ACTIVATION_URL: ${BASE_URL}/auth/activation/%s
+            ACTIVATION_STATE_URL: ${BASE_URL}/activation/%s
+    
+
+    biz:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/biz:latest
+        volumes: 
+            - ../../../logs:/logs
+        depends_on:
+            - "db-chckr"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../biz/.env
+            - ./env/dev/global.env
+        environment: 
+            DB_HOST: db-chckr
+
+            
+    ch3ck1nweb:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:latest
+        volumes: 
+            - ../../../logs:/logs
+        depends_on:
+            - "jaeger"
+            - "authx"
+            - "biz"
+            - "pixi"
+            - "checkins"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../ch3ck1nweb/.env
+            - ./env/dev/global.env
+   
+
+    checkins:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:latest
+        volumes: 
+            - ../../../logs:/logs
+        depends_on:
+            - "db-checkins"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../checkins/.env
+            - ./env/dev/global.env
+        environment:
+            DB_HOST: db-checkins
+            DOMAIN_NAME: ${DOMAIN_NAME}
+
+
+    pixi:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:latest
+        volumes: 
+            - ../../../logs:/logs
+            - ./pixi-dev:/static
+        depends_on:
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../pixi/.env
+            - ./env/dev/global.env
+
+            
+    db-chckr:
+        image: mariadb:latest
+        hostname: db-chckr.docker
+        volumes:
+            - mariadb-chckr:/var/lib/mysql
+        networks:
+            - chckr_default
+        environment:
+            MYSQL_ROOT_PASSWORD: 
+            MYSQL_DATABASE: chckr
+            MYSQL_USER: chckr_user
+            MYSQL_PASSWORD: 
+
+
+    db-checkins:
+        image: mariadb:latest
+        hostname: db-checkins.docker
+        volumes:
+            - mariadb-checkins:/var/lib/mysql
+        networks:
+            - chckr_default
+        environment:
+            MYSQL_ROOT_PASSWORD: 
+            MYSQL_DATABASE: checkins
+            MYSQL_USER: checkins_user
+            MYSQL_PASSWORD: 
+    
+    jaeger:
+        image: jaegertracing/all-in-one:latest
+        environment: 
+            COLLECTOR_ZIPKIN_HTTP_PORT: 9411
+            QUERY_BASE_PATH: /jaeger
+        networks:
+            - chckr_default
+
+
+    albert:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:latest
+        volumes:
+            - ../../../logs:/logs
+            - ./albert/dev:/config
+        depends_on:
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ../../../service-gateway/.env
+            - ./env/dev/global.env
+        environment:
+            ROUTES_CONFIG: /config/routes.json
+
+volumes:
+  mariadb-chckr:
+  mariadb-checkins:

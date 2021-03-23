@@ -1,0 +1,14 @@
+version: "3.7"
+
+networks:
+  landingpages:
+    external: true
+    name: landing_default
+
+services:
+  initial-acquire-biz:
+    image: ${{ secrets.REGISTRY_SERVER }}/chckr/landing-initial-acquire-biz
+    environment:
+      SERVER_PORT: 4444
+    networks:
+      - landingpages
