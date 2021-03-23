@@ -1,0 +1,194 @@
+version: "3.7"
+networks:
+    chckr_default:
+        external: true
+        name: chckr_default
+        attachable: true
+
+
+services:
+    admin:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/admin:latest
+        volumes: 
+            - /var/log/chckr:/logs
+            - pixi:/pixi
+        depends_on:
+            - "db-chckr"
+            - "db-checkins"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/prod/global.env
+        environment: 
+            SERVER_PORT: 19000
+            QR_CODE_FILE_PATH: /pixi/qr
+            DEEP_LINK_TO_BUSINESS_BY_CODE: ${BASE_URL}/checkin/
+            DB_CHCKR_HOST: ${DB_CHCKR_HOST}
+            DB_CHCKR_NAME: ${DB_CHCKR_NAME}
+            DB_CHCKR_USER: ${DB_CHCKR_USER}
+            DB_CHCKR_PASSWORD: ${DB_CHCKR_PASSWORD}
+            DB_CHECKINS_HOST: ${DB_CHECKINS_HOST}
+            DB_CHECKINS_NAME: ${DB_CHECKINS_NAME}
+            DB_CHECKINS_USER: ${DB_CHECKINS_USER}
+            DB_CHECKINS_PASSWORD: ${DB_CHECKINS_PASSWORD}
+
+    authx:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/authx:latest
+        volumes: 
+            - /var/log/chckr:/logs
+        depends_on:
+            - "db-chckr"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/prod/global.env
+            - ./env/prod/session.env
+        environment: 
+            SERVER_PORT: 2000
+            BASE_URL: ${BASE_URL}
+            ACTIVATION_URL: ${BASE_URL}/auth/activation/%s
+            ACTIVATION_STATE_URL: ${BASE_URL}/activation/%s
+            DB_HOST: ${DB_CHCKR_HOST}
+            DB_NAME: ${DB_CHCKR_NAME}
+            DB_USER: ${DB_CHCKR_USER}
+            DB_PASSWORD: ${DB_CHCKR_PASSWORD}
+            P_FACEBOOK_KEY: 
+            P_FACEBOOK_SECRET: 
+            P_GPLUS_KEY: 
+            P_GPLUS_SECRET: 
+            P_APPLE_KEY: 
+            P_APPLE_SECRET: 
+
+
+    biz:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/biz:latest
+        volumes: 
+            - /var/log/chckr:/logs
+        depends_on:
+            - "db-chckr"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/prod/global.env
+            - ./env/prod/session.env
+        environment: 
+            SERVER_PORT: 4000
+            DB_HOST: ${DB_CHCKR_HOST}
+            DB_NAME: ${DB_CHCKR_NAME}
+            DB_USER: ${DB_CHCKR_USER}
+            DB_PASSWORD: ${DB_CHCKR_PASSWORD}
+
+            
+    ch3ck1nweb:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:latest
+        volumes: 
+            - /var/log/chckr:/logs
+        depends_on:
+            - "jaeger"
+            - "authx"
+            - "biz"
+            - "pixi"
+            - "checkins"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/prod/global.env
+        environment: 
+            SERVER_PORT: 3000
+
+
+    checkins:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:latest
+        volumes: 
+            - /var/log/chckr:/logs
+        depends_on:
+            - "db-checkins"
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/prod/global.env
+            - ./env/prod/session.env
+        environment:
+            SERVER_PORT: 6000
+            DB_HOST: ${DB_CHECKINS_HOST}
+            DB_NAME: ${DB_CHECKINS_NAME}
+            DB_USER: ${DB_CHECKINS_USER}
+            DB_PASSWORD: ${DB_CHECKINS_PASSWORD}
+            DOMAIN_NAME: ${DOMAIN_NAME}
+
+
+    pixi:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:latest
+        volumes: 
+            - /var/log/chckr:/logs
+            - pixi:/static
+        depends_on:
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/dev/global.env
+        environment:
+            SERVER_PORT: 5000
+            
+
+    db-chckr:
+        image: mariadb:latest
+        hostname: db-chckr.docker
+        volumes:
+            - mariadb-chckr:/var/lib/mysql
+        networks:
+            - chckr_default
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_CHCKR_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_CHCKR_NAME}
+            MYSQL_USER: ${DB_CHCKR_USER}
+            MYSQL_PASSWORD: ${DB_CHCKR_PASSWORD}
+
+
+    db-checkins:
+        image: mariadb:latest
+        hostname: db-checkins.docker
+        volumes:
+            - mariadb-checkins:/var/lib/mysql
+        networks:
+            - chckr_default
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_CHECKINS_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_CHECKINS_NAME}
+            MYSQL_USER: ${DB_CHECKINS_USER}
+            MYSQL_PASSWORD: ${DB_CHECKINS_PASSWORD}
+    
+    jaeger:
+        image: jaegertracing/all-in-one:latest
+        environment: 
+            COLLECTOR_ZIPKIN_HTTP_PORT: 9411
+            QUERY_BASE_PATH: /jaeger
+        networks:
+            - chckr_default
+
+
+    albert:
+        image: ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:latest
+        volumes:
+            - /etc/chckr/albert:/config
+        depends_on:
+            - "jaeger"
+        networks:
+            - chckr_default
+        env_file:
+            - ./env/dev/global.env
+        environment:
+            SERVER_PORT: 8080
+            ROUTES_CONFIG: /config/routes.json
+            SSL_ACTIVE: "false"
+
+
+volumes:
+  mariadb-chckr:
+  mariadb-checkins:
+  pixi:

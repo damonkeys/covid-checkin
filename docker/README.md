@@ -1,23 +1,40 @@
 # Docker
-All microservices are dockerized. You can start the chckr-environment with docker stacks to bring up the whole swarm.
+All microservices are dockerized. You can start the chckr-environment with docker stacks to bring up the whole swarm. 
+We have different stacks for chckr-services, landing-pages, website and a global reverse proxy. All stacks are defined
+by seperate docker-folder for compose-files in folder docker/stacks/.
 
 ## First time
-Starting the docker environment for the first time you have to build all Docker Images before. But to start the docker
+Starting the docker environment for the first time you have to build all Docker images before. In production this is done
+by github actions or locally use the script "buildAll.sh" in tools-folder. But to start the docker
 swarm you need to init it with following docker command:
 
 ```
 docker swarm init
 ```
 
-In the tools-folder you find a script for starting the docker-environment called `startStack.sh`. Call this command at
-the first time to build the whole environment and start all containers.
+Before starting the stacks the first time you need to start some scripts. Create needed networks using the script in
+docker/onetime/. Use this for local development:
 
 ```
-cd tools
-./startStack.sh dev build
+docker/onetime/createNetworks.sh
 ```
-For the dev-stage you are not able to reach the react-app because kong is configured to call the local running app. You
-have to start it manually via
+
+or on remote docker server (e.g. for production)
+```
+DOCKER_HOST="ssh://user@dockerhost" docker/onetime/createNetworks.sh
+```
+
+We need some config-files. In development-environment they are located relativ to the stack-folder. There is nothing to
+do in local development-environment. On docker-server in production you need to copy the config-files to the expected
+locations. Execute the script copyProdConfigFiles.sh located in onetime folder:
+
+```
+SSH_HOST="user@dockerhost" docker/onetime/copyProdConfigFiles.sh
+```
+
+### Stage dev
+For the local-development-environemnt you are not able to reach the react-app because albert is configured to call the
+locally running app. You have to start it manually via
 ```
 cd client-app
 yarn start
@@ -25,23 +42,27 @@ yarn start
 It will be started locally because of developing without deploying the react-app. Now you are ready to call the app via
 https://dev.checkin.chckr.de. __Don't forget to call the ./host.sh add script.__
 
-To stop all docker containers call the `stopStack.sh` script.
+To start all other services you need to deploy all needed stacks:
 
 ```
-cd tools
-./stopStack.sh
+docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.dev.yml proxy
+docker stack deploy -c docker/stacks/homepage/docker-compose.dev.yml www
+docker stack deploy -c docker/stacks/landing/docker-compose.yml landing
+cd docker/stacks/chckr
+./deployDevStack.sh
 ```
+
 
 ### Stage prod
-Stage prod works the same as dev but it starts ch3ck1nweb-server with static build of the react-app. You are ready to reach chckr via the prod-URL defined in `docker/env/.env.prod`.
+Stage prod works the same as dev but it starts ch3ck1nweb-server with static build of the react-app.
 
 ```
-cd tools
-./startStack.sh prod build
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.prod.yml proxy
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/homepage/docker-compose.prod.yml www
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/landing/docker-compose.yml landing
+cd docker/stacks/chckr
+DOCKER_HOST="ssh://user@dockerhost" ./deployProdStack.sh
 ```
-
-### Other stages
-You can define freely any stage you need. The env-files and Albert-config are grouped by folders named like the given stage.
 
 
 ### Database
@@ -64,26 +85,14 @@ cd /db-checkins
 ./run.sh up
 ```
 
-## Second time ;-)
-During the second time you don't need to build or initialize something. Enter the tools folder and start the docker-environment:
-```
-cd tools
-./startStack.sh dev
-
-cd ../client-app
-yarn start
-```
-
-Now you are ready for developing!
-
 
 # Scripts
 
 ## Build-Scripts
-There is a script for building an image in this docker folder:
+There is a script for building an image in the tools folder:
 
 ```
-cd docker
+cd tools
 ./buildDockerImage.sh <servicename>
 ```
 To rebuild a single golang-image after changing the code you need this command e.g.
@@ -93,32 +102,11 @@ cd docker
 ```
 
 To build all containers there is a script for multiple call the buildDockerImage.sh script. _This script is needed to
-add new servers if we add one to our environment!_ The script builds the dbmate-image with all migrations too.
-```
-cd docker
-./buildAll.sh
-```
-
-## Start-Scripts
-To start the containers in the tools folder you find the `startStack.sh` script.
-
+add new servers if we add one to our environment!_ The script builds the dbmate-image with all migrations too. __No docker images will be pushed to the docker registry!!!__
 ```
 cd tools
-./startStack.sh <stage> <build>
+./buildAll.sh
 ```
-
-The two parameters are for controlling the starting.
-
-1. The first parameter stage expect dev or prod. With this parameter you control some environment-variables for the container. You find this environment-variables in the folder `docker/env`. For both stages there are one env-file:
-    ```
-    .env.dev
-    .env.prod
-    ```
-    Here you find the Domainname for this stage.
-
-    In dependency of the stage kong gets the specific route-config. You find both configs in folder `docker/kong`. The `kong/dev/kong.yml` has to be changed locally for your development. This is described later.
-
-2. The second parameter is optional. If you set it to build all images will be (re)build. Sometimes it is necessary to rebuild the whole environment.
 
 # Developing with docker
 For developing it is very slow to rebuild the docker iamge for testing your changes on the code. If you do some changes to a server start it locally like the old way with the `./startServer.sh` script in your server-folder, e.g.
@@ -126,9 +114,9 @@ For developing it is very slow to rebuild the docker iamge for testing your chan
 cd biz
 ./startServer.sh
 ```
-At this moment Albert doesn't know your local server and will call the container via the route config. Before you start the whole docker-environment you have to adjust the Albert-route-file. You find it in `docker/albert/dev/route.json`.
+At this moment Albert doesn't know your local server and will call the container via the route config. Before you start the whole docker-environment you have to adjust the Albert-route-file. You find it in `docker/stacks/chckr/albert/dev/route.json`.
 
-For example if you want to use the local running biz server you have to tell it Albert. change the Albert-route from:
+For example if you want to use the local running biz server you have to tell it Albert. Change the Albert-route from:
 ```
 {
   "name": "Biz",
@@ -156,11 +144,8 @@ to this:
 ```
 Now Albert will route all biz-calls to your locally running server.
 
-After this adjustments you start the docker environment:
-```
-cd tools
-./startStack.sh dev
-```
+After this adjustments you have to restart the docker-dev-stack.
+
 All your biz-server-changes can be tested locally. Then you have to rebuild and restart the server locally:
 ```
 cd <servername>
@@ -169,7 +154,7 @@ go build
 ```
 
 ## Logging
-The `./startStack.sh`script starts the docker swarm containers in detached mode. You won't see any logs. To get the
+The docker swarm containers running in detached mode. You won't see any logs. To get the
 logs of a service try this command:
 ```
 docker service logs -f chckr_biz
