@@ -50,7 +50,7 @@ jobs:
 
 
     - name: ch3ck1nweb Docker Build & Push to registry
-      run: cd ch3ck1nweb; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb
+      run: cd ch3ck1nweb; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:${{ github.run_id }}
         
   
 ########### admin ######################
@@ -59,7 +59,7 @@ jobs:
 
 
     - name: admin Docker Build & Push to registry
-      run: cd admin; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/admin:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/admin:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/admin
+      run: cd admin; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/admin:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/admin:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/admin:${{ github.run_id }}
 
 
 
@@ -69,7 +69,7 @@ jobs:
 
 
     - name: authx Docker Build & Push to registry
-      run: cd authx; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/authx:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/authx:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/authx
+      run: cd authx; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/authx:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/authx:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/authx:${{ github.run_id }}
 
 
 
@@ -79,7 +79,7 @@ jobs:
 
 
     - name: biz Docker Build & Push to registry
-      run: cd biz; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/biz:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/biz:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/biz
+      run: cd biz; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/biz:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/biz:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/biz:${{ github.run_id }}
 
 
 
@@ -89,7 +89,7 @@ jobs:
 
 
     - name: checkins Docker Build & Push to registry
-      run: cd checkins; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/checkins
+      run: cd checkins; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:${{ github.run_id }}
 
 
 
@@ -99,7 +99,7 @@ jobs:
 
 
     - name: pixi Docker Build & Push to registry
-      run: cd pixi; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/pixi
+      run: cd pixi; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:${{ github.run_id }}
 
 
 ########### albert ######################
@@ -108,12 +108,12 @@ jobs:
 
 
     - name: albert service-gateway Docker Build & Push to registry
-      run: cd service-gateway; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway -t ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway
+      run: cd service-gateway; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway -t ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:${{ github.run_id }}
 
 
 ########### dbmate ######################
     - name: dbmate Docker Build & Push to registry
-      run: cd dbmate; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate
+      run: cd dbmate; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate:${{ github.run_id }}
 
 
 ########### initial-acquire-biz ########################
@@ -122,4 +122,4 @@ jobs:
 
 
     - name: initial-acquire-biz Docker Build & Push to registry
-      run: cd landing/initial-acquire-biz; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz
+      run: cd landing/initial-acquire-biz; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:latest -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:${{ github.run_id }}
