@@ -45,9 +45,9 @@ https://dev.checkin.chckr.de. __Don't forget to call the ./host.sh add script.__
 To start all other services you need to deploy all needed stacks:
 
 ```
-docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.dev.yml proxy
-docker stack deploy -c docker/stacks/homepage/docker-compose.dev.yml www
-docker stack deploy -c docker/stacks/landing/docker-compose.yml landing
+docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.dev.yml --with-registry-auth proxy
+docker stack deploy -c docker/stacks/homepage/docker-compose.dev.yml --with-registry-auth www
+docker stack deploy -c docker/stacks/landing/docker-compose.yml --with-registry-auth landing
 cd docker/stacks/chckr
 ./deployDevStack.sh
 ```
@@ -57,9 +57,9 @@ cd docker/stacks/chckr
 Stage prod works the same as dev but it starts ch3ck1nweb-server with static build of the react-app.
 
 ```
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.prod.yml proxy
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/homepage/docker-compose.prod.yml www
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/landing/docker-compose.yml landing
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.prod.yml --with-registry-auth proxy
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/homepage/docker-compose.prod.yml --with-registry-auth www
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/landing/docker-compose.yml --with-registry-auth landing
 cd docker/stacks/chckr
 DOCKER_HOST="ssh://user@dockerhost" ./deployProdStack.sh
 ```

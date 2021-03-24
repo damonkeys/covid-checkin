@@ -19,4 +19,4 @@ export DB_CHECKINS_USER=${DB_CHECKINS_USER}
 export DB_CHECKINS_PASSWORD=${DB_CHECKINS_PASSWORD}
 export DB_CHECKINS_ROOT_PASSWORD=${DB_CHECKINS_ROOT_PASSWORD}
 
-docker stack deploy -c docker-compose.prod.yml chckr
+docker stack deploy -c docker-compose.prod.yml --with-registry-auth chckr
