@@ -122,4 +122,4 @@ jobs:
 
 
     - name: initial-acquire-biz Docker Build & Push to registry
-      run: cd landing/initial-acquire-biz; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/initial-acquire-biz:${{ github.run_id }}
+      run: cd landing/initial-acquire-biz; docker build -t ${{ secrets.REGISTRY_SERVER }}/chckr/landing-initial-acquire-biz:${{ github.run_id }} .; docker push ${{ secrets.REGISTRY_SERVER }}/chckr/landing-initial-acquire-biz:${{ github.run_id }}
