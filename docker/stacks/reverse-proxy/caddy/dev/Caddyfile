@@ -1,4 +1,4 @@
-chckr.de:80, www.chckr.de:80 {
+chckr.local:80, www.chckr.local:80 {
         reverse_proxy wordpress:80
         encode {
                 zstd
@@ -6,7 +6,7 @@ chckr.de:80, www.chckr.de:80 {
         }
 }
 
-landing.chckr.de:80 {
+landing.chckr.local:80 {
         reverse_proxy initial-acquire-biz:4444
         encode {
                 zstd
@@ -14,7 +14,7 @@ landing.chckr.de:80 {
         }
 }
 
-checkin.chckr.de:80 {
+checkin.chckr.local:80 {
         reverse_proxy albert:8080
         encode {
                 zstd
