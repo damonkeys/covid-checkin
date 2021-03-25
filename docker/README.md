@@ -17,6 +17,7 @@ docker/onetime/. Use this for local development:
 
 ```
 docker/onetime/createNetworks.sh
+docker/onetime/addDevHosts.sh
 ```
 
 or on remote docker server (e.g. for production)
