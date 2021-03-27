@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="de-DE">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>chckr.de covid meldepflicht digital gelöst</title>
-    <meta name="description" content="Free bootstrap template Atlas">
+    <title>chckr.de gäste registrierung digital gelöst</title>
+    <meta name="description" content="chckr.de ein einfacher service für die gäste registrierung digital gelöst">
     <link rel="icon" href="img/favicon.png" sizes="32x32" type="image/png">
     <!-- custom.css -->
     <link rel="stylesheet" href="css/custom.css">
@@ -28,7 +28,7 @@
             <p data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="lead text-white my-4">
                 Mit chckr kannst Du Dich endlich wieder auf Dein Business konzentrieren - Deine Gäste registrieren sich papierlos.
             </p>
-            <a href="#" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">Frühen Zugang sichern.</a>
+            <a href="#contact" data-aos="fade" data-aos-easing="linear" data-aos-duration="1000" data-aos-once="true" class="btn my-4 font-weight-bold atlas-cta cta-green">Frühen Zugang sichern.</a>
         </div>
     </div>
     <!-- three-blcok -->
@@ -65,7 +65,7 @@
                         Alle Daten liegen auf deutschen Servern, wir geben sie an niemanden weiter - mit der Ausnahme
                         der Gesundheitsbehörden und im Rahmen der gesetzlichen Auflagen.
                     </p>
-                    <a href="#" class="btn my-4 font-weight-bold atlas-cta cta-blue">Ich bin interessiert</a>
+                    <a href="#contact" class="btn my-4 font-weight-bold atlas-cta cta-blue">Ich bin interessiert</a>
                 </div>
                 <div data-aos="fade-left" data-aos-duration="1000" data-aos-once="true" class="col-md-6 align-self-center">
                     <img src="img/checkin-screen.png" alt="Eine kleine Vorschau" class="mx-auto d-block">
@@ -92,7 +92,7 @@
                     <li><i class="fa fa-check-square" aria-hidden="true"></i> Kostenloses Onboarding</li>
                     <li><i class="fa fa-check-square" aria-hidden="true"></i> Online Speisekarte</li>
                 </ul>
-                <a href="#" class="btn my-4 font-weight-bold atlas-cta cta-ghost">Als chckr starten</a>
+                <a href="#contact" class="btn my-4 font-weight-bold atlas-cta cta-ghost" onclick="document.getElementById('mce-BUNDLE').value = 'chckr';">Als chckr starten</a>
             </div>
             <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" data-aos-once="true" class="col-md-4 py-4 mt-5" id="price-table__premium">
                 <h4 class="my-4">Voll chckr</h4>
@@ -104,7 +104,7 @@
                     <li></li>
                     <li></li>
                 </ul>
-                <a href="#" class="btn my-4 font-weight-bold atlas-cta cta-green">Als Voll chckr starten</a>
+                <a href="#contact" class="btn my-4 font-weight-bold atlas-cta cta-green" onclick="document.getElementById('mce-BUNDLE').value = 'voll-chckr';">Als Voll chckr starten</a>
             </div>
             <div data-aos="fade-right" data-aos-duration="1000" data-aos-once="true" class="col-md-4 py-4 mt-5 rounded">
                 <h4 class="my-4">Ober chckr</h4>
@@ -116,11 +116,12 @@
                     <li></li>
                     <li></li>
                 </ul>
-                <a href="#" class="btn my-4 font-weight-bold atlas-cta cta-ghost">Als Ober chckr starten</a>
+                <a href="#contact" class="btn my-4 font-weight-bold atlas-cta cta-ghost" onclick="document.getElementById('mce-BUNDLE').value = 'ober-chckr';">Als Ober chckr starten</a>
             </div>
         </div>
     </div>
     </div>
+
     <div class="jumbotron jumbotron-fluid" id="contact" style="background-image: url(img/contact-bk.jpg);">
         <div class="container my-5">
             <div class="row justify-content-between">
@@ -150,6 +151,7 @@
 	                        <div class="form-group col-md-6 mc-field-group">
                                 <label for="mce-FNAME">Dein Vorname</label>
                                 <input type="text" value="" name="FNAME" class="form-control" id="mce-FNAME">
+                                <input type="hidden" value="" name="BUNDLE" class="form-control" id="mce-BUNDLE">
 	                        </div>
 	                    </div>
                         <div id="mergeRow-gdpr" class="mergeRow gdpr-mergeRow content__gdprBlock mc-field-group">
@@ -159,7 +161,7 @@
                                 <fieldset class="mc_fieldset gdprRequired mc-field-group" name="interestgroup_field">
                                 <label class="checkbox subfield" for="gdpr_47043"><input type="checkbox" id="gdpr_47043" name="gdpr[47043]" value="Y" class="av-checkbox gdpr form-check-input"><span>Ihr dürft mir (gelegentlich) E-Mail senden</span> </label><label class="checkbox subfield" for="gdpr_47059"><input type="checkbox" id="gdpr_47059" name="gdpr[47059]" value="Y" class="av-checkbox gdpr form-check-input"><span>Ihr  dürft mich anrufen, wenn es wichtig ist</span> </label>
                                 </fieldset>
-                                <p>Du kannst Dich jederzeit abmelden, in dem Du auf den Link im Fuß der E-Mails folgst. Um mehr Informationen zu unserem Datenschutz zu erhalten, besuche bitte unseren Internetauftritt (chckr.de/privacy)</p>
+                                <p>Du kannst Dich jederzeit abmelden, in dem Du auf den Link im Fuß der E-Mails folgst. Um mehr Informationen zu unserem Datenschutz zu erhalten, besuche bitte unseren Internetauftritt (<a href="https://chckr.de/privacy" target="_blank">chckr.de/privacy</a>)</p>
                             </div>
                             <div class="content__gdprLegal">
                                 <p class="small">We use Mailchimp as our marketing platform. By clicking below to subscribe, you acknowledge that your information will be transferred to Mailchimp for processing. <a href="https://mailchimp.com/legal/" target="_blank">Learn more about Mailchimp's privacy practices here.</a></p>
@@ -177,21 +179,10 @@
         <div class="container">
             <div class="row justify-content-between">
             	<div class="col-md-6 text-white align-self-center text-center text-md-left my-2">
-                    Copyright © 2018 Chen, Yi-Ya.
+                    Copyright © 2021 chckr.de
                 </div>
                 <div class="col-md-6 align-self-center text-center text-md-right my-2" id="social-media">
-                    <a href="#" class="d-inline-block text-center ml-2">
-                    	<i class="fa fa-facebook" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="d-inline-block text-center ml-2">
-                    	<i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="d-inline-block text-center ml-2">
-                    	<i class="fa fa-medium" aria-hidden="true"></i>
-                    </a>
-                    <a href="#" class="d-inline-block text-center ml-2">
-                    	<i class="fa fa-linkedin" aria-hidden="true"></i>
-                    </a>
+                    
                 </div>
             </div>
         </div>
