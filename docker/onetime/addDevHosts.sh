@@ -14,7 +14,7 @@ if [ -n "$(grep $HOSTNAME /etc/hosts)" ]
         echo "Adding $HOSTNAME to your $ETC_HOSTS";
         sudo -- sh -c -e "echo '$IP\t$HOSTNAME' >> /etc/hosts";
         sudo -- sh -c -e "echo '$IP\twww.$HOSTNAME' >> /etc/hosts";
-        sudo -- sh -c -e "echo '$IP\tlanding.$HOSTNAME' >> /etc/hosts";
+        sudo -- sh -c -e "echo '$IP\tjoin.$HOSTNAME' >> /etc/hosts";
         sudo -- sh -c -e "echo '$IP\tcheckin.$HOSTNAME' >> /etc/hosts";
 
         if [ -n "$(grep $HOSTNAME /etc/hosts)" ]

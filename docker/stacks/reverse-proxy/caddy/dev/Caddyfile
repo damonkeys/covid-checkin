@@ -6,7 +6,7 @@ chckr.local:80, www.chckr.local:80 {
         }
 }
 
-landing.chckr.local:80 {
+join.chckr.local:80 {
         reverse_proxy initial-acquire-biz:4444
         encode {
                 zstd
