@@ -1,2 +1,5 @@
 #! /bin/bash
-docker run --name chckr_dbmate --rm -it -v "$(pwd)/db:/db" --network=chckr_default ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate
+
+container_id=$(docker ps -aqf "name=dbmate_dbmate")
+echo 'Container-ID for dbmate-container: ' $container_id
+docker exec -it $container_id bash

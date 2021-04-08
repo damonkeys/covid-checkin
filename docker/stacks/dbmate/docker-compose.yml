@@ -1,0 +1,12 @@
+version: "3.7"
+
+networks:
+  chckr:
+    external: true
+    name: chckr_default
+
+services:
+  dbmate:
+    image: ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate
+    networks:
+      - chckr

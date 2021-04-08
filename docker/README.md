@@ -68,8 +68,13 @@ DOCKER_HOST="ssh://user@dockerhost" ./deployProdStack.sh
 
 ### Database
 During the first start of the docker environment there will be two clean instances of MariaDB created but without any
-tables. To run the dbmate-scripts for migrations you need to start another docker container called chckr/dbmate. To enter
-the commandline of this container there is a script in the tools-directory:
+tables. To run the dbmate-scripts for migrations you need to start another docker stack called dbmate. 
+
+```
+DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/dbmate/docker-compose.yml --with-registry-auth dbmate
+```
+
+To enter the commandline of this container there is a script in the tools-directory:
 
 ```
 cd tools
@@ -84,6 +89,11 @@ cd /db-chckr
 
 cd /db-checkins
 ./run.sh up
+```
+
+After running the migrations don't forget to shutdown the dbmate stack with
+```
+DOCKER_HOST="ssh://user@dockerhost" docker stack rm dbmate
 ```
 
 
