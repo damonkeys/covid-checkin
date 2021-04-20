@@ -2,7 +2,7 @@ name: Deploy on Staging
 
 on:
   workflow_run:
-    workflows: ["Build and Deploy"]
+    workflows: ["Build and Push"]
     branches: [main]
     types: [completed]
 
