@@ -1,0 +1,28 @@
+name: Deploy on Staging
+
+on:
+  workflow_run:
+    workflows: ["Build and Deploy"]
+    branches: [main]
+    types: [completed]
+
+jobs:
+  on-success:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup SSH Keys and known_hosts
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.STAGING_SSH_KEY }}"
+    
+    - name: Checkout repository
+      uses: actions/checkout@master
+
+    - name: Docker Login
+      run: docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_SERVER }}
+    
+    - name: Deploy to staging
+      run: DOCKER_HOST="ssh://user@staging.chckr.de" ./docker/startAllStagingStacks.sh

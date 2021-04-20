@@ -1,0 +1,31 @@
+version: "3.7"
+
+networks:
+  homepage:
+    external: true
+    name: homepage_default
+  chckr:
+    external: true
+    name: chckr_default
+  landingpages:
+    external: true
+    name: landing_default
+
+services:
+  caddy:
+    image: caddy:2.3.0
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/chckr/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - chckr
+      - homepage
+      - landingpages
+
+volumes:
+  caddy_data:
+  caddy_config:

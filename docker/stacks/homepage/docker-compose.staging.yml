@@ -1,0 +1,30 @@
+version: '3.7'
+
+networks:
+  homepage:
+    external: true
+    name: homepage_default
+
+services:
+  wordpress:
+    image: wordpress
+    volumes:
+      - /etc/chckr/php/homepage.ini:/usr/local/etc/php/conf.d/homepage.ini
+      - wordpress:/var/www/html
+    env_file:
+      - ./env/prod.env
+    networks:
+      - homepage
+
+  db:
+    image: mysql:8.0.23
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+      - ./env/staging.env
+    networks:
+      - homepage
+
+volumes:
+  wordpress:
+  db:
