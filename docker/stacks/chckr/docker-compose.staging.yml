@@ -19,7 +19,7 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
+            - ./env/staging/global.env
         environment: 
             SERVER_PORT: 19000
             QR_CODE_FILE_PATH: /pixi/qr
@@ -43,8 +43,8 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
-            - ./env/prod/session.env
+            - ./env/staging/global.env
+            - ./env/staging/session.env
         environment: 
             SERVER_PORT: 2000
             BASE_URL: ${BASE_URL}
@@ -72,8 +72,8 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
-            - ./env/prod/session.env
+            - ./env/staging/global.env
+            - ./env/staging/session.env
         environment: 
             SERVER_PORT: 4000
             DB_HOST: ${DB_CHCKR_HOST}
@@ -95,7 +95,7 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
+            - ./env/staging/global.env
         environment: 
             SERVER_PORT: 3000
 
@@ -110,8 +110,8 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
-            - ./env/prod/session.env
+            - ./env/staging/global.env
+            - ./env/staging/session.env
         environment:
             SERVER_PORT: 6000
             DB_HOST: ${DB_CHECKINS_HOST}
@@ -131,7 +131,7 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
+            - ./env/staging/global.env
         environment:
             SERVER_PORT: 5000
             
@@ -181,7 +181,7 @@ services:
         networks:
             - chckr_default
         env_file:
-            - ./env/prod/global.env
+            - ./env/staging/global.env
         environment:
             SERVER_PORT: 8080
             ROUTES_CONFIG: /config/routes.json
