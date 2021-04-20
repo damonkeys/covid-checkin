@@ -6,7 +6,7 @@ import {
     List,
     ListItem
 } from 'framework7-react';
-import Logins from '../../components/Logins/index';
+import Register from '../../components/Register/index';
 import Logo from '../../components/Logo';
 import { useSession } from '../../modules/session';
 import { useTranslation } from 'react-i18next';
@@ -41,7 +41,7 @@ const Account = (props: Props) => {
         <Block>
             {t('signin.explanation')}
         </Block>
-        <Logins></Logins>
+        <Register></Register>
     </div>
 }
 

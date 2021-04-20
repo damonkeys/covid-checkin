@@ -14,7 +14,7 @@ type Props = {
 }
 
 const device = getDevice();
-export default class Logins extends Component<Props> {
+export default class Register extends Component<Props> {
 
     isAppleDevice = () => {
         return device.ios || device.macos;

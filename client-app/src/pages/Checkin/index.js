@@ -10,14 +10,12 @@ import {
 } from 'framework7-react';
 import checkHTTPError from '../../modules/checkHTTPError';
 import BusinessView from '../../components/BusinessView/businessView.js'
-import { useSession } from '../../modules/session';
 import type { CheckinProps, BusinessData } from '../../js/types';
 import {useTranslation} from 'react-i18next';
 
 const Checkin = (props: CheckinProps) => {
   const [t] = useTranslation();
   const [businessData: BusinessData, setBusinessData] = useState({});
-  useSession();
 
 
   useEffect(() => {
@@ -79,11 +77,6 @@ const Checkin = (props: CheckinProps) => {
           iconIos="f7:info_circle"
           iconAurora="f7:info_circle"
           iconMd="material:info">Infos</Link>
-        <Link
-          tabLink="#checkin-account"
-          iconIos="f7:person_crop_circle"
-          iconAurora="f7:person_crop_circle"
-          iconMd="material:account_circle">Account</Link>
       </Toolbar>
     </Page>
   );
