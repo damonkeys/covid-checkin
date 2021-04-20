@@ -24,7 +24,6 @@
 # log file should be ignored
 *.log
 
-
 # binaries
 admin/admin
 checkins/checkins
