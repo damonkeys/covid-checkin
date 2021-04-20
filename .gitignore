@@ -24,6 +24,9 @@
 # log file should be ignored
 *.log
 
+# Docker-data
+docker/stacks/chckr/pixi-dev/**
+
 # binaries
 admin/admin
 checkins/checkins
