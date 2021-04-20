@@ -3,7 +3,7 @@ name: Deploy on Staging
 on:
   workflow_run:
     workflows: ["Build and Push"]
-    branches: [main]
+    branches: [master]
     types: [completed]
 
 jobs:
