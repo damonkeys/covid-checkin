@@ -17,7 +17,7 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< ${{ secrets.STAGING_SSH_KEY }}
+          ssh-add - <<< "${{ secrets.STAGING_SSH_KEY }}"
     
     - name: Checkout repository
       uses: actions/checkout@master
@@ -26,4 +26,6 @@ jobs:
       run: docker login -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASSWORD }} ${{ secrets.REGISTRY_SERVER }}
     
     - name: Deploy to staging
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: DOCKER_HOST="ssh://user@staging.chckr.de" ./docker/stacks/startAllStagingStacks.sh
