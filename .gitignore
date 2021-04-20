@@ -24,13 +24,6 @@
 # log file should be ignored
 *.log
 
-# Docker-data
-docker/mariadb-chckr/*
-docker/mariadb-checkins/*
-docker/pixi/*
-docker/pixi/qr/*
-docker/albert/.cache/acme_account+key
-docker/albert/.cache/dev.checkin.chckr.de
 
 # binaries
 admin/admin
