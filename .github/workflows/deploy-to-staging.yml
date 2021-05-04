@@ -32,4 +32,5 @@ jobs:
     - name: Deploy to staging
       env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          STAGING_HOST: staging.chckr.de
       run: DOCKER_HOST="ssh://user@${STAGING_HOST}" ./docker/stacks/startAllStagingStacks.sh
