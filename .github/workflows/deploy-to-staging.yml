@@ -15,9 +15,11 @@ jobs:
     - name: Setup SSH Keys and known_hosts
       env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          STAGING_HOST: staging.chckr.de
       run: |
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "${{ secrets.STAGING_SSH_KEY }}"
+          ssh-keyscan -t rsa $STAGING_HOST >> ~/.ssh/known_hosts
     
     - name: Checkout repository
       uses: actions/checkout@master
@@ -28,4 +30,4 @@ jobs:
     - name: Deploy to staging
       env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      run: DOCKER_HOST="ssh://user@staging.chckr.de" ./docker/stacks/startAllStagingStacks.sh
+      run: DOCKER_HOST="ssh://user@${STAGING_HOST}" ./docker/stacks/startAllStagingStacks.sh
