@@ -21,7 +21,7 @@ jobs:
           ssh-add - <<< "${{ secrets.STAGING_SSH_KEY }}"
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
-          ssh-keyscan -t -v rsa $STAGING_HOST >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa $STAGING_HOST >> ~/.ssh/known_hosts
     
     - name: Checkout repository
       uses: actions/checkout@master
