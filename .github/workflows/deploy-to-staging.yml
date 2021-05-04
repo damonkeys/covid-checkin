@@ -19,7 +19,7 @@ jobs:
       run: |
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "${{ secrets.STAGING_SSH_KEY }}"
-          mkdir -p -v ~/.ssh
+          mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
           ssh-keyscan -t -v rsa $STAGING_HOST >> ~/.ssh/known_hosts
     
