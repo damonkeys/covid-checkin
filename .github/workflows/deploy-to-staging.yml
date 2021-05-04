@@ -19,8 +19,9 @@ jobs:
       run: |
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "${{ secrets.STAGING_SSH_KEY }}"
+          mkdir -pv ~/.ssh
           touch ~/.ssh/known_hosts
-          ssh-keyscan -t rsa $STAGING_HOST >> ~/.ssh/known_hosts
+          ssh-keyscan -tv rsa $STAGING_HOST >> ~/.ssh/known_hosts
     
     - name: Checkout repository
       uses: actions/checkout@master
