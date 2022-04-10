@@ -8,7 +8,7 @@ networks:
 
 services:
     admin:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/admin:latest
+        image: ${REGISTRY_SERVER}/chckr/admin:latest
         volumes: 
             - /var/log/chckr:/logs
             - pixi:/pixi
@@ -34,7 +34,7 @@ services:
             DB_CHECKINS_PASSWORD: ${DB_CHECKINS_PASSWORD}
 
     authx:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/authx:latest
+        image: ${REGISTRY_SERVER}/chckr/authx:latest
         volumes: 
             - /var/log/chckr:/logs
         depends_on:
@@ -54,16 +54,16 @@ services:
             DB_NAME: ${DB_CHCKR_NAME}
             DB_USER: ${DB_CHCKR_USER}
             DB_PASSWORD: ${DB_CHCKR_PASSWORD}
-            P_FACEBOOK_KEY: 
-            P_FACEBOOK_SECRET: 
-            P_GPLUS_KEY: 
-            P_GPLUS_SECRET: 
-            P_APPLE_KEY: 
-            P_APPLE_SECRET: 
+            P_FACEBOOK_KEY: [your-facebook-key]
+            P_FACEBOOK_SECRET: [your-facebook-secret]
+            P_GPLUS_KEY: [your-google-key]
+            P_GPLUS_SECRET: [your-google-secret]
+            P_APPLE_KEY: [your-apple-key]
+            P_APPLE_SECRET: [your-apple-secret]
 
 
     biz:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/biz:latest
+        image: ${REGISTRY_SERVER}/chckr/biz:latest
         volumes: 
             - /var/log/chckr:/logs
         depends_on:
@@ -83,7 +83,7 @@ services:
 
             
     ch3ck1nweb:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:latest
+        image: ${REGISTRY_SERVER}/chckr/ch3ck1nweb:latest
         volumes: 
             - /var/log/chckr:/logs
         depends_on:
@@ -101,7 +101,7 @@ services:
 
 
     checkins:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:latest
+        image: ${REGISTRY_SERVER}/chckr/checkins:latest
         volumes: 
             - /var/log/chckr:/logs
         depends_on:
@@ -122,7 +122,7 @@ services:
 
 
     pixi:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:latest
+        image: ${REGISTRY_SERVER}/chckr/pixi:latest
         volumes: 
             - /var/log/chckr:/logs
             - pixi:/static
@@ -173,7 +173,7 @@ services:
 
 
     albert:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:latest
+        image: ${REGISTRY_SERVER}/chckr/service-gateway:latest
         volumes:
             - /etc/chckr/albert:/config
         depends_on:

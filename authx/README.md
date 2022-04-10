@@ -1,6 +1,6 @@
 # Bongo - Auth-Server
 
-Auth-Server for monkeycash.io.
+Auth-Server for chckr.de.
 
 ## Providers for oauth-login
 Actuall providers

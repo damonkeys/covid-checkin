@@ -33,7 +33,7 @@ For further informations about the docker environment look at the README.md at t
 _If you don't know the correct name ask a developer/ mentor_
 
 ### First run - the docker way
-* change into _/tools_ folder and start the script `./host.sh add` to add an ip-routing for checkins.monkeycash.io to your localhost.
+* change into _/tools_ folder and start the script `./host.sh add` to add an ip-routing for checkin.chckr.de to your localhost.
 * change into _/tools_ folder. restart all docker containers with `./stopStack.sh dev; ./startStack.sh dev`
 * change into _/client-app folder to start the react-app with `yarn start`
 

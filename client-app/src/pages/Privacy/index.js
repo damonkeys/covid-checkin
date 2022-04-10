@@ -8,7 +8,7 @@ export default () => (
         <Block strong>
             <h1>Datenschutzerklärung</h1>
             <p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:<br />
-                info@monkeycash.io</p>
+                info@chckr.de</p>
             <h2>Ihre Betroffenenrechte</h2>
             <p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:</p>
             <ul>
@@ -141,7 +141,7 @@ export default () => (
             <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
             <h2>Fragen an den Datenschutzbeauftragten</h2>
             <p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:</p>
-            <p>info@monkeycash.io</p>
+            <p>info@chckr.de</p>
             <p><em>Die Datenschutzerklärung wurde mit dem </em><em><a className="link external" href="https://www.activemind.de/datenschutz/datenschutzhinweis-generator/" target="_blank" rel="noopener noreferrer">Datenschutzerklärungs-Generator der activeMind AG erstellt</a> (Version 2018-06-22).</em></p>
 
         </Block>

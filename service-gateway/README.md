@@ -17,9 +17,9 @@ Simple SSL-Proxy-Server using echo. It uses a json (default routes.json in curre
         "name": "Admin-Tests",
         "path": "/admin*",
         "urls": [
-            "http://dev.monkeycash.io:9000/admin/behaviour/device_infos",
-            "http://dev.monkeycash.io:9000/admin/gaming/gameturns",
-            "http://dev.monkeycash.io:9000/admin/auth/users"
+            "http://dev.checkin.de:9000/admin/behaviour/device_infos",
+            "http://dev.checkin.de:9000/admin/gaming/gameturns",
+            "http://dev.checkin.de:9000/admin/auth/users"
         ],
         "balancer": "roundrobin",
         "rewrite": false

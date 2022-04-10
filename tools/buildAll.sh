@@ -21,7 +21,7 @@ cd ../docker
 
 # dbmate container
 cd ../dbmate
-docker build -t chckr/dbmate -t ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate .
+docker build -t chckr/dbmate -t $REGISTRY_SERVER/chckr/dbmate .
 
 
 # Landing Page

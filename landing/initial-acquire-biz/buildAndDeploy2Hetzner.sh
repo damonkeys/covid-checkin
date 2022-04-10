@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ./buildEmbeddedFileServerVar.sh linux amd64
-server=user@host
+server=[your-user]@[your-host]
 chckrDir=/var/opt/chckr
 appName=$(basename $PWD)
 gzip --best --force $(appName)

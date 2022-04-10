@@ -2,7 +2,7 @@
     "routes": [{
         "name": "Client-App",
         "path": "/*",
-        "description": "The route to the (react based) webserver for monkeycash",
+        "description": "The route to the (react based) webserver for chckr.de",
         "urls": [
             "http://host.docker.internal:3000"
         ],
@@ -56,7 +56,7 @@
         ],
         "auth": {
             "user":"admin",
-            "password":"REPLACE"
+            "password":"[your-admin-password]"
         },
         "balancer": "roundrobin",
         "rewrite": false
@@ -69,7 +69,7 @@
         ],
         "auth": {
             "user":"admin",
-            "password":"REPLACE"
+            "password":"[your-admin-password]"
         },
         "balancer": "roundrobin",
         "rewrite": false

@@ -8,7 +8,7 @@ networks:
 
 services:
     admin:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/admin:latest
+        image: ${REGISTRY_SERVER}/chckr/admin:latest
         volumes: 
             - ../../../logs:/logs
             - ./pixi-dev:/pixi
@@ -30,7 +30,7 @@ services:
 
 
     authx:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/authx:latest
+        image: ${REGISTRY_SERVER}/chckr/authx:latest
         volumes: 
             - ../../../logs:/logs
         depends_on:
@@ -49,7 +49,7 @@ services:
     
 
     biz:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/biz:latest
+        image: ${REGISTRY_SERVER}/chckr/biz:latest
         volumes: 
             - ../../../logs:/logs
         depends_on:
@@ -65,7 +65,7 @@ services:
 
             
     ch3ck1nweb:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/ch3ck1nweb:latest
+        image: ${REGISTRY_SERVER}/chckr/ch3ck1nweb:latest
         volumes: 
             - ../../../logs:/logs
         depends_on:
@@ -82,7 +82,7 @@ services:
    
 
     checkins:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/checkins:latest
+        image: ${REGISTRY_SERVER}/chckr/checkins:latest
         volumes: 
             - ../../../logs:/logs
         depends_on:
@@ -99,7 +99,7 @@ services:
 
 
     pixi:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/pixi:latest
+        image: ${REGISTRY_SERVER}/chckr/pixi:latest
         volumes: 
             - ../../../logs:/logs
             - ./pixi-dev:/static
@@ -120,10 +120,10 @@ services:
         networks:
             - chckr_default
         environment:
-            MYSQL_ROOT_PASSWORD: 
+            MYSQL_ROOT_PASSWORD:
             MYSQL_DATABASE: chckr
             MYSQL_USER: chckr_user
-            MYSQL_PASSWORD: 
+            MYSQL_PASSWORD: ${DB_CHCKR_PASSWORD}
 
 
     db-checkins:
@@ -134,10 +134,10 @@ services:
         networks:
             - chckr_default
         environment:
-            MYSQL_ROOT_PASSWORD: 
+            MYSQL_ROOT_PASSWORD:
             MYSQL_DATABASE: checkins
             MYSQL_USER: checkins_user
-            MYSQL_PASSWORD: 
+            MYSQL_PASSWORD: ${DB_CHECKINS_PASSWORD}
     
     jaeger:
         image: jaegertracing/all-in-one:latest
@@ -149,7 +149,7 @@ services:
 
 
     albert:
-        image: ${{ secrets.REGISTRY_SERVER }}/chckr/service-gateway:latest
+        image: ${REGISTRY_SERVER}/chckr/service-gateway:latest
         volumes:
             - ../../../logs:/logs
             - ./albert/dev:/config

@@ -6,4 +6,4 @@ cd ../$1
 
 id=$(git rev-parse HEAD)
 env GOOS=linux GOARCH=amd64 go build -o $1
-docker build --tag ${{ secrets.REGISTRY_SERVER }}/chckr/$1:$id .
+docker build --tag $REGISTRY_SERVER/chckr/$1:$id .

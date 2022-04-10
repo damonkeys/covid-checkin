@@ -22,7 +22,7 @@ docker/onetime/addDevHosts.sh
 
 or on remote docker server (e.g. for production)
 ```
-DOCKER_HOST="ssh://user@dockerhost" docker/onetime/createNetworks.sh
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" docker/onetime/createNetworks.sh
 ```
 
 We need some config-files. In development-environment they are located relativ to the stack-folder. There is nothing to
@@ -30,7 +30,7 @@ do in local development-environment. On docker-server in production you need to 
 locations. Execute the script copyProdConfigFiles.sh located in onetime folder:
 
 ```
-SSH_HOST="user@dockerhost" docker/onetime/copyProdConfigFiles.sh
+SSH_HOST="[your-user]@[your-dockerhost]" docker/onetime/copyProdConfigFiles.sh
 ```
 
 ### Stage dev
@@ -58,11 +58,11 @@ cd docker/stacks/chckr
 Stage prod works the same as dev but it starts ch3ck1nweb-server with static build of the react-app.
 
 ```
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.prod.yml --with-registry-auth proxy
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/homepage/docker-compose.prod.yml --with-registry-auth www
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/landing/docker-compose.yml --with-registry-auth landing
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" docker stack deploy -c docker/stacks/reverse-proxy/docker-compose.prod.yml --with-registry-auth proxy
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" docker stack deploy -c docker/stacks/homepage/docker-compose.prod.yml --with-registry-auth www
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" docker stack deploy -c docker/stacks/landing/docker-compose.yml --with-registry-auth landing
 cd docker/stacks/chckr
-DOCKER_HOST="ssh://user@dockerhost" ./deployProdStack.sh
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" ./deployProdStack.sh
 ```
 
 
@@ -71,7 +71,7 @@ During the first start of the docker environment there will be two clean instanc
 tables. To run the dbmate-scripts for migrations you need to start another docker stack called dbmate. 
 
 ```
-DOCKER_HOST="ssh://user@dockerhost" docker stack deploy -c docker/stacks/dbmate/docker-compose.yml --with-registry-auth dbmate
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" docker stack deploy -c docker/stacks/dbmate/docker-compose.yml --with-registry-auth dbmate
 ```
 
 To enter the commandline of this container there is a script in the tools-directory:
@@ -93,7 +93,7 @@ cd /db-checkins
 
 After running the migrations don't forget to shutdown the dbmate stack with
 ```
-DOCKER_HOST="ssh://user@dockerhost" docker stack rm dbmate
+DOCKER_HOST="ssh://[your-user]@[your-dockerhost]" docker stack rm dbmate
 ```
 
 
