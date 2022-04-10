@@ -20,7 +20,7 @@ sudo_user=$1 #bbu or sho
 
 server="dev.checkin.chckr.de"
 server_path="/opt/ch3ck1n/"
-server_user="user"
+server_user="[your-server-user]"
 server_ssh=$server_user@$server
 server_sudossh=$sudo_user@$server
 dist_directory="dist"

@@ -22,7 +22,7 @@
             "step1": "Go to the used login provider (Facebook, Google or Apple).",
             "step2": "Go to the settings for your oauth apps.",
             "step3": "Remove the chckr app.",
-            "step4": "Go to https://dev.checkin.chckr.de login again and allow chckr to recieve your email address."
+            "step4": "Go to https://checkin.chckr.de login again and allow chckr to recieve your email address."
         }
     },
     "activation": {

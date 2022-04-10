@@ -14,9 +14,9 @@
     }, {
         "path": "/admin",
         "urls": [
-            "http://checkin.chckr.de:9000/admin/behaviour/device_infos",
-            "http://checkin.chckr.de:9000/admin/gaming/gameturns",
-            "http://checkin.chckr.de:9000/admin/auth/users"
+            "http://checkin.chckr.de:9000/admin/foo/bar",
+            "http://checkin.chckr.de:9000/admin/foo/barz",
+            "http://checkin.chckr.de:9000/admin/bar/foor"
         ]
     }]
 }

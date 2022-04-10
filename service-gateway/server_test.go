@@ -16,8 +16,8 @@ func TestParseProxyConfig(t *testing.T) {
 	os.Setenv("ROUTES_CONFIG", "./routes.json")
 	// test default flags
 	setProxyConfig(context.TODO())
-	if proxyConfig.HTTPSPort != "443" {
-		t.Errorf("Default port 443 is not set! Actually default port: %s", proxyConfig.HTTPSPort)
+	if proxyConfig.ServerPort != "443" {
+		t.Errorf("Default port 443 is not set! Actually default port: %s", proxyConfig.ServerPort)
 	}
 	if proxyConfig.RoutesConfigFile != "./routes.json" {
 		t.Errorf("Default route-config filepath is not set! Acually deault filepath: %s", proxyConfig.RoutesConfigFile)

@@ -4,7 +4,7 @@ if [ -z "$SSH_HOST" ]
 then
     echo -e "\nERROR: please execute this script with SSH_HOST set to target-host."
     echo -e ""
-    echo -e 'example: SSH_HOST="user@dockerhost" ./copyProdConfigFiles.sh'
+    echo -e 'example: SSH_HOST="[your-user]@[your-dockerhost]" ./copyProdConfigFiles.sh'
     exit
 fi
 

@@ -22,7 +22,7 @@
             "step1": "Geht zu Deinem benutzen Login Provider (Facebook, Google oder Apple).",
             "step2": "Geh zu den Einstellungen Deiner oauth apps.",
             "step3": "Entferne die chckr app.",
-            "step4": "Gehe zu https://dev.checkin.chckr.de, logge Dich erneut über eine der Möglichkeiten ein ein und erlaube chckr, Deine E-Mail-Adresse zu bekommen."
+            "step4": "Gehe zu https://checkin.chckr.de, logge Dich erneut über eine der Möglichkeiten ein ein und erlaube chckr, Deine E-Mail-Adresse zu bekommen."
         }
     },
     "activation": {

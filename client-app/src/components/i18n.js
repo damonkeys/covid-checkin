@@ -37,7 +37,7 @@ i18n
 
       // optional expire and domain for set cookie
       cookieMinutes: 10,
-      cookieDomain: 'monkeycash.io'
+      cookieDomain: 'chckr.de'
     },
     // react i18next special options (optional)
     react: {

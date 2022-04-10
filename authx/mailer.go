@@ -12,14 +12,14 @@ import (
 
 // Your available domain names can be found here:
 // (https://app.mailgun.com/app/domains)
-const yourDomain = "[your-mailgun-domain]" // e.g. mg.yourcompany.com
+const yourDomain = "[your-mailgun-domain]" // TODO: replace with env variables
 
 // You can find the Private API Key in your Account Menu, under "Settings":
 // (https://app.mailgun.com/app/account/security)
-const privateAPIKey = "[your-mailgun-api-key]"
+const privateAPIKey = "[your-mailgun-api-key]" // TODO: replace with env variable
 
 // CTAMailContext contains all data that is need for the typical mail with a single call to cation (CTA)
-// thus should be used with the cta template (cta-tpl) of our mailgun account.
+// thus should be used with the cta template (cta-tpl) of our mailgun accountä-ö.
 type CTAMailContext struct {
 	templatename string
 	recipient    string

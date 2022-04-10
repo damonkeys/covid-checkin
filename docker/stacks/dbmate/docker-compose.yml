@@ -7,6 +7,6 @@ networks:
 
 services:
   dbmate:
-    image: ${{ secrets.REGISTRY_SERVER }}/chckr/dbmate
+    image: ${REGISTRY_SERVER}/chckr/dbmate
     networks:
       - chckr

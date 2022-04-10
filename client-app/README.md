@@ -6,7 +6,7 @@ Framework7 app created with following options:
 
 ```
 {
-  "cwd": "/Users/ch3ck1n/projects/github/ch3ck1n/client-app",
+  "cwd": "[your-project-root]/ch3ck1n/client-app",
   "type": [
     "pwa",
     "web"

@@ -20,6 +20,6 @@
             "http://checkin.chckr.de:9000/admin/behaviour/device_infos",
             "http://checkin.chckr.de:9000/admin/gaming/gameturns",
             "http://checkin.chckr.de:9000/admin/auth/users"
-        ],
-
+        ]
+    }]
 }
