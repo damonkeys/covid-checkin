@@ -13,11 +13,11 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	authx "github.com/damonkeys/ch3ck1n/authx/models"
-	biz "github.com/damonkeys/ch3ck1n/biz/business"
-	"github.com/damonkeys/ch3ck1n/checkins/checkin"
-	"github.com/damonkeys/ch3ck1n/monkeys/database"
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	authx "github.com/damonkeys/covid-checkin/authx/models"
+	biz "github.com/damonkeys/covid-checkin/biz/business"
+	"github.com/damonkeys/covid-checkin/checkins/checkin"
+	"github.com/damonkeys/covid-checkin/monkeys/database"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 	"github.com/qor/admin"
 	"github.com/qor/qor"
 )

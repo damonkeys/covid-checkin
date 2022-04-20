@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/damonkeys/ch3ck1n/monkeys/languagehelper"
+	"github.com/damonkeys/covid-checkin/monkeys/languagehelper"
 	//"fmt"
 	"net/http"
 	"strings"

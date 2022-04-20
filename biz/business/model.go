@@ -3,7 +3,7 @@ package business
 import (
 	"os"
 
-	"github.com/damonkeys/ch3ck1n/biz/qr"
+	"github.com/damonkeys/covid-checkin/biz/qr"
 	"github.com/google/uuid"
 	"github.com/jinzhu/gorm"
 )

@@ -1,4 +1,4 @@
-module github.com/damonkeys/ch3ck1n
+module github.com/damonkeys/covid-checkin
 
 go 1.16
 
