@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/damonkeys/ch3ck1n/checkins/checkin"
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/checkins/checkin"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 )

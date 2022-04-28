@@ -38,15 +38,15 @@ import (
 	"github.com/markbates/goth/providers/facebook"
 	"github.com/markbates/goth/providers/gplus"
 
-	"github.com/damonkeys/ch3ck1n/authx/models"
+	"github.com/damonkeys/covid-checkin/authx/models"
 	"github.com/markbates/goth/gothic"
 
-	"github.com/damonkeys/ch3ck1n/authx/applesupport"
-	bubblesclient "github.com/damonkeys/ch3ck1n/monkeys/bubbles"
-	"github.com/damonkeys/ch3ck1n/monkeys/config"
-	"github.com/damonkeys/ch3ck1n/monkeys/database"
-	l "github.com/damonkeys/ch3ck1n/monkeys/logger"
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/authx/applesupport"
+	bubblesclient "github.com/damonkeys/covid-checkin/monkeys/bubbles"
+	"github.com/damonkeys/covid-checkin/monkeys/config"
+	"github.com/damonkeys/covid-checkin/monkeys/database"
+	l "github.com/damonkeys/covid-checkin/monkeys/logger"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

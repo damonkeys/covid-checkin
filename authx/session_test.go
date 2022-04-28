@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"

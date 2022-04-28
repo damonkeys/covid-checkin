@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"

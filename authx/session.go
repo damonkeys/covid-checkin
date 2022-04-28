@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/damonkeys/ch3ck1n/monkeys/languagehelper"
+	"github.com/damonkeys/covid-checkin/monkeys/languagehelper"
 
-	"github.com/damonkeys/ch3ck1n/authx/models"
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/authx/models"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 
 	"github.com/eefret/gravatar/default_img"
 

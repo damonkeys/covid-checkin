@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/damonkeys/ch3ck1n/biz/qr"
+	"github.com/damonkeys/covid-checkin/biz/qr"
 )
 
 //Flags helps holding the values of the flags

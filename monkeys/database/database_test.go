@@ -15,7 +15,7 @@ func TestGetDatabasePath(t *testing.T) {
 	}
 	databasePath := getDatabasePath(databaseConfig)
 
-	if databasePath != "username:password@server/name?charset=utf8&parseTime=True&loc=Local" {
+	if databasePath != "username:password@(server)/name?charset=utf8&parseTime=True&loc=Local" {
 		t.Error("wrong databasepath will be returned")
 	}
 }

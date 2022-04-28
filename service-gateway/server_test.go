@@ -12,7 +12,8 @@ import (
 )
 
 func TestParseProxyConfig(t *testing.T) {
-	os.Setenv("SERVER_PORT_SSL", "443")
+	os.Setenv("SERVER_PORT", "443")
+	os.Setenv("SSL_ACTIVE", "true")
 	os.Setenv("ROUTES_CONFIG", "./routes.json")
 	// test default flags
 	setProxyConfig(context.TODO())
