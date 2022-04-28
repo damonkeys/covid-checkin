@@ -3,19 +3,20 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"github.com/markbates/goth"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
 	"testing"
 
+	"github.com/markbates/goth"
+
 	"github.com/gorilla/sessions"
 
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 )
 
 var (
