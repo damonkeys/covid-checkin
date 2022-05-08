@@ -40,19 +40,20 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 ## screenshots
 
 ### Checkin app main screen - optional working social media logins
-[<img alt="Checkin app main screen - optional working social media logins" width="100px" src="/doc/images/working-social-logins.png" />](/doc/images/working-social-logins.png)
-* Checkin app main screen (mobile) - with 5 letter code checking method
-[![Checkin app main screen - 5 letter code](/doc/images/checkin-via-5letter-code.png)](/doc/images/checkin-via-5letter-code.png)
-* Checkin process: Filling the form (mobile)
-[![Checkin app - filling the form during checking](/doc/images/checkin-form-mobile.png)](/doc/images/checkin-form-mobile.png)
-* Checkin process: Read business infos before checkin in (mobile)
-[![Checkin app - Read business infos before checkin in](/doc/images/business-infos-before-checkin.png)](/doc/images/business-infos-before-checkin.png)
-* Checkin process: Successful checkin (mobile)
-[![Checkin app - Successful checkin](/doc/images/successful-checkin-message.png)](/doc/images/successful-checkin-message.png)
-* Administrative backend
-[![Main Page of backoffice admin panel for managing businesses](/doc/images/backoffice-business-administration-main.png)](/doc/images/backoffice-business-administration-main.png)
-[![Detail Page of backoffice admin panel for managing businesses](/doc/images/backoffice-business-adminstration-detail.png)](/doc/images/backoffice-business-adminstration-detail.png)
-* Landing page - i18n included
+[<img alt="Checkin app main screen - optional working social media logins" width="250px" src="/doc/images/working-social-logins.png" />](/doc/images/working-social-logins.png)
+### Checkin app main screen (mobile) - with 5 letter code checking method
+[<img alt="Checkin app main screen - 5 letter code" src="/doc/images/checkin-via-5letter-code.png" width="250px" />](/doc/images/checkin-via-5letter-code.png)
+### Checkin process: Filling the form (mobile)
+[<img alt="Checkin app - filling the form during checking" src="/doc/images/checkin-form-mobile.png" width="250px" />](/doc/images/checkin-form-mobile.png)
+### Checkin process: Read business infos before checkin in (mobile)
+[<img alt="Checkin app - Read business infos before checkin in" src="/doc/images/business-infos-before-checkin.png" width="250px" />](/doc/images/business-infos-before-checkin.png)
+### Checkin process: Successful checkin (mobile)
+[<img alt="Checkin app - Successful checkin" src="/doc/images/successful-checkin-message.png" width="250px" />](/doc/images/successful-checkin-message.png)
+### Administrative backend
+[<img alt="Main Page of backoffice admin panel for managing businesses" src="/doc/images/backoffice-business-administration-main.png" width="250px" />](/doc/images/backoffice-business-administration-main.png)
+
+[<img alt="Detail Page of backoffice admin panel for managing businesses" src="/doc/images/backoffice-business-adminstration-detail.png" width="250px" />](/doc/images/backoffice-business-adminstration-detail.png)
+### Landing page - i18n included
 [![Full Screenshot of landing page](/doc/images/landingpage-full-screen.png)](/doc/images/landingpage-full-screen.png)
   
 
