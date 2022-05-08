@@ -39,10 +39,22 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 
 ## screenshots
 
-* Checkin landing screen (mobile)
-* Checkin (mobile)
+* Checkin app main screen - optional working social media logins
+[![Checkin app main screen - optional working social media logins](/doc/images/working-social-logins.png)](/doc/images/working-social-logins.png)
+* Checkin app main screen (mobile) - with 5 letter code checking method
+[![Checkin app main screen - 5 letter code](/doc/images/checkin-via-5letter-code.png)](/doc/images/checkin-via-5letter-code.png)
+* Checkin process: Filling the form (mobile)
+[![Checkin app - filling the form during checking](/doc/images/checkin-form-mobile.png)](/doc/images/checkin-form-mobile.png)
+* Checkin process: Read business infos before checkin in (mobile)
+[![Checkin app - Read business infos before checkin in](/doc/images/business-infos-before-checkin.png)](/doc/images/business-infos-before-checkin.png)
+* Checkin process: Successful checkin (mobile)
+[![Checkin app - Successful checkin](/doc/images/successful-checkin-message.png)](/doc/images/successful-checkin-message.png)
 * Administrative backend
-* landing page
+[![Main Page of backoffice admin panel for managing businesses](/doc/images/backoffice-business-administration-main.png)](/doc/images/backoffice-business-administration-main.png)
+[![Detail Page of backoffice admin panel for managing businesses](/doc/images/backoffice-business-adminstration-detail.png)](/doc/images/backoffice-business-adminstration-detail.png)
+* Landing page - i18n included
+[![Full Screenshot of landing page](/doc/images/landingpage-full-screen.png)](/doc/images/landingpage-full-screen.png)
+  
 
 ## how to start
 
