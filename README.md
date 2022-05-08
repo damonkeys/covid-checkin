@@ -39,8 +39,8 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 
 ## screenshots
 
-* Checkin app main screen - optional working social media logins
-[![Checkin app main screen - optional working social media logins](/doc/images/working-social-logins.png | width="100")](/doc/images/working-social-logins.png)
+### Checkin app main screen - optional working social media logins
+[<img alt="Checkin app main screen - optional working social media logins" width="100px" src="/doc/images/working-social-logins.png" />](/doc/images/working-social-logins.png)
 * Checkin app main screen (mobile) - with 5 letter code checking method
 [![Checkin app main screen - 5 letter code](/doc/images/checkin-via-5letter-code.png)](/doc/images/checkin-via-5letter-code.png)
 * Checkin process: Filling the form (mobile)
