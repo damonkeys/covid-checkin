@@ -37,7 +37,7 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 ### Technical overview
 ### Parts
 
-## screenshots
+## Screenshots
 
 ### Checkin app main screen - optional working social media logins
 [<img alt="Checkin app main screen - optional working social media logins" width="250px" src="/doc/images/working-social-logins.png" />](/doc/images/working-social-logins.png)
@@ -54,7 +54,7 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 
 [<img alt="Detail Page of backoffice admin panel for managing businesses" src="/doc/images/backoffice-business-adminstration-detail.png" width="250px" />](/doc/images/backoffice-business-adminstration-detail.png)
 ### Landing page - i18n included
-[![Full Screenshot of landing page](/doc/images/landingpage-full-screen.png)](/doc/images/landingpage-full-screen.png)
+[<img alt="Full Screenshot of landing page" src="/doc/images/landingpage-full-screen.png" width="250px" />](/doc/images/landingpage-full-screen.png)
   
 
 ## how to start
