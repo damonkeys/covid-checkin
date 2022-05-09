@@ -1,7 +1,5 @@
 # covid-checkin - a location based checkin app ready to run
 
-## TL;DR
-
 ## about
 
 ### What it is
@@ -32,11 +30,6 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 * all docker based
 * with docker stacks ('lightweight' docker container orchestrator)
 
-### Ideas behind it
-
-### Technical overview
-### Parts
-
 ## Screenshots
 
 ### Checkin app main screen - optional working social media logins
@@ -55,12 +48,3 @@ Coming from a financial transactions background in spring 2020 we reckoned that 
 [<img alt="Detail Page of backoffice admin panel for managing businesses" src="/doc/images/backoffice-business-adminstration-detail.png" width="250px" />](/doc/images/backoffice-business-adminstration-detail.png)
 ### Landing page - i18n included
 [<img alt="Full Screenshot of landing page" src="/doc/images/landingpage-full-screen.png" width="250px" />](/doc/images/landingpage-full-screen.png)
-  
-
-## how to start
-
-* Source organisation
-* Containers
-* How it they are build
-* How they are started
-* further need
