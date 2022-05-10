@@ -7,28 +7,30 @@
 This repository contains a covid/corona related checkin app that allows users to checkin at a given location.
 This may help in tracking the location of potentially infected persons at the given location.
 
-It is full featured with a mobile focussed frontend
+It is a feature complete app and its frontend is optimized for mobile.
 ### History
 
-Coming from a financial transactions background in spring 2020 we reckoned that there hasn't been any good checkin app in germany and that we have had a lot of the necessary ingredients neccessary to build one at hand. So we decided to create chckr.de (the original name of the 'product') in our spare time. It turned out that we had been a little late to the party and that other took the "covid checkin biz" more seriously. So we called it "an app" and stopped our efforts right after we finished this MVP like system.
+Coming from a financial transactions background in spring 2020 we reckognized that there hasn't been any good checkin app in Germany and that we have had a lot of the ingredients neccessary to build one at hand. So we decided to create chckr.de (the original name of the 'product') in our spare time. It turned out that we had been a little late to the party and that other took the "covid checkin biz" more seriously. So we called it "an app" and stopped our efforts right after we finished this MVP.
 
 ## features
-* mobile (responsive) frontend with pwa features
-* backend with admin panel
-* qr-code generation
-* backend for companies using this app for checkins (kind of yellow pages)
-* api-gateway
-* Short-Code generation (5-letter code to use if no qr-code reader is at hand)
-* caddy ssh termination
-* JWT based auth
-* static landing page
-* microservice like architecture
-* migrations ready
-* mariadb as backend
-* full i18n integrated (english and germany)
-* jaeger tracing integrated
-* all docker based
-* with docker stacks ('lightweight' docker container orchestrator)
+* Mobile (responsive) frontend with pwa features
+* Backend with admin panel
+* QR-code generation
+* Backend for companies using this app for checkins (kind of yellow pages)
+* API-gateway
+* Short-Code generation (5-letter code to use if no QR-code reader is at hand)
+* SSH termination through Caddy
+* JWT based auth (Apple, Facebook, Google)
+* Static landing page server (with automatic file embedding)
+* Microservice like architecture
+* Database-Migrations included
+* Persistence via mariadb
+* Full i18n integrated (english and german)
+* Jaeger tracing integrated
+* Everything containerized
+* Reay for use with Docker stacks ('lightweight' docker container orchestrator)
+* Ready to get deployed via github actions
+* Hetzner Cloud prepared
 
 ## Screenshots
 
