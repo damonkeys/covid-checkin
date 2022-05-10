@@ -16,7 +16,7 @@ Coming from a financial transactions background in spring 2020 we reckognized th
 * Mobile (responsive) frontend with pwa features
 * Backend with admin panel
 * QR-code generation
-* Backend for companies using this app for checkins (kind of yellow pages)
+* Backend for companies that use this app for their guests checkins
 * API-gateway
 * Short-Code generation (5-letter code to use if no QR-code reader is at hand)
 * SSH termination through Caddy
@@ -34,12 +34,12 @@ Coming from a financial transactions background in spring 2020 we reckognized th
 
 ## Screenshots
 
-### Checkin app main screen - optional working social media logins
+### Checkin app main screen - optionally working social media logins
 [<img alt="Checkin app main screen - optional working social media logins" width="250px" src="/doc/images/working-social-logins.png" />](/doc/images/working-social-logins.png)
-### Checkin app main screen (mobile) - with 5 letter code checking method
+### Checkin app main screen (mobile) - with 5 letter code checkin method
 [<img alt="Checkin app main screen - 5 letter code" src="/doc/images/checkin-via-5letter-code.png" width="250px" />](/doc/images/checkin-via-5letter-code.png)
 ### Checkin process: Filling the form (mobile)
-[<img alt="Checkin app - filling the form during checking" src="/doc/images/checkin-form-mobile.png" width="250px" />](/doc/images/checkin-form-mobile.png)
+[<img alt="Checkin app - filling the form during checkin" src="/doc/images/checkin-form-mobile.png" width="250px" />](/doc/images/checkin-form-mobile.png)
 ### Checkin process: Read business infos before checkin in (mobile)
 [<img alt="Checkin app - Read business infos before checkin in" src="/doc/images/business-infos-before-checkin.png" width="250px" />](/doc/images/business-infos-before-checkin.png)
 ### Checkin process: Successful checkin (mobile)
