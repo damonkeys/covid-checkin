@@ -23,11 +23,11 @@ import (
 
 	"github.com/markbates/goth/gothic"
 
-	"github.com/damonkeys/ch3ck1n/biz/business"
-	"github.com/damonkeys/ch3ck1n/monkeys/config"
-	"github.com/damonkeys/ch3ck1n/monkeys/database"
-	l "github.com/damonkeys/ch3ck1n/monkeys/logger"
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/biz/business"
+	"github.com/damonkeys/covid-checkin/monkeys/config"
+	"github.com/damonkeys/covid-checkin/monkeys/database"
+	l "github.com/damonkeys/covid-checkin/monkeys/logger"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 

@@ -18,10 +18,10 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"golang.org/x/crypto/acme/autocert"
 
-	"github.com/damonkeys/ch3ck1n/monkeys/config"
-	l "github.com/damonkeys/ch3ck1n/monkeys/logger"
-	mcmiddleware "github.com/damonkeys/ch3ck1n/monkeys/middleware"
-	"github.com/damonkeys/ch3ck1n/monkeys/tracing"
+	"github.com/damonkeys/covid-checkin/monkeys/config"
+	l "github.com/damonkeys/covid-checkin/monkeys/logger"
+	mcmiddleware "github.com/damonkeys/covid-checkin/monkeys/middleware"
+	"github.com/damonkeys/covid-checkin/monkeys/tracing"
 )
 
 // RoutesStruct defines all configured routes
