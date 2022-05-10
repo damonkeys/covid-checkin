@@ -25,10 +25,10 @@ Coming from a financial transactions background in spring 2020 we reckognized th
 * Microservice like architecture
 * Database-Migrations included
 * Persistence via mariadb
-* Full i18n integrated (english and german)
+* Batteries included: i18n (english and german)
 * Jaeger tracing integrated
 * Everything containerized
-* Reay for use with Docker stacks ('lightweight' docker container orchestrator)
+* Ready to be used with Docker stacks ('lightweight' docker container orchestrator)
 * Ready to get deployed via github actions
 * Hetzner Cloud prepared
 
