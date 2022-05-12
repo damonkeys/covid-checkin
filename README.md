@@ -19,7 +19,7 @@ Coming from a financial transactions background in spring 2020 we reckognized th
 * Backend for companies that use this app for their guests checkins
 * API-gateway
 * Short-Code generation (5-letter code to use if no QR-code reader is at hand)
-* SSH termination through Caddy
+* SSL termination through Caddy
 * JWT based auth (Apple, Facebook, Google)
 * Static landing page server (with automatic file embedding)
 * Microservice like architecture
